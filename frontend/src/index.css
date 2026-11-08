@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-primary: #38bdf8; --c-secondary: #a78bfa; --c-accent: #f472b6; --c-bg: #070b14; --c-surface: rgba(255,255,255,.06); --c-surface-solid: #12182a;
+  --c-ink: #f4f6fb; --c-muted: #a7b3c7; --c-border: rgba(255,255,255,.12); --c-hero-from: #0b1226; --c-hero-to: #1e1b4b; --c-on-primary: #0b0b0b; --c-on-secondary: #0b0b0b;
+}
+html, body, #root { height: 100%; }
+body { margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--c-bg); color: var(--c-ink); -webkit-font-smoothing: antialiased; }
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--c-muted) 45%, transparent) transparent; }
+
+@layer components {
+  .card { @apply rounded-2xl border shadow-card; background: var(--c-surface); border-color: var(--c-border); backdrop-filter: blur(6px); }
+  .chart-card { @apply rounded-2xl border shadow-card overflow-hidden; background: #fcfcfb; border-color: var(--c-border); color: #0f172a; }
+  .btn { @apply inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-sm font-medium transition; border-color: var(--c-border); background: var(--c-surface); color: var(--c-ink); }
+  .btn:hover { border-color: var(--c-primary); color: var(--c-primary); }
+  .btn-primary { background: var(--c-primary); color: var(--c-on-primary); border-color: transparent; }
+  .btn-primary:hover { color: var(--c-on-primary); filter: brightness(1.08); }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold; background: color-mix(in srgb, var(--c-primary) 18%, transparent); color: var(--c-primary); }
+  .chip-soon { background: #fde68a; color: #7c2d12; }
+  .field { @apply rounded-xl border px-3 py-2 text-sm outline-none transition w-full; background: var(--c-surface-solid); color: var(--c-ink); border-color: var(--c-border); }
+  .field:focus { border-color: var(--c-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary) 25%, transparent); }
+  .label { @apply mb-1 block text-xs font-semibold uppercase tracking-wide; color: var(--c-muted); }
+  .th { @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide whitespace-nowrap select-none; color: var(--c-muted); }
+  .td { @apply px-3 py-2 text-sm whitespace-nowrap; }
+}
+.skeleton { position: relative; overflow: hidden; background: color-mix(in srgb, var(--c-muted) 18%, transparent); border-radius: 12px; }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); animation: shimmer 1.4s infinite; }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+.pattern-dots { background-image: radial-gradient(rgba(255,255,255,.18) 1.5px, transparent 1.6px); background-size: 22px 22px; }
+.pattern-grid { background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 34px 34px; }
+.pattern-stripes { background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.08) 0 14px, transparent 14px 34px); }
+.pattern-rings { background-image: radial-gradient(circle at 80% 20%, transparent 0 60px, rgba(255,255,255,.10) 61px 64px, transparent 65px 110px, rgba(255,255,255,.07) 111px 114px, transparent 115px); }
+.pattern-waves { background-image: repeating-radial-gradient(circle at 0 100%, transparent 0 26px, rgba(255,255,255,.08) 27px 29px); }
+.pattern-flags { background-image: linear-gradient(135deg, rgba(255,255,255,.10) 25%, transparent 25% 50%, rgba(255,255,255,.10) 50% 75%, transparent 75%); background-size: 48px 48px; }
+.js-plotly-plot .plotly .modebar { right: 6px !important; }
+@media print { aside, .no-print { display: none !important; } }
+
+@keyframes barGrow { from { transform: scaleX(0); } }
+.bar-grow { animation: barGrow .7s ease-out; }
+.bar-grow-l { transform-origin: right center; }
+.bar-grow-r { transform-origin: left center; }
+@media (prefers-reduced-motion: reduce) { .bar-grow { animation: none; } }

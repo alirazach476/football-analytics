@@ -1,0 +1,20 @@
+# Runtime requirements of the API only (the full project adds dbt, dagster, streamlit, notebooks, ...). Versions as built and tested locally.
+fastapi==0.162.0
+uvicorn==0.30.6
+starlette==1.10.0
+pydantic==2.10.3
+psycopg[binary]==3.3.6
+pandas==2.2.3
+numpy==2.1.3
+pyarrow==25.0.1
+scipy==1.17.1
+statsmodels==0.15.0
+scikit-learn==1.9.0
+xgboost==3.4.1
+joblib==1.6.0
+mlflow-skinny==3.17.2
+plotly==7.1.0
+matplotlib==3.11.0
+seaborn==0.13.2
+requests==2.34.2
+tabulate==0.9.0

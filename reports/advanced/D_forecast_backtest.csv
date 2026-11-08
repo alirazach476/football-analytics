@@ -1,0 +1,13 @@
+competition,method,editions,backtest_origins,mae_goals_per_match
+WC,naive_mean,7,4,0.2714
+WC,linear_trend,7,4,0.2222
+WC,holt,7,4,0.2476
+EURO,naive_mean,7,4,0.2139
+EURO,linear_trend,7,4,0.2783
+EURO,holt,7,4,0.2783
+COPA,naive_mean,9,6,0.3478
+COPA,linear_trend,9,6,0.5627
+COPA,holt,9,6,0.5617
+UNL,naive_mean,5,2,0.1372
+UNL,linear_trend,5,2,0.1689
+UNL,holt,5,2,0.1689

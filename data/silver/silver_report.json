@@ -1,0 +1,45 @@
+{
+ "matches": 1830,
+ "scheduled_kept": 51,
+ "scheduled_seasons": [
+  "EURO-2028"
+ ],
+ "players_bronze": 9978,
+ "players_silver": 8410,
+ "player_ids_merged": 1568,
+ "merge_groups": 1314,
+ "merged_by_rule": {
+  "D1_same_name_and_dob": 920,
+  "D2_name_subset_same_national_team": 648
+ },
+ "assists": {
+  "martj42_assist_rows": 2076,
+  "attached": 461,
+  "no_unique_match": 1152,
+  "no_unique_goal": 463
+ },
+ "events": 1033220,
+ "lineups": 35351,
+ "squads": 11728,
+ "awards": 407,
+ "shootouts": {
+  "shootouts_attached": 68,
+  "shootout_conflicts_with_pen_scores": 0
+ },
+ "scorer_links": {
+  "goal_events_considered": 3086,
+  "linked": 1091,
+  "ambiguous": 9,
+  "no_squad_for_edition": 1910
+ },
+ "lineup_links": {
+  "rows_considered": 13271,
+  "linked": 12729,
+  "ambiguous": 4,
+  "no_squad_for_edition": 493
+ },
+ "minutes": {
+  "minutes_derived_rows": 13262
+ },
+ "ucl_rows": 0
+}

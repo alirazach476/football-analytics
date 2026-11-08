@@ -1,0 +1,88 @@
+team_name,matches,editions,wins,gd_pm,ppm,win_pct_shrunk,ko_matches,ko_win_pct,knockout_matches_per_edition,major_editions,titles,ppm_sd_editions,titles_per_major_edition,ko_win_pct_shrunk,dominance_score,consistency_note
+Argentina,86,15,56,1.1047,2.1744,62.2447,40.0,57.5,2.8571,15.0,3.0,0.5134,0.2,56.6667,0.969,more consistent than median
+Spain,105,19,65,1.0286,2.0952,59.7869,37.0,56.7568,2.4167,14.0,6.0,0.6138,0.4286,55.9524,0.9563,more consistent than median
+France,106,19,59,0.5943,1.8962,54.0991,38.0,65.7895,2.9091,14.0,3.0,0.8045,0.2143,63.9535,0.9506,less consistent than median
+Brazil,83,16,49,1.0843,2.012,56.7257,34.0,50.0,2.2667,16.0,4.0,0.4325,0.25,50.0,0.9103,more consistent than median
+Germany,100,19,49,0.69,1.73,47.959,32.0,56.25,2.8,14.0,1.0,0.6807,0.0714,55.4054,0.908,less consistent than median
+Greece,50,10,26,0.3,1.74,49.5915,7.0,57.1429,1.6667,5.0,1.0,0.7656,0.2,54.1667,0.8494,less consistent than median
+Portugal,99,19,52,0.7273,1.8182,51.1513,31.0,41.9355,2.0833,14.0,3.0,0.5071,0.2143,43.0556,0.8287,more consistent than median
+Norway,37,7,20,0.4865,1.7568,50.5424,3.0,66.6667,3.0,2.0,0.0,0.5101,0.0,56.25,0.8241,more consistent than median
+Colombia,60,12,34,0.5833,1.9167,53.9356,23.0,43.4783,2.0909,12.0,1.0,0.5833,0.0833,44.6429,0.823,more consistent than median
+Italy,84,16,39,0.4286,1.7143,45.484,25.0,40.0,2.375,11.0,2.0,0.5296,0.1818,41.6667,0.7954,more consistent than median
+England,94,18,45,0.6383,1.7128,46.8797,29.0,44.8276,2.4545,13.0,0.0,0.629,0.0,45.5882,0.7391,less consistent than median
+Belgium,72,14,39,0.5278,1.7361,52.1401,19.0,47.3684,2.1429,9.0,0.0,0.5642,0.0,47.9167,0.7345,more consistent than median
+Georgia,34,6,16,0.7941,1.7059,44.8975,3.0,66.6667,1.0,1.0,0.0,0.8982,0.0,56.25,0.7253,less consistent than median
+Uruguay,71,15,29,0.3239,1.5493,40.4382,25.0,32.0,2.2727,15.0,1.0,0.5005,0.0667,35.0,0.7161,more consistent than median
+Netherlands,86,16,47,0.8372,1.8953,52.8697,27.0,37.037,2.1,11.0,0.0,0.652,0.0,39.0625,0.7138,less consistent than median
+Turkey,58,12,23,-0.0345,1.3448,39.3455,11.0,54.5455,2.25,7.0,0.0,0.7297,0.0,53.125,0.7092,less consistent than median
+Kosovo,30,5,15,0.7333,1.7333,46.8873,2.0,100.0,,,0.0,0.6785,,64.2857,0.6851,less consistent than median
+Wales,39,8,16,0.0,1.4103,40.3162,4.0,50.0,2.0,3.0,0.0,0.8863,0.0,50.0,0.6759,less consistent than median
+Chile,49,11,20,0.1837,1.4694,40.2626,15.0,26.6667,1.6667,11.0,2.0,0.6139,0.1818,32.5,0.6678,more consistent than median
+Morocco,16,3,6,0.1875,1.4375,37.5189,7.0,28.5714,3.5,3.0,0.0,0.8012,0.0,37.5,0.6414,less consistent than median
+Luxembourg,30,5,12,0.2333,1.4333,39.3873,2.0,100.0,,,0.0,0.4549,,64.2857,0.6276,more consistent than median
+Montenegro,28,5,12,0.25,1.4286,41.4603,,,,,0.0,0.8165,,50.0,0.592,less consistent than median
+Mexico,57,14,25,0.0877,1.5263,42.9178,15.0,33.3333,1.5,14.0,0.0,0.6183,0.0,37.5,0.5897,less consistent than median
+North Macedonia,31,6,14,0.0968,1.5161,43.3047,,,,1.0,0.0,1.1615,0.0,50.0,0.5828,less consistent than median
+Finland,31,6,13,0.0,1.3548,40.8657,,,,1.0,0.0,0.7681,0.0,50.0,0.5632,less consistent than median
+Belarus,28,5,10,0.3571,1.4643,36.1972,,,,,0.0,0.6882,,50.0,0.5575,less consistent than median
+Denmark,62,14,23,-0.0484,1.3548,37.1596,9.0,33.3333,1.4,9.0,0.0,0.5902,0.0,39.2857,0.5494,more consistent than median
+Senegal,16,4,6,0.0,1.3125,37.5189,4.0,25.0,1.3333,4.0,0.0,0.3801,0.0,38.8889,0.5471,more consistent than median
+Czech Republic,58,14,21,-0.3103,1.2069,36.4043,5.0,40.0,1.6667,9.0,0.0,0.7146,0.0,45.0,0.546,less consistent than median
+Ivory Coast,13,4,5,0.0,1.2308,38.0649,1.0,0.0,1.0,4.0,0.0,0.25,0.0,41.6667,0.5448,more consistent than median
+Scotland,37,8,15,-0.1081,1.3784,39.9041,2.0,50.0,,3.0,0.0,0.7387,0.0,50.0,0.5414,less consistent than median
+Ukraine,47,10,18,-0.4468,1.2979,38.1665,6.0,33.3333,2.0,5.0,0.0,0.5904,0.0,40.9091,0.5276,more consistent than median
+Russia,38,10,13,-0.2368,1.2632,34.9061,4.0,25.0,2.0,8.0,0.0,0.4726,0.0,38.8889,0.5218,more consistent than median
+Peru,47,10,16,-0.1489,1.2979,34.6578,16.0,31.25,2.0,10.0,0.0,0.466,0.0,35.7143,0.5138,more consistent than median
+Honduras,12,3,3,-0.6667,0.9167,30.7042,3.0,33.3333,3.0,3.0,0.0,0.8819,0.0,43.75,0.508,less consistent than median
+Serbia,42,9,13,0.0952,1.2381,32.221,2.0,50.0,,4.0,0.0,0.766,0.0,50.0,0.5046,less consistent than median
+Switzerland,73,16,27,0.137,1.4247,37.0541,14.0,14.2857,1.5,11.0,0.0,0.6342,0.0,23.6842,0.5023,less consistent than median
+Moldova,28,5,11,-0.2857,1.3929,38.8287,2.0,50.0,,,0.0,0.7509,,50.0,0.5023,less consistent than median
+Sweden,63,15,23,0.127,1.3333,36.6506,7.0,14.2857,1.1667,10.0,0.0,0.7164,0.0,29.1667,0.4989,less consistent than median
+Croatia,78,17,28,-0.2179,1.3462,36.0851,16.0,25.0,2.0,12.0,0.0,0.5778,0.0,30.9524,0.4862,more consistent than median
+Albania,30,7,10,-0.2,1.2,34.3873,,,,2.0,0.0,0.7003,0.0,50.0,0.4805,less consistent than median
+Latvia,33,6,8,-0.1818,1.0909,27.337,2.0,100.0,,1.0,0.0,0.7162,0.0,64.2857,0.4793,less consistent than median
+United States,37,9,12,-0.2703,1.1622,33.5211,10.0,30.0,1.6667,9.0,0.0,0.5688,0.0,36.6667,0.4724,more consistent than median
+Austria,46,10,17,0.087,1.3478,37.0624,5.0,0.0,1.0,5.0,0.0,0.6597,0.0,25.0,0.4609,less consistent than median
+Slovenia,43,9,11,-0.1163,1.2093,27.8395,3.0,33.3333,1.0,4.0,0.0,0.7011,0.0,43.75,0.4609,less consistent than median
+Ghana,19,5,6,-0.3158,1.1579,33.6376,4.0,25.0,1.3333,5.0,0.0,0.5042,0.0,38.8889,0.4575,more consistent than median
+Romania,42,9,14,-0.0952,1.2857,34.1441,2.0,0.0,1.0,4.0,0.0,0.8156,0.0,35.7143,0.4575,less consistent than median
+Canada,14,3,3,-0.3571,0.9286,28.1455,5.0,20.0,2.5,3.0,0.0,0.7211,0.0,35.0,0.4529,less consistent than median
+South Korea,27,7,8,-0.2963,1.1111,31.77,6.0,16.6667,2.0,7.0,0.0,0.3817,0.0,31.8182,0.4494,more consistent than median
+Faroe Islands,28,5,7,-0.1786,1.25,28.3024,,,,,0.0,0.4655,,50.0,0.4437,more consistent than median
+South Africa,10,3,3,-0.4,1.2,33.7746,1.0,0.0,1.0,3.0,0.0,0.1925,0.0,41.6667,0.4425,more consistent than median
+Northern Ireland,30,6,7,-0.1333,0.9667,26.8873,1.0,0.0,1.0,1.0,0.0,0.8023,0.0,41.6667,0.4345,less consistent than median
+Hungary,40,8,14,-0.25,1.35,35.5098,3.0,0.0,1.0,3.0,0.0,0.4702,0.0,31.25,0.4218,more consistent than median
+Republic of Ireland,39,8,9,-0.4872,1.0,26.0304,4.0,50.0,1.0,3.0,0.0,0.5409,0.0,50.0,0.4207,more consistent than median
+Israel,24,5,7,-0.4167,1.1667,31.6321,,,,,0.0,0.6169,,50.0,0.4195,less consistent than median
+Slovakia,43,9,15,-0.1395,1.2326,35.3866,5.0,0.0,1.0,4.0,0.0,0.5745,0.0,25.0,0.4195,more consistent than median
+Bosnia and Herzegovina,33,7,10,-0.5152,1.2121,31.9882,1.0,0.0,1.0,2.0,0.0,0.8428,0.0,41.6667,0.4126,less consistent than median
+Azerbaijan,27,5,7,-0.4074,1.1481,29.0673,,,,,0.0,0.639,,50.0,0.4057,less consistent than median
+Venezuela,35,9,10,-0.3714,1.2,30.5665,7.0,14.2857,1.4,9.0,0.0,0.7707,0.0,29.1667,0.3851,less consistent than median
+Cyprus,30,5,8,-0.9,1.0333,29.3873,2.0,50.0,,,0.0,0.3819,,50.0,0.369,more consistent than median
+Japan,29,8,8,-0.2069,1.1724,30.1408,5.0,0.0,1.0,8.0,0.0,0.6168,0.0,25.0,0.369,less consistent than median
+Kazakhstan,30,5,7,-0.6,0.9667,26.8873,2.0,50.0,,,0.0,0.759,,50.0,0.3586,less consistent than median
+Iceland,34,7,6,-0.8824,0.8235,22.1703,4.0,25.0,2.0,2.0,0.0,0.7764,0.0,38.8889,0.3586,less consistent than median
+Lithuania,29,5,5,-1.069,0.6552,22.4485,2.0,100.0,,,0.0,0.6731,,64.2857,0.3586,less consistent than median
+Nigeria,13,4,2,-0.5385,0.6923,25.0214,1.0,0.0,1.0,4.0,0.0,0.3849,0.0,41.6667,0.3575,more consistent than median
+Panama,13,4,3,-1.7692,0.6923,29.3692,1.0,0.0,1.0,4.0,0.0,0.75,0.0,41.6667,0.3506,less consistent than median
+Malta,25,5,8,-0.36,1.28,33.5855,2.0,0.0,,,0.0,0.6625,,35.7143,0.3483,less consistent than median
+Costa Rica,34,10,10,-0.6765,1.1176,31.2612,4.0,0.0,1.3333,10.0,0.0,0.5776,0.0,27.7778,0.3425,more consistent than median
+Armenia,30,5,10,-0.4667,1.1667,34.3873,2.0,0.0,,,0.0,0.5593,,35.7143,0.3402,more consistent than median
+Iran,15,5,2,-0.6667,0.8,23.0197,,,,5.0,0.0,0.4472,0.0,50.0,0.3356,more consistent than median
+Estonia,28,5,7,-0.25,1.0714,28.3024,2.0,0.0,,,0.0,1.0448,,35.7143,0.3345,less consistent than median
+Cameroon,12,4,2,-1.0,0.6667,26.1587,,,,4.0,0.0,0.7698,0.0,50.0,0.3333,less consistent than median
+Poland,56,14,12,-0.5357,0.9107,23.8711,3.0,0.0,1.5,9.0,0.0,0.4119,0.0,31.25,0.3322,more consistent than median
+Algeria,11,3,2,-0.5455,0.8182,27.4044,2.0,0.0,1.0,3.0,0.0,0.3849,0.0,35.7143,0.331,more consistent than median
+Paraguay,55,13,11,-0.3636,1.0,22.6999,15.0,0.0,1.6667,13.0,0.0,0.4685,0.0,12.5,0.3276,more consistent than median
+Tunisia,15,5,2,-1.3333,0.6,23.0197,,,,5.0,0.0,0.5477,0.0,50.0,0.3115,more consistent than median
+Liechtenstein,22,5,2,-0.8636,0.5455,17.9841,,,,,0.0,0.4488,,50.0,0.3103,more consistent than median
+Australia,21,6,5,-0.7143,0.9524,28.2417,3.0,0.0,1.0,6.0,0.0,0.6019,0.0,31.25,0.3057,more consistent than median
+Andorra,25,5,2,-0.96,0.64,16.4426,,,,,0.0,0.4488,,50.0,0.3,more consistent than median
+Saudi Arabia,15,5,2,-1.8667,0.6,23.0197,,,,5.0,0.0,0.4346,0.0,50.0,0.3,more consistent than median
+Jamaica,9,3,0,-1.6667,0.0,19.7627,,,,3.0,0.0,0.0,0.0,50.0,0.2943,more consistent than median
+Bolivia,29,9,1,-1.6552,0.3103,12.1921,1.0,0.0,1.0,9.0,0.0,0.3889,0.0,41.6667,0.2885,more consistent than median
+San Marino,22,5,2,-1.8636,0.4091,17.9841,,,,,0.0,0.7583,,50.0,0.2851,less consistent than median
+Qatar,9,3,0,-1.8889,0.2222,19.7627,,,,3.0,0.0,0.1925,0.0,50.0,0.2851,more consistent than median
+Ecuador,48,14,10,-0.4583,0.875,23.7154,5.0,0.0,1.0,14.0,0.0,0.507,0.0,25.0,0.2839,more consistent than median
+Bulgaria,33,6,8,-0.4848,1.0606,27.337,2.0,0.0,,1.0,0.0,0.6924,0.0,35.7143,0.2828,less consistent than median
+Gibraltar,26,5,5,-1.0,0.8846,24.3192,4.0,0.0,,,0.0,0.6638,,27.7778,0.1989,less consistent than median

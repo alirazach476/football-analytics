@@ -1,0 +1,9 @@
+competition_id,phase,matches,goals_per_match_recorded,goals90_per_match,n_goals90,draw_pct
+COPA,group/league,176,2.477,2.477,176,26.136
+COPA,knockout,72,2.597,3.125,48,30.556
+EURO,group/league,204,2.402,2.402,204,25.98
+EURO,knockout,73,2.63,2.807,57,23.288
+UNL,group/league,716,2.471,2.471,716,25.698
+UNL,knockout,50,2.94,3.087,46,18.0
+WC,group/league,360,2.614,2.614,360,24.167
+WC,knockout,128,2.594,2.352,128,19.531

@@ -1,0 +1,5 @@
+pos,player_seasons,minutes,goals,assists,goals_per_90,assists_per_90,note
+Defender,2793,683588.8,273,149,0.036,0.02,position known only for players from StatsBomb/Wyscout/Fjelstul sources
+Forward,1387,244682.9,857,61,0.315,0.022,position known only for players from StatsBomb/Wyscout/Fjelstul sources
+Goalkeeper,455,142469.0,0,0,0.0,0.0,position known only for players from StatsBomb/Wyscout/Fjelstul sources
+Midfielder,2496,499174.2,695,201,0.125,0.036,position known only for players from StatsBomb/Wyscout/Fjelstul sources

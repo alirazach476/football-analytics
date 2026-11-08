@@ -1,0 +1,10 @@
+{
+ "task": "match outcome",
+ "model": "baseline_elo_logreg",
+ "features": [
+  "elo_diff"
+ ],
+ "trained_on": "train period only",
+ "saved_at": "2026-11-06T07:56:45+00:00",
+ "python": "3.12.10"
+}

@@ -1,0 +1,132 @@
+[
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "awards",
+  "rows": 407
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "competition_seasons",
+  "rows": 30
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "events_all",
+  "rows": 1033220
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "head_coaches",
+  "rows": 491
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "lineups_all",
+  "rows": 35351
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "match_event_coverage",
+  "rows": 1779
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "matches",
+  "rows": 1830
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "player_links",
+  "rows": 616
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "player_match_stats_all",
+  "rows": 15006
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "players_all",
+  "rows": 9978
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "squads",
+  "rows": 11728
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "team_aliases",
+  "rows": 108
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "team_match_stats_all",
+  "rows": 3406
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "teams",
+  "rows": 103
+ },
+ {
+  "layer": "Bronze (frozen snapshot)",
+  "table": "venues",
+  "rows": 338
+ },
+ {
+  "layer": "Silver",
+  "table": "awards",
+  "rows": 407
+ },
+ {
+  "layer": "Silver",
+  "table": "events",
+  "rows": 1033220
+ },
+ {
+  "layer": "Silver",
+  "table": "lineups",
+  "rows": 35351
+ },
+ {
+  "layer": "Silver",
+  "table": "matches",
+  "rows": 1830
+ },
+ {
+  "layer": "Silver",
+  "table": "player_match_stats",
+  "rows": 15006
+ },
+ {
+  "layer": "Silver",
+  "table": "player_xref",
+  "rows": 9978
+ },
+ {
+  "layer": "Silver",
+  "table": "players",
+  "rows": 8410
+ },
+ {
+  "layer": "Silver",
+  "table": "squads",
+  "rows": 11728
+ },
+ {
+  "layer": "Silver",
+  "table": "team_match_stats",
+  "rows": 3406
+ },
+ {
+  "layer": "Silver",
+  "table": "teams",
+  "rows": 103
+ },
+ {
+  "layer": "Silver",
+  "table": "venues",
+  "rows": 338
+ }
+]

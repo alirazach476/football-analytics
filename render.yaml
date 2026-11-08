@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: football-analytics-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL        # Neon connection string (postgresql://...?sslmode=require): set in the Render dashboard, never committed
+        sync: false

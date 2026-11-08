@@ -1,0 +1,5 @@
+model,n_train,n_test,mae,r2,spearman,note
+baseline_train_mean,427,811,0.16262863726800983,-0.000867244384817667,,"chronological split: train editions <= 2016, test later; target = goals per 90 in the next tournament"
+baseline_last_edition_rate,427,811,0.1370012330456227,-0.2666975173778068,0.35029812132635135,"chronological split: train editions <= 2016, test later; target = goals per 90 in the next tournament"
+ridge,427,811,0.13258012770473834,0.2691309066251887,0.4587840803819961,"chronological split: train editions <= 2016, test later; target = goals per 90 in the next tournament"
+random_forest,427,811,0.12496989467685671,0.2625913154109063,0.4682306500455118,"chronological split: train editions <= 2016, test later; target = goals per 90 in the next tournament"

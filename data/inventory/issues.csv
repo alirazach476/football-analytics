@@ -1,0 +1,46 @@
+question,topic,table,classification,records,finding,example
+1,duplicate matches,matches,info,0,duplicate match_id,
+1,duplicate matches,matches,info,0,same season + date + home + away team appears more than once,
+2,duplicate players,players_all,possible_error,1628,same full name + date of birth under different player_id (should be one person unless a rule is missing),"['chris gunter', 'joe allen', 'jamie vardy']"
+2,duplicate players,players_all,possible_error,3592,same normalised full name under different ids (often different people: same-name players; needs DOB/team check),
+3,duplicate teams,teams,info,0,two team ids with the same normalised name,
+3,duplicate teams,team_aliases,info,0,one alias mapped to several teams,
+3,duplicate teams,teams,info,7,similar-name team pairs reviewed and deliberately NOT merged,
+4,missing scores,matches,info,0,completed match without a score,
+4,missing scores,matches,legitimate_missing,51,"scheduled fixtures (Euro 2028): no score yet, kept null",EURO-2028
+4,missing scores,matches,info,0,scheduled match that has a score,
+5,incorrect dates,matches,info,0,completed match dated in the future,
+5,incorrect dates,matches,info,2,dates already corrected by majority of three sources (original recorded in date_check),['corrected 2016-06-21 -> 2016-06-22: martj42 and Wikipedia agree against openfootball']
+5,incorrect dates,matches,possible_error,1,date contradicts the weekday written in its source line,"[['COPA-2024', '2024-07-14']]"
+10,incorrect season assignments,matches,info,0,"match date outside the season's registry window (the registry window itself is a seeded, unverified fact)",[]
+10,incorrect season assignments,registry,legitimate_missing,7,seasons without confirmed start/end dates,"['EURO-2028', 'COPA-2028', 'UNL-2018-19', 'UNL-2020-21', 'UNL-2022-23', 'UNL-2024-25', 'UNL-2026-27']"
+6,invalid match statuses,matches,info,0,"values seen: {'completed': 1779, 'scheduled': 51}; abandoned/awarded results have no own status",
+6,invalid match statuses,matches,possible_error,1,match whose on-pitch result differs from an awarded result (no 'awarded' status exists),"[['Romania', 'Kosovo']]"
+7,missing player ids,events_all,legitimate_missing,2279,martj42: events without player_id (source gives names only),
+7,missing player ids,events_all,legitimate_missing,544,openfootball: events without player_id (source gives names only),
+7,missing player ids,events_all,info,6728,statsbomb: events without player_id (non-player events such as match start/end),
+7,missing player ids,events_all,legitimate_missing,5355,wikipedia: events without player_id (source gives names only),
+7,missing player ids,lineups_all,legitimate_missing,13271,Wikipedia line-up rows carry names only (no ids exist in that source),{'wikipedia': 13271}
+8,inconsistent team names,team_aliases,info,4,teams spelled several ways in the sources (resolved by documented rules R0-R4),"{'T-NAT-bosnia-herzegovina': 3, 'T-NAT-republic-of-ireland': 2, 'T-NAT-ivory-coast': 2}"
+9,inconsistent competition names,matches/squads,info,4,"competition_id values in use: ['COPA', 'EURO', 'UNL', 'WC']; raw source spellings (e.g. 'UEFA Euro', '2018 FIFA Men's World Cup', 'Copa América') all map to these four",
+11,missing tournament stages,matches,info,0,played matches without a stage,
+11,missing tournament stages,matches,legitimate_missing,0,scheduled fixtures without a stage,
+12,invalid score values,matches,info,0,scores <0 or >12 (highest real score in scope: Hungary 10-1 El Salvador style results excluded; check manually),[]
+12,invalid score values,matches,info,0,shoot-out recorded but on-pitch score not level,
+13,inconsistent player statistics,player_match_stats_all,info,0,passes_completed > passes,
+13,inconsistent player statistics,player_match_stats_all,info,0,shots_on_target > shots,
+13,inconsistent player statistics,player_match_stats_all,info,0,minutes_played < 0 or > 130,
+13,inconsistent player statistics,team_match_stats_all,info,0,team goals rebuilt from events differ from the recorded score,
+13,inconsistent player statistics,player_match_stats_all,legitimate_missing,2326,"Wyscout rows: tackles, interceptions, blocks, xG, xA are null by definition (not 0)",
+14,missing historical records,matches vs registry,info,0,seasons whose match count differs from the registry's (arithmetic) expected count,[]
+14,missing historical records,registry,legitimate_missing,5,Nations League seasons have no expected count (no verified official total),"['UNL-2018-19', 'UNL-2020-21', 'UNL-2022-23', 'UNL-2024-25', 'UNL-2026-27']"
+14,missing historical records,events,legitimate_missing,2,played matches with no event data in any permitted source,
+14,missing historical records,matches,legitimate_missing,8,played matches with no attendance in either Wikipedia,
+14,missing historical records,matches,legitimate_missing,830,played matches without a Man of the Match (not recorded for Copa 2001/04/07 or Nations League group matches),
+14,missing historical records,events,legitimate_missing,1466,played matches without pass/shot coordinates (only StatsBomb and Wyscout publish them),
+15,conflicting records between files,wikipedia_vs_matches_conflicts.csv,possible_error,1,Wikipedia vs matches: rows in the conflict report (resolved or annotated individually),"[{'season_id': 'UNL-2024-25', 'kind': 'score_or_date', 'date': '2024-11-15', 'match': 'ROU v KOS', 'ours': '2024-11-15 0-0 [martj42]', 'wikipedia': '2024-11-15 3-0'}]"
+15,conflicting records between files,martj42_vs_matches_conflicts.csv,possible_error,2,martj42 vs matches: rows in the conflict report (resolved or annotated individually),"[{'season_id': 'EURO-2016', 'our_date': '2016-06-21', 'martj42_date': '2016-06-22', 'match': 'Italy v Ireland', 'ours': '0-1', 'martj42': 'Italy 0-1 Republic of Ireland'}]"
+15,conflicting records between files,fjelstul_vs_matches_conflicts.csv,info,0,Fjelstul vs matches: rows in the conflict report (resolved or annotated individually),[]
+15,conflicting records between files,wikipedia_details_validation.csv,possible_error,53,matches where Wikipedia and Fjelstul/StatsBomb disagree on the NUMBER of cards (517 compared),
+15,conflicting records between files,fjelstul_vs_statsbomb.csv,possible_error,18,matches where Fjelstul and StatsBomb disagree on card counts (128 compared),
+0,UCL exclusion,all processed tables,info,0,UEFA Champions League rows in processed tables (must be 0),

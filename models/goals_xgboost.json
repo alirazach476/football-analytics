@@ -1,0 +1,28 @@
+{
+ "task": "expected goals",
+ "model": "xgboost",
+ "features": [
+  "own_att",
+  "opp_def",
+  "own_gf_avg",
+  "opp_ga_avg",
+  "own_form_gd",
+  "opp_form_gd",
+  "own_elo",
+  "opp_elo",
+  "elo_diff",
+  "own_n_prior",
+  "opp_n_prior",
+  "own_is_host",
+  "opp_is_host",
+  "is_knockout",
+  "stage_rank",
+  "comp_WC",
+  "comp_EURO",
+  "comp_COPA",
+  "comp_UNL"
+ ],
+ "trained_on": "train period only",
+ "saved_at": "2026-11-06T07:58:59+00:00",
+ "python": "3.12.10"
+}

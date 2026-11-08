@@ -1,0 +1,30 @@
+{
+ "cache": {
+  "openfootball": {
+   "files": 47,
+   "bytes": 574322,
+   "ucl_files": 17
+  },
+  "statsbomb": {
+   "files": 315,
+   "bytes": 66769053,
+   "ucl_files": 0
+  },
+  "wikipedia": {
+   "files": 563,
+   "bytes": 57231069,
+   "ucl_files": 180
+  },
+  "wikipedia_es": {
+   "files": 14,
+   "bytes": 586543,
+   "ucl_files": 0
+  },
+  "staging(statsbomb)": {
+   "files": 1104,
+   "bytes": 106186390,
+   "ucl_files": 0
+  }
+ },
+ "ucl_cached_files": 197
+}

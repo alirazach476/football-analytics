@@ -1,0 +1,6 @@
+model,true_A win__pred_A win,true_A win__pred_draw,true_A win__pred_B win,true_draw__pred_A win,true_draw__pred_draw,true_draw__pred_B win,true_B win__pred_A win,true_B win__pred_draw,true_B win__pred_B win
+baseline_prior,119,0,0,70,0,0,86,0,0
+baseline_elo_logreg,96,0,23,46,0,24,26,0,60
+logreg,89,8,22,40,3,27,19,10,57
+random_forest,95,0,24,45,0,25,28,0,58
+xgboost,98,0,21,46,1,23,27,0,59

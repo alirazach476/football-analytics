@@ -1,0 +1,20 @@
+{
+ "task": "predict next-tournament goals per 90",
+ "features": [
+  "prior_goals_p90",
+  "prior_minutes",
+  "prior_editions",
+  "prior_goals",
+  "prior_assists_p90",
+  "age",
+  "last_goals_p90",
+  "prior_team_ppm",
+  "pos_Goalkeeper",
+  "pos_Defender",
+  "pos_Midfielder",
+  "pos_Forward"
+ ],
+ "train_years": "<=2016",
+ "saved_at": "2026-11-06T08:01:38+00:00",
+ "python": "3.12.10"
+}

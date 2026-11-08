@@ -1,0 +1,20 @@
+version: 2
+models:
+  - name: stg_matches
+    description: "All matches (played and scheduled) with dimension attributes resolved. Scheduled fixtures keep placeholders (e.g. A1) and null scores."
+    columns:
+      - {name: match_key, tests: [unique, not_null]}
+      - {name: match_status, tests: [accepted_values: {values: ['completed', 'scheduled']}]}
+      - {name: competition_id, tests: [accepted_values: {values: ['WC', 'EURO', 'COPA', 'UNL']}]}
+      - {name: home_team_name, tests: [not_null]}
+    tests:
+      - expression_is_true: {expression: "is_played or (home_score is null and away_score is null)"}
+      - expression_is_true: {expression: "not is_played or (home_score is not null and away_score is not null)"}
+  - name: stg_goal_events
+    columns:
+      - {name: event_key, tests: [unique, not_null]}
+    tests:
+      - expression_is_true: {expression: "minute is null or minute between 0 and 135"}
+  - name: stg_awards
+    columns:
+      - {name: winner_type, tests: [accepted_values: {values: ['player', 'team']}]}

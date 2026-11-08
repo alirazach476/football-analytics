@@ -1,0 +1,5 @@
+competition_id,away win,draw,home win,note
+WC,0.33,0.23,0.441,empirical frequencies of the listed team's recorded-score result; not a prediction
+EURO,0.368,0.253,0.379,empirical frequencies of the listed team's recorded-score result; not a prediction
+COPA,0.258,0.274,0.468,empirical frequencies of the listed team's recorded-score result; not a prediction
+UNL,0.325,0.252,0.423,empirical frequencies of the listed team's recorded-score result; not a prediction
