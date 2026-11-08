@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Football Analytics Platform — Project Guide</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+:root { --ink:#0f172a; --muted:#475569; --brand:#0b5fff; --brand2:#00a86b; --soft:#f1f5f9; --line:#dbe3ee; }
+* { box-sizing: border-box; }
+body { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--ink); font-size: 10.4pt; line-height: 1.5; margin: 0; }
+h1 { font-size: 22pt; margin: 0 0 6pt; } h2 { font-size: 15pt; margin: 22pt 0 6pt; padding-bottom: 4pt; border-bottom: 2.5pt solid var(--brand); color: var(--ink); page-break-after: avoid; }
+h3 { font-size: 11.6pt; margin: 14pt 0 4pt; color: var(--brand); page-break-after: avoid; } p { margin: 4pt 0 6pt; } ul, ol { margin: 4pt 0 8pt 16pt; padding: 0; } li { margin: 2pt 0; }
+.cover { height: 255mm; display: flex; flex-direction: column; justify-content: center; page-break-after: always; background: linear-gradient(135deg,#0b1226,#14306e 60%,#0b5fff); color: #fff; margin: -16mm -15mm 0; padding: 0 20mm; }
+.cover .kicker { letter-spacing: .3em; text-transform: uppercase; font-size: 10pt; opacity: .8; } .cover h1 { font-size: 36pt; line-height: 1.05; margin: 10pt 0 12pt; } .cover p { font-size: 13pt; max-width: 150mm; opacity: .92; }
+.cover .logos img { height: 38pt; background: #fff; border-radius: 6pt; padding: 4pt; margin-right: 8pt; } .cover .meta { margin-top: 26pt; font-size: 10.5pt; line-height: 1.8; } .cover a { color: #9cc4ff; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6pt; margin: 8pt 0 10pt; } .kpi { background: var(--soft); border-left: 3pt solid var(--brand); padding: 6pt 8pt; border-radius: 4pt; } .kpi b { display: block; font-size: 15pt; color: var(--brand); } .kpi span { font-size: 8.4pt; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 9.2pt; page-break-inside: avoid; } th { background: var(--ink); color: #fff; text-align: left; padding: 4pt 6pt; } td { padding: 4pt 6pt; border-bottom: 1pt solid var(--line); vertical-align: top; } tr:nth-child(even) td { background: #f8fafc; }
+.box { background: #eef5ff; border-left: 3pt solid var(--brand); padding: 6pt 10pt; margin: 8pt 0; border-radius: 4pt; page-break-inside: avoid; } .box.warn { background: #fff8e6; border-color: #f59e0b; } .box.ok { background: #ecfdf3; border-color: var(--brand2); }
+.flow { display: flex; flex-wrap: wrap; gap: 4pt; align-items: center; margin: 8pt 0; } .flow span { background: var(--ink); color: #fff; padding: 4pt 8pt; border-radius: 4pt; font-size: 8.8pt; } .flow i { color: var(--muted); font-style: normal; }
+img.shot { width: 100%; border: 1pt solid var(--line); border-radius: 6pt; margin: 4pt 0 2pt; } .cap { font-size: 8.6pt; color: var(--muted); margin-bottom: 8pt; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; } .q { page-break-inside: avoid; margin: 8pt 0; } .q b { color: var(--brand); } .q p { margin: 2pt 0; } code { background: var(--soft); padding: 0 3pt; border-radius: 3pt; font-size: 9pt; }
+.pb { page-break-before: always; } footer { margin-top: 18pt; font-size: 8.5pt; color: var(--muted); text-align: center; }
+</style></head><body>
+
+<div class="cover">
+  <div class="logos"><img src="../../frontend/public/logos/fifa.png"><img src="../../frontend/public/logos/uefa.png"><img src="../../frontend/public/logos/conmebol.png"></div>
+  <div class="kicker" style="margin-top:22pt">Project guide · working · tech stack · interview prep</div>
+  <h1>Football Analytics Platform</h1>
+  <p>An end-to-end data-engineering, data-science and analytics platform for men's international tournament football: World Cup, Euro, Copa América and Nations League, with a broadcast-style React dashboard.</p>
+  <div class="meta">Live demo: <a href="https://football-analytics-xi.vercel.app">football-analytics-xi.vercel.app</a><br>Source code: <a href="https://github.com/alirazach476/football-analytics">github.com/alirazach476/football-analytics</a><br>Author: Ali Raza</div>
+</div>
+
+<h2 style="margin-top:0">1. The project in one page</h2>
+<p><b>What it does.</b> It collects open football data from six sources, cleans and unifies it through a Bronze → Silver → warehouse → Gold pipeline, analyses it with statistics and machine learning, and serves it through a FastAPI backend to a React dashboard where every tournament edition has its own visual identity built from its logo.</p>
+<div class="kpis">
+  <div class="kpi"><b>1,830</b><span>matches (1,779 played + 51 coming soon)</span></div><div class="kpi"><b>103</b><span>national teams</span></div><div class="kpi"><b>8,410</b><span>canonical players after entity resolution</span></div><div class="kpi"><b>1.03 M</b><span>event rows (passes, shots, goals…)</span></div>
+  <div class="kpi"><b>30</b><span>tournament editions</span></div><div class="kpi"><b>85</b><span>interactive chart types</span></div><div class="kpi"><b>115</b><span>dbt models and tests</span></div><div class="kpi"><b>223 + 6</b><span>Python + front-end tests</span></div>
+</div>
+<h3>Golden rules</h3>
+<ul><li><b>Nothing is invented.</b> Missing data stays empty (NULL) and is reported; a missing value is never shown as zero.</li><li><b>Provenance is kept</b> for every record (source, version, hash); raw collected data is never modified or deleted.</li><li><b>Upcoming fixtures are kept and shown as "Coming soon"</b>, but never enter statistics or model targets.</li><li><b>Predictions are always labelled</b> as predictions, and weak model results are reported plainly.</li><li><b>Scope</b>: four men's competitions only (the UEFA Champions League is excluded by design). Only openly licensed sources are used; FIFA, UEFA and CONMEBOL sites are not scraped because their terms forbid it.</li></ul>
+
+<h2>2. How it works, end to end</h2>
+<div class="flow"><span>Sources</span><i>→</i><span>Bronze</span><i>→</i><span>Silver</span><i>→</i><span>PostgreSQL star schema</span><i>→</i><span>dbt Gold</span><i>→</i><span>ML + statistics</span><i>→</i><span>FastAPI</span><i>→</i><span>React on Vercel</span></div>
+<h3>2.1 Sources and Bronze (ingestion)</h3>
+<table><tr><th>Source</th><th>Gives</th><th>Licence</th></tr>
+<tr><td>OpenFootball</td><td>fixtures, results, goal scorers (Euro, Copa, World Cup 2026)</td><td>CC0</td></tr>
+<tr><td>martj42 international results</td><td>results, goal scorers, a few assists</td><td>CC0</td></tr>
+<tr><td>Fjelstul World Cup database</td><td>World Cup matches, goals, squads</td><td>CC BY-SA 4.0</td></tr>
+<tr><td>StatsBomb Open Data</td><td>event-level data, line-ups, managers, shots, passes</td><td>attribution terms</td></tr>
+<tr><td>Wyscout public dataset</td><td>event data for some editions</td><td>CC BY 4.0</td></tr>
+<tr><td>Wikipedia (MediaWiki API)</td><td>match boxes (line-ups, cards, managers), awards, venues, World Cup 2030 facts</td><td>CC BY-SA 4.0</td></tr></table>
+<p>Every downloaded file is registered with a <b>SHA-256 hash</b> and a version, and frozen snapshots are kept, so any result can be traced back to the exact bytes it came from. Files from the excluded competition are flagged and never processed.</p>
+<h3>2.2 Silver (clean, standardise, resolve)</h3>
+<ul><li>One schema for all sources: matches, teams, players, line-ups, events, venues, squads. Original raw values are kept next to the standardised ones.</li><li><b>Entity resolution</b> merges the same person across sources (8,410 canonical players): same name and birth date, or name containment plus same national team and never in one line-up together. Ambiguous cases go to a review file instead of being guessed.</li><li><b>Pandera</b> validates the Silver tables (13 checks); source disagreements are written to a conflicts report, and Wikipedia only fills nulls, it never overwrites a licensed dataset.</li></ul>
+<h3>2.3 Warehouse and Gold</h3>
+<ul><li><b>PostgreSQL star schema</b> (<code>wh</code>): dimensions (competition, season, team, player, venue, referee, date, stage) and facts (matches, team/player match stats, appearances, events, standings, awards, managers) with surrogate keys and constraints.</li><li><b>dbt</b> builds staging, intermediate and 11 Gold marts, with 115 models and tests.</li><li><b>Monitoring schema</b>: pipeline runs, step attempts, data-quality results, source coverage, freshness, ingestion history. The dashboard's data-engineering pages read these tables.</li><li><b>Orchestration</b>: Dagster assets or a plain runner; steps are idempotent (skipped when input hashes are unchanged) and retried, with every attempt logged.</li></ul>
+<h3>2.4 Statistics and machine learning</h3>
+<ul><li><b>Statistics</b>: ten statistical questions (details in <code>docs/STATISTICAL_REPORT.md</code>) answered with hypothesis tests, confidence intervals and permutation methods; goal counts are discrete and over-dispersed, so rank-based and count-model tools are used.</li>
+<li><b>Features</b> are built <i>only from matches before each match date</i> (Elo-style strength, recent form, tournament experience), so there is no leakage; a chronological train / validation / test split is used.</li>
+<li><b>Models</b>: prior baseline, one-feature Elo logistic baseline, logistic regression, random forest and XGBoost; selection on validation log loss; bootstrap confidence intervals on the test set; permutation importance, SHAP and partial dependence; calibration curves; goal-count models (Poisson-family); K-Means and hierarchical clustering of teams and players; MLflow tracking.</li></ul>
+<div class="box warn"><b>Honest result.</b> On 275 test matches, accuracy is about 55–57 %. XGBoost (log loss 0.956) does <b>not</b> clearly beat the one-feature Elo baseline (0.942); the confidence intervals overlap. Goal totals barely beat the base rate and team clusters are weak. The project states this plainly instead of overselling.</div>
+<h3>2.5 API and dashboard</h3>
+<ul><li><b>FastAPI</b> exposes a registry of 85 chart ids, whitelisted queries, tournament pages, the Match Center, fixtures, standings, exports and the match predictor. Python builds each Plotly figure and returns it as JSON; React renders it. One code path serves analysis and UI, and every "not shown: reason" rule is preserved.</li>
+<li><b>React + TypeScript</b> (Vite, Tailwind, TanStack Query, framer-motion): per-edition themes, broadcast scoreboard, line-ups on a pitch, fixtures with filters, a 7-page analytics section and a 7-page visualization lab with cross-filtering, table view and CSV / HTML / PNG export on every chart.</li></ul>
+
+<h2>3. Tech stack and why</h2>
+<table><tr><th>Area</th><th>Choice</th><th>Why</th></tr>
+<tr><td>Language</td><td>Python 3.12, TypeScript</td><td>One language across ingestion, analysis and API; TypeScript for a safe front end</td></tr>
+<tr><td>Storage</td><td>Parquet (Bronze/Silver), PostgreSQL (warehouse)</td><td>Cheap immutable files for raw layers; relational constraints and SQL for serving</td></tr>
+<tr><td>Transform</td><td>dbt</td><td>Versioned SQL marts with built-in tests and lineage</td></tr>
+<tr><td>Validation</td><td>Pandera + dbt tests + constraints</td><td>Three layers of defence, each catching different errors</td></tr>
+<tr><td>Orchestration</td><td>Dagster / runner, monitoring tables</td><td>Visible runs, retries, idempotency, freshness</td></tr>
+<tr><td>ML</td><td>scikit-learn, XGBoost, SHAP, MLflow</td><td>Standard, explainable, reproducible; a baseline keeps claims honest</td></tr>
+<tr><td>API</td><td>FastAPI + psycopg 3</td><td>Typed, fast, automatic docs; reuses the existing Python chart code</td></tr>
+<tr><td>Charts</td><td>Plotly (server-side JSON) + Matplotlib/Seaborn twins</td><td>Interactive charts plus static exports without rewriting charts in JS</td></tr>
+<tr><td>Front end</td><td>React 18, Vite, Tailwind, TanStack Query, framer-motion, flag-icons</td><td>Fast builds, cached queries, themeable design tokens, animation</td></tr>
+<tr><td>Hosting</td><td>Vercel, Neon, Cloudflare tunnel, Docker</td><td>Free tier friendly; see section 6</td></tr></table>
+
+<h2>4. Dashboard tour</h2>
+<img class="shot" src="../../docs/img/match-center.jpg"><div class="cap">Match Center: broadcast scoreboard in each nation's colours, scorers with assists, managers, comparison statistics.</div>
+<div class="two"><div><img class="shot" src="../../docs/img/lineups.jpg"><div class="cap">Line-ups: formation derived from recorded positions.</div></div><div><img class="shot" src="../../docs/img/worldcup-2022.jpg"><div class="cap">Each edition is themed from its own logo.</div></div></div>
+<div class="two"><div><img class="shot" src="../../docs/img/copa-2024.jpg"><div class="cap">Each competition has its own typography and shapes.</div></div><div><img class="shot" src="../../docs/img/worldcup-2030.jpg"><div class="cap">World Cup 2030: coming soon, with sourced facts.</div></div></div>
+<img class="shot" src="../../docs/img/lab-teams.jpg" style="width:78%;display:block;margin:4pt auto"><div class="cap">Visualization lab: shared filters, click-to-filter, table view and downloads on every chart.</div>
+
+<h2 class="pb">5. Real engineering problems solved</h2>
+<table><tr><th>Problem</th><th>What I found</th><th>Fix</th></tr>
+<tr><td>Same match, conflicting sources</td><td>Providers disagree on scores, names and dates</td><td>Cross-source conflict report, licensed data wins, Wikipedia only fills nulls, raw values kept</td></tr>
+<tr><td>Own goals attributed to the wrong team</td><td>StatsBomb stores an own goal under the scorer's team; martj42 / Fjelstul under the team that benefits</td><td>Normalised per provider and verified against every recorded score (35/35 and 60/60 matches); a "scorers may be incomplete" note when goals do not add up</td></tr>
+<tr><td>Scorers missing for whole editions</td><td>openfootball goals have event_type "goal" but no goal flag, so the timeline query labelled them "Substitution" (Euro 2000/2004, Copa 2021, World Cup 2026)</td><td>Fixed the query; scanned ~840 matches; only 7 matches now lack scorers because no source has them</td></tr>
+<tr><td>Data leakage in ML</td><td>Features could see the future</td><td>Features computed strictly from earlier matches; chronological split; baseline comparison</td></tr>
+<tr><td>Upcoming fixtures</td><td>Scheduled matches have no result</td><td>Kept and shown as "Coming soon"; excluded from every statistic and target</td></tr>
+<tr><td>Missing is not zero</td><td>Heatmaps counted unplayed matches as missing</td><td>Played matches only for completeness metrics; unavailable charts say why</td></tr>
+<tr><td>Memory on a free host</td><td>API took ~290 MB just to import, ~500 MB with ML</td><td>Lazy imports of scikit-learn / statsmodels / mlflow (190 MB at start-up); heavy ML objects pre-computed and shipped as pickles</td></tr>
+<tr><td>Slow first request</td><td>Scoring the test period and SHAP took ~1 minute each</td><td>Pre-computed cache loaded from disk; cold start 4 s in a container</td></tr>
+<tr><td>Flags for every country</td><td>Historical and variant names</td><td>Central name → ISO map with aliases; defunct states and bracket placeholders get a neutral badge, never a wrong flag; a test checks every team in the data</td></tr>
+<tr><td>Tabs / charts hidden when data is absent</td><td>Commentary and shot data do not exist for most matches</td><td>The UI shows only sections the data supports and says what is not recorded</td></tr></table>
+
+<h2>6. Deployment and trade-offs</h2>
+<div class="flow"><span>Browser</span><i>→</i><span>Vercel (React, /api proxy)</span><i>→</i><span>Cloudflare tunnel</span><i>→</i><span>FastAPI on my PC</span><i>→</i><span>Postgres (local Docker or Neon)</span></div>
+<ul><li>Hugging Face Docker Spaces need a paid plan and Render needs a card on file, so the card-free choice was a <b>tunnel</b>. The cost is availability: the site is up only while <code>python tools/serve_public.py</code> runs, and each tunnel run gets a new address (the script redeploys Vercel automatically).</li><li>A copy of the warehouse (298 MB) is loaded into <b>Neon</b>, and a Docker image + <code>render.yaml</code> are ready for an always-on host with a one-line change.</li><li>Secrets are never committed; the repository holds code, docs, tests, models, reports and small runtime data only.</li></ul>
+
+<h2 class="pb">7. Interview preparation</h2>
+<h3>The 60-second pitch</h3>
+<div class="box ok">I built an end-to-end football analytics platform. It ingests six open data sources into an immutable Bronze layer, cleans and entity-resolves them in Silver (8,410 canonical players), loads a PostgreSQL star schema, and builds 11 dbt marts with 115 tests. A statistics and ML layer with leakage-free features and a chronological split shows honestly that complex models do not clearly beat an Elo baseline. A FastAPI service serves 85 interactive charts and a Match Center to a React dashboard, where every tournament has its own design built from its logo. It is deployed on Vercel with Neon and a tunnel, and I can explain every trade-off.</div>
+
+<h3>Data engineering</h3>
+<div class="q"><p><b>Why Bronze / Silver / Gold?</b></p><p>Bronze is immutable and traceable (hash + version), Silver is the cleaned and unified model, Gold is business-ready marts. Each layer can be rebuilt from the one before, and a bug in cleaning never destroys raw data.</p></div>
+<div class="q"><p><b>How do you merge the same player across sources?</b></p><p>Deterministic rules: same name and birth date, or name containment plus same national team and never in the same line-up. Anything ambiguous goes to a review file. I measured duplicates before and after and kept the raw ids as an xref table.</p></div>
+<div class="q"><p><b>How do you make the pipeline idempotent?</b></p><p>Steps hash their inputs (and the code for Silver); unchanged inputs are skipped, every attempt is logged in <code>monitoring.pipeline_execution_logs</code>, failures retry. Reloading the warehouse drops the dbt views, so the pipeline runs <code>dbt build</code> right after.</p></div>
+<div class="q"><p><b>What data-quality controls exist?</b></p><p>Three layers: Pandera on Silver (13 checks), dbt tests on Gold (115 models and tests), PostgreSQL constraints. Plus a coverage report per edition so gaps are visible rather than hidden.</p></div>
+<div class="q"><p><b>Tell me about a hard data bug.</b></p><p>Scorers were missing for whole editions. I measured it per season, found one source flagged goals differently (event_type "goal" without the goal flag) so the timeline query mislabelled them, fixed the query, and re-scanned ~840 matches. Own goals were a second trap: two providers store them on opposite teams, so I normalised and verified against every recorded score.</p></div>
+
+<h3>SQL and modelling</h3>
+<div class="q"><p><b>Why a star schema?</b></p><p>Facts at match / event / appearance grain with conformed dimensions keep joins simple and fast and make dbt marts easy to build. Surrogate keys decouple the warehouse from source ids.</p></div>
+<div class="q"><p><b>How do you treat unplayed matches?</b></p><p>They stay in <code>fact_matches</code> with status and "Coming soon" detail, but every statistic filters to played matches, and ML targets exclude them.</p></div>
+
+<h3>Machine learning</h3>
+<div class="q"><p><b>How did you avoid leakage?</b></p><p>Features use only matches before the match date; the split is chronological (train → 2022, validation → 2024, test after). Nothing from the test period is used for tuning.</p></div>
+<div class="q"><p><b>Your best model barely beats a baseline. Why report that?</b></p><p>Because it is true and informative: tournament football has high randomness, 55–57 % accuracy on three outcomes is realistic, and bootstrap intervals overlap. I selected on validation log loss, showed calibration, and avoided claiming a win.</p></div>
+<div class="q"><p><b>Why log loss and not just accuracy?</b></p><p>It scores the probabilities, which matter more than the argmax, and it penalises over-confidence. Accuracy hides that a model is badly calibrated.</p></div>
+<div class="q"><p><b>How do you explain the model?</b></p><p>Permutation importance and SHAP (global and per outcome), partial dependence, and a note that importance describes the model, not football causality.</p></div>
+<div class="q"><p><b>Is clustering useful here?</b></p><p>Teams form a continuum (k = 2, weak silhouette and low stability), which I report; player clusters within position groups are more interpretable.</p></div>
+
+<h3>API and front end</h3>
+<div class="q"><p><b>Why return Plotly JSON from Python instead of charting in JS?</b></p><p>One implementation for analysis, exports and UI; every availability and "never fabricate" rule lives in one place. The trade-off is server load, handled with caching and pre-computed heavy objects.</p></div>
+<div class="q"><p><b>How is each tournament themed?</b></p><p>A per-edition design token set (colours extracted from the logo and curated, banner art, pattern, mode) is applied as CSS variables; each competition also has its own typography and corner language. Contrast is checked in tests.</p></div>
+<div class="q"><p><b>How do you handle flags for 100+ nations?</b></p><p>A central name → ISO map with aliases and the flag-icons library; defunct states and bracket placeholders get a neutral badge, never a wrong flag, and a test verifies every team in the data.</p></div>
+<div class="q"><p><b>How did you cut API memory?</b></p><p>Lazy imports of scikit-learn, statsmodels and mlflow (290 → 190 MB at start-up), a per-thread reusable database connection, and pre-computed ML caches.</p></div>
+
+<h3>Deployment and operations</h3>
+<div class="q"><p><b>Why Vercel plus a tunnel?</b></p><p>Constraints: free only, no card. Vercel hosts the static React app and proxies <code>/api</code>; the API needs ~500 MB, Postgres and heavy Python libraries, which no free serverless tier fits. A tunnel keeps everything free but ties availability to my machine; the Docker image and <code>render.yaml</code> make an always-on move trivial.</p></div>
+<div class="q"><p><b>What would you do with more budget?</b></p><p>Run the API on a small always-on container with managed Postgres, add CI (tests + dbt on every push), alerting on freshness, and an autoscaled cache for the ML endpoints.</p></div>
+
+<h3>Behavioural / reflection</h3>
+<div class="q"><p><b>What would you improve next?</b></p><p>Event data for the Nations League, a per-match managers source for all editions, assist coverage, richer features (squad value, rest days), and CI/CD.</p></div>
+<div class="q"><p><b>What are the known limitations?</b></p><p>Assists and managers are missing for some editions, 7 matches lack scorers in every source, Nations League scorers are not linked to player ids, and the live demo depends on one machine.</p></div>
+
+<h3>Numbers worth remembering</h3>
+<table><tr><td>1,830 matches · 1,779 played · 51 coming soon</td><td>103 teams · 8,410 players</td></tr><tr><td>4,494 goals · 1,033,220 events</td><td>30 editions · 4 competitions</td></tr><tr><td>11 Gold marts · 115 dbt models + tests · 13 Pandera checks</td><td>223 Python tests · 6 front-end tests</td></tr><tr><td>85 chart ids · 14 dashboard pages</td><td>Test period 275 matches · 55–57 % accuracy</td></tr></table>
+
+<footer>Football Analytics Platform · Ali Raza · github.com/alirazach476/football-analytics · data from open sources (CC0, CC BY, CC BY-SA, StatsBomb attribution)</footer>
+</body></html>
