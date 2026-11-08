@@ -18,7 +18,7 @@
 ![XGBoost](https://img.shields.io/badge/XGBoost-337AB7)
 ![Tests](https://img.shields.io/badge/tests-223_Python_+_6_front--end-brightgreen)
 
-[**Live demo**](https://football-analytics-xi.vercel.app) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [Quick start](#-quick-start) · [Docs](#-documentation)
+[**Live demo**](https://football-analytics-xi.vercel.app) · [**Project guide (PDF)**](docs/Football_Analytics_Project_Guide.pdf) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [Quick start](#-quick-start) · [Docs](#-documentation)
 
 <sub>The demo's API runs from the author's PC through a free tunnel, so it can be offline. See [Deployment](docs/DEPLOYMENT.md).</sub>
 
@@ -164,7 +164,7 @@ tests/  notebooks/  docs/  reports/ tools/  deploy/
 
 ## 📖 Documentation
 
-[Architecture](docs/ARCHITECTURE.md) · [Pipeline guide](docs/PIPELINE_GUIDE.md) · [Data sources](docs/DATA_SOURCES.md) · [Database schema](docs/DATABASE_SCHEMA.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Data quality](docs/DATA_QUALITY.md) · [Statistical report](docs/STATISTICAL_REPORT.md) · [Model documentation](docs/MODEL_DOCUMENTATION.md) · [Data-science report](docs/DATA_SCIENCE_REPORT.md) · [React dashboard guide](docs/REACT_DASHBOARD_GUIDE.md) · [Visualization guide](docs/VISUALIZATION_GUIDE.md) · [Deployment](docs/DEPLOYMENT.md)
+[Architecture](docs/ARCHITECTURE.md) · [Pipeline guide](docs/PIPELINE_GUIDE.md) · [Data sources](docs/DATA_SOURCES.md) · [Database schema](docs/DATABASE_SCHEMA.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Data quality](docs/DATA_QUALITY.md) · [Statistical report](docs/STATISTICAL_REPORT.md) · [Model documentation](docs/MODEL_DOCUMENTATION.md) · [Data-science report](docs/DATA_SCIENCE_REPORT.md) · [React dashboard guide](docs/REACT_DASHBOARD_GUIDE.md) · [Visualization guide](docs/VISUALIZATION_GUIDE.md) · [Deployment](docs/DEPLOYMENT.md) · [**Project guide & interview prep (PDF)**](docs/Football_Analytics_Project_Guide.pdf)
 
 ## ⚠️ Known limits
 
