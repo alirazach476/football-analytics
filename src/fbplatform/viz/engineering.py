@@ -8,7 +8,10 @@ import json
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-import pyarrow.parquet as pq
+try:
+    import pyarrow.parquet as pq
+except ImportError:                                   # slim hosted build: counts come from the snapshot, silver tables from pickles
+    pq = None
 from plotly.subplots import make_subplots
 
 from ..analysis import data as D
@@ -30,7 +33,7 @@ def layer_counts() -> pd.DataFrame:
     tools/prepare_render.py (when the files exist locally they are counted live)."""
     rows = []
     snap = json.loads(SNAPSHOT.read_text(encoding="utf-8")) if SNAPSHOT.exists() else []
-    snaps = sorted((DATA / "bronze" / "collected").glob("v*"))
+    snaps = sorted((DATA / "bronze" / "collected").glob("v*")) if pq else []
     if snaps:
         for f in sorted(snaps[-1].iterdir()):
             if f.suffix == ".parquet":
@@ -39,7 +42,7 @@ def layer_counts() -> pd.DataFrame:
                 rows.append(dict(layer="Bronze (frozen snapshot)", table=f.stem, rows=sum(1 for _ in open(f, encoding="utf-8", errors="ignore")) - 1))
     else:
         rows += [r for r in snap if r["layer"].startswith("Bronze")]
-    for f in sorted((DATA / "silver").glob("*.parquet")):
+    for f in (sorted((DATA / "silver").glob("*.parquet")) if pq else []):
         rows.append(dict(layer="Silver", table=f.stem, rows=pq.ParquetFile(f).metadata.num_rows))
     have = {r["table"] for r in rows if r["layer"] == "Silver"}
     rows += [r for r in snap if r["layer"] == "Silver" and r["table"] not in have]
@@ -76,6 +79,10 @@ def coverage() -> pd.DataFrame:
 
 
 def silver_table(name: str, columns: list[str] | None = None) -> pd.DataFrame:
+    pkl = DATA / "silver_pkl" / f"{name}.pkl.xz"
+    if pq is None and pkl.exists():
+        d = pd.read_pickle(pkl)
+        return d[columns] if columns else d
     return pd.read_parquet(DATA / "silver" / f"{name}.parquet", columns=columns)
 
 

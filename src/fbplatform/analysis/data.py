@@ -16,7 +16,7 @@ import threading
 
 import psycopg
 
-from ..warehouse.load import dsn
+from ..db import dsn
 
 COMP_ORDER = ["WC", "EURO", "COPA", "UNL"]
 # Okabe-Ito colour-blind-safe palette, one fixed colour per competition across all figures
@@ -32,7 +32,7 @@ def _query(sql, params):
     for attempt in (0, 1):
         c = getattr(_local, "conn", None)
         if c is None or c.closed:
-            c = _local.conn = psycopg.connect(dsn(), autocommit=True)
+            c = _local.conn = psycopg.connect(dsn(), autocommit=True, prepare_threshold=None)     # None: also safe behind a PgBouncer pooler
         try:
             cur = c.execute(sql, params)
             return pd.DataFrame(cur.fetchall(), columns=[d.name for d in cur.description])

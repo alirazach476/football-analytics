@@ -1,23 +1,33 @@
-# Deployment (free)
+# Deployment (free, always on)
 
 | Part | Where | Notes |
 |---|---|---|
-| React front end | **Vercel** — https://football-analytics-xi.vercel.app | project `football-analytics`, built from `frontend/`; `/api/*` is proxied to the API (see `frontend/vercel.template.json`) |
-| API (FastAPI) | **this PC**, exposed by a Cloudflare quick tunnel | `python tools/serve_public.py` starts the API + tunnel and redeploys Vercel with the new tunnel address |
-| Warehouse | local Docker Postgres (default) or **Neon** (free, 0.5 GB; a copy of the warehouse is loaded) | `--neon` with `FOOTBALL_DATABASE_URL` |
-| Code | GitHub `alirazach476/football-analytics` | code, docs, tests, small runtime data; no raw/bronze data, no secrets |
+| React front end | **Vercel**, https://football-analytics-xi.vercel.app | project `football-analytics`, built from `frontend/`; `/api/*` is proxied to the API project (`frontend/vercel.template.json`) |
+| API (FastAPI) | **Vercel serverless Python function**, https://football-analytics-api.vercel.app | project `football-analytics-api`, bundle built by `tools/build_vercel_api.py`; reads `DATABASE_URL` (Neon, pooled endpoint) |
+| Warehouse | **Neon** free Postgres (~300 MB of 0.5 GB) | a `pg_dump -Fc` of the local warehouse restored with `pg_restore --no-owner --no-privileges` |
+| Code | GitHub `alirazach476/football-analytics` | code, docs, tests, models, reports and small runtime data; no raw/bronze data and no secrets |
 
-The site works only while `serve_public.py` is running (a quick tunnel gets a new address every run, hence the redeploy). For an always-on API use `Dockerfile` + `render.yaml` (Render needs a card on file even for the free plan) or any host that runs the Docker image with `DATABASE_URL` set.
+Nothing depends on a personal machine. The free function sleeps when idle, so the first request after a quiet period can take about 10 s (cold start); later requests take about a second.
 
-## Run
+## Why the API fits a serverless function
+* `fbplatform/db.py` holds the connection settings (no heavy imports); scikit-learn, statsmodels and the mlflow tracking import are loaded lazily; the build uses `xgboost-cpu` and has no pyarrow, shap, mlflow, dbt or dagster (`deploy/vercel/requirements.txt`).
+* Heavy ML objects (scoring the test period, SHAP, event-level player stats) are pre-computed into `deploy/cache/*.pkl`; the silver tables the engineering charts read ship as small pickles (`data/silver_pkl`) and the layer row counts as `data/layer_counts_snapshot.json`.
+* Queries reuse one connection per thread (`prepare_threshold=None`, safe behind Neon's PgBouncer pooler).
+
+## Update the deployment
 ```
-docker compose up -d                       # local warehouse (or use --neon)
-python tools/serve_public.py               # API + tunnel + Vercel redeploy; keep it running
+docker compose up -d                                   # local warehouse (source of truth)
+PYTHONPATH=src python tools/prepare_render.py          # refresh pickles + snapshot after retraining / reloading data
+python tools/build_vercel_api.py                       # builds build/vercel_api
+cd build/vercel_api && vercel deploy --prod --yes      # first time: vercel link --yes --project football-analytics-api
+                                                       #             vercel env add DATABASE_URL production   (Neon pooled connection string)
+python tools/deploy_vercel.py https://football-analytics-api.vercel.app --prod    # front end, proxied to the API
 ```
-## Rebuild the shipped caches (after retraining or reloading data)
-`PYTHONPATH=src python tools/prepare_render.py` writes `deploy/cache/*.pkl` (heavy ML caches) and `data/layer_counts_snapshot.json`.
-## Reload Neon
-`pg_dump -Fc` the local warehouse and `pg_restore --no-owner --no-privileges` it into the Neon database.
+Reload Neon after a data refresh: `pg_dump -Fc --no-owner --no-privileges` the local warehouse, then `pg_restore --clean --if-exists --no-owner --no-privileges -d <neon direct url>`.
 
-## Free-tier limits
-Neon 0.5 GB (the warehouse is ~300 MB); Vercel hobby; the tunnel needs this PC on. Memory use of the API is about 190 MB at start-up and ~500 MB after the ML charts are opened (scikit-learn/statsmodels load lazily).
+## Alternatives
+* `Dockerfile` + `render.yaml`: the same API as a container on Render or any Docker host (`DATABASE_URL` set; Render needs a card on file even for its free plan).
+* `tools/serve_public.py`: serve the API from a PC through a Cloudflare quick tunnel (no longer needed).
+
+## Limits
+Vercel hobby function: 1 GB memory, 60 s maximum duration. Neon free: 0.5 GB storage. The API needs about 190 MB at start-up and about 500 MB after the ML charts are opened.
