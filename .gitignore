@@ -23,3 +23,5 @@ reports/_tmp/
 dbt/target/
 dbt/logs/
 dbt/dbt_packages/
+serve_public.log
+.env.local
