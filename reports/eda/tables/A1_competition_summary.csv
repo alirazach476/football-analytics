@@ -1,0 +1,5 @@
+competition_id,competition_name,seasons,matches_played,goals_per_match,draw_pct,home_win_pct,beyond_90_pct,avg_attendance,goals_stddev,avg_teams,total_goals
+WC,FIFA World Cup,7,488,2.609,23.0,44.1,8.6,53115.0,1.708,34.285714285714285,1273.0
+EURO,UEFA European Championship,7,277,2.462,25.3,37.9,9.7,39993.0,1.529,19.428571428571427,682.0
+COPA,Copa América,9,248,2.512,27.4,46.8,9.7,32088.0,1.74,12.666666666666666,623.0
+UNL,UEFA Nations League,5,766,2.501,25.2,42.3,0.5,16341.0,1.634,54.4,1916.0

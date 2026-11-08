@@ -1,0 +1,13 @@
+# Connection comes from environment variables (defaults match docker-compose.yml). No secrets are stored here.
+football:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('WH_HOST', 'localhost') }}"
+      port: "{{ env_var('WH_PORT', '5442') | as_number }}"
+      user: "{{ env_var('WH_USER', 'football') }}"
+      password: "{{ env_var('WH_PASSWORD', 'football_local_dev') }}"
+      dbname: "{{ env_var('WH_DB', 'football_dw') }}"
+      schema: public
+      threads: 4

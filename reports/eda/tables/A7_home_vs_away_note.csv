@@ -1,0 +1,5 @@
+competition_id,home_win,away_win,note
+COPA,0.468,0.258,"'home' = team listed first; most tournament matches are at neutral venues, so this is NOT a home-advantage measure except for hosts"
+EURO,0.379,0.368,"'home' = team listed first; most tournament matches are at neutral venues, so this is NOT a home-advantage measure except for hosts"
+UNL,0.423,0.325,"'home' = team listed first; most tournament matches are at neutral venues, so this is NOT a home-advantage measure except for hosts"
+WC,0.441,0.33,"'home' = team listed first; most tournament matches are at neutral venues, so this is NOT a home-advantage measure except for hosts"

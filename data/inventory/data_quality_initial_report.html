@@ -1,0 +1,120 @@
+<style>body{font-family:Segoe UI,Arial;margin:24px;color:#222}table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ccc;padding:4px 8px;vertical-align:top}th{background:#f0f0f0}.confirmed_error{background:#fde0e0}.possible_error{background:#fff2cc}.legitimate_missing{background:#e2eefb}.info{background:#e8f5e9}</style><h1>Initial data-quality report</h1><p>Generated 2026-11-06 11:06. Read-only investigation of 163 files; nothing was deleted or modified.</p>
+<h2>Summary by classification</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>findings</th>
+      <th>records</th>
+    </tr>
+    <tr>
+      <th>classification</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>info</th>
+      <td>24</td>
+      <td>6745</td>
+    </tr>
+    <tr>
+      <th>legitimate_missing</th>
+      <td>13</td>
+      <td>26144</td>
+    </tr>
+    <tr>
+      <th>possible_error</th>
+      <td>8</td>
+      <td>5296</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Findings</h2><table><tr><th>question</th><th>topic</th><th>table</th><th>classification</th><th>records</th><th>finding</th><th>example</th></tr>
+<tr class='info'><td>0</td><td>UCL exclusion</td><td>all processed tables</td><td>info</td><td>0</td><td>UEFA Champions League rows in processed tables (must be 0)</td><td></td></tr>
+<tr class='info'><td>1</td><td>duplicate matches</td><td>matches</td><td>info</td><td>0</td><td>duplicate match_id</td><td></td></tr>
+<tr class='info'><td>1</td><td>duplicate matches</td><td>matches</td><td>info</td><td>0</td><td>same season + date + home + away team appears more than once</td><td></td></tr>
+<tr class='possible_error'><td>2</td><td>duplicate players</td><td>players_all</td><td>possible_error</td><td>1628</td><td>same full name + date of birth under different player_id (should be one person unless a rule is missing)</td><td>['chris gunter', 'joe allen', 'jamie vardy']</td></tr>
+<tr class='possible_error'><td>2</td><td>duplicate players</td><td>players_all</td><td>possible_error</td><td>3592</td><td>same normalised full name under different ids (often different people: same-name players; needs DOB/team check)</td><td></td></tr>
+<tr class='info'><td>3</td><td>duplicate teams</td><td>teams</td><td>info</td><td>0</td><td>two team ids with the same normalised name</td><td></td></tr>
+<tr class='info'><td>3</td><td>duplicate teams</td><td>team_aliases</td><td>info</td><td>0</td><td>one alias mapped to several teams</td><td></td></tr>
+<tr class='info'><td>3</td><td>duplicate teams</td><td>teams</td><td>info</td><td>7</td><td>similar-name team pairs reviewed and deliberately NOT merged</td><td></td></tr>
+<tr class='info'><td>4</td><td>missing scores</td><td>matches</td><td>info</td><td>0</td><td>completed match without a score</td><td></td></tr>
+<tr class='info'><td>4</td><td>missing scores</td><td>matches</td><td>info</td><td>0</td><td>scheduled match that has a score</td><td></td></tr>
+<tr class='legitimate_missing'><td>4</td><td>missing scores</td><td>matches</td><td>legitimate_missing</td><td>51</td><td>scheduled fixtures (Euro 2028): no score yet, kept null</td><td>EURO-2028</td></tr>
+<tr class='info'><td>5</td><td>incorrect dates</td><td>matches</td><td>info</td><td>0</td><td>completed match dated in the future</td><td></td></tr>
+<tr class='info'><td>5</td><td>incorrect dates</td><td>matches</td><td>info</td><td>2</td><td>dates already corrected by majority of three sources (original recorded in date_check)</td><td>['corrected 2016-06-21 -> 2016-06-22: martj42 and Wikipedia agree against openfootball']</td></tr>
+<tr class='possible_error'><td>5</td><td>incorrect dates</td><td>matches</td><td>possible_error</td><td>1</td><td>date contradicts the weekday written in its source line</td><td>[['COPA-2024', '2024-07-14']]</td></tr>
+<tr class='info'><td>6</td><td>invalid match statuses</td><td>matches</td><td>info</td><td>0</td><td>values seen: {'completed': 1779, 'scheduled': 51}; abandoned/awarded results have no own status</td><td></td></tr>
+<tr class='possible_error'><td>6</td><td>invalid match statuses</td><td>matches</td><td>possible_error</td><td>1</td><td>match whose on-pitch result differs from an awarded result (no 'awarded' status exists)</td><td>[['Romania', 'Kosovo']]</td></tr>
+<tr class='info'><td>7</td><td>missing player ids</td><td>events_all</td><td>info</td><td>6728</td><td>statsbomb: events without player_id (non-player events such as match start/end)</td><td></td></tr>
+<tr class='legitimate_missing'><td>7</td><td>missing player ids</td><td>events_all</td><td>legitimate_missing</td><td>2279</td><td>martj42: events without player_id (source gives names only)</td><td></td></tr>
+<tr class='legitimate_missing'><td>7</td><td>missing player ids</td><td>events_all</td><td>legitimate_missing</td><td>544</td><td>openfootball: events without player_id (source gives names only)</td><td></td></tr>
+<tr class='legitimate_missing'><td>7</td><td>missing player ids</td><td>events_all</td><td>legitimate_missing</td><td>5355</td><td>wikipedia: events without player_id (source gives names only)</td><td></td></tr>
+<tr class='legitimate_missing'><td>7</td><td>missing player ids</td><td>lineups_all</td><td>legitimate_missing</td><td>13271</td><td>Wikipedia line-up rows carry names only (no ids exist in that source)</td><td>{'wikipedia': 13271}</td></tr>
+<tr class='info'><td>8</td><td>inconsistent team names</td><td>team_aliases</td><td>info</td><td>4</td><td>teams spelled several ways in the sources (resolved by documented rules R0-R4)</td><td>{'T-NAT-bosnia-herzegovina': 3, 'T-NAT-republic-of-ireland': 2, 'T-NAT-ivory-coast': 2}</td></tr>
+<tr class='info'><td>9</td><td>inconsistent competition names</td><td>matches/squads</td><td>info</td><td>4</td><td>competition_id values in use: ['COPA', 'EURO', 'UNL', 'WC']; raw source spellings (e.g. 'UEFA Euro', '2018 FIFA Men's World Cup', 'Copa América') all map to these four</td><td></td></tr>
+<tr class='info'><td>10</td><td>incorrect season assignments</td><td>matches</td><td>info</td><td>0</td><td>match date outside the season's registry window (the registry window itself is a seeded, unverified fact)</td><td>[]</td></tr>
+<tr class='legitimate_missing'><td>10</td><td>incorrect season assignments</td><td>registry</td><td>legitimate_missing</td><td>7</td><td>seasons without confirmed start/end dates</td><td>['EURO-2028', 'COPA-2028', 'UNL-2018-19', 'UNL-2020-21', 'UNL-2022-23', 'UNL-2024-25', 'UNL-2026-27']</td></tr>
+<tr class='info'><td>11</td><td>missing tournament stages</td><td>matches</td><td>info</td><td>0</td><td>played matches without a stage</td><td></td></tr>
+<tr class='legitimate_missing'><td>11</td><td>missing tournament stages</td><td>matches</td><td>legitimate_missing</td><td>0</td><td>scheduled fixtures without a stage</td><td></td></tr>
+<tr class='info'><td>12</td><td>invalid score values</td><td>matches</td><td>info</td><td>0</td><td>scores <0 or >12 (highest real score in scope: Hungary 10-1 El Salvador style results excluded; check manually)</td><td>[]</td></tr>
+<tr class='info'><td>12</td><td>invalid score values</td><td>matches</td><td>info</td><td>0</td><td>shoot-out recorded but on-pitch score not level</td><td></td></tr>
+<tr class='info'><td>13</td><td>inconsistent player statistics</td><td>player_match_stats_all</td><td>info</td><td>0</td><td>passes_completed > passes</td><td></td></tr>
+<tr class='info'><td>13</td><td>inconsistent player statistics</td><td>player_match_stats_all</td><td>info</td><td>0</td><td>shots_on_target > shots</td><td></td></tr>
+<tr class='info'><td>13</td><td>inconsistent player statistics</td><td>player_match_stats_all</td><td>info</td><td>0</td><td>minutes_played < 0 or > 130</td><td></td></tr>
+<tr class='info'><td>13</td><td>inconsistent player statistics</td><td>team_match_stats_all</td><td>info</td><td>0</td><td>team goals rebuilt from events differ from the recorded score</td><td></td></tr>
+<tr class='legitimate_missing'><td>13</td><td>inconsistent player statistics</td><td>player_match_stats_all</td><td>legitimate_missing</td><td>2326</td><td>Wyscout rows: tackles, interceptions, blocks, xG, xA are null by definition (not 0)</td><td></td></tr>
+<tr class='info'><td>14</td><td>missing historical records</td><td>matches vs registry</td><td>info</td><td>0</td><td>seasons whose match count differs from the registry's (arithmetic) expected count</td><td>[]</td></tr>
+<tr class='legitimate_missing'><td>14</td><td>missing historical records</td><td>registry</td><td>legitimate_missing</td><td>5</td><td>Nations League seasons have no expected count (no verified official total)</td><td>['UNL-2018-19', 'UNL-2020-21', 'UNL-2022-23', 'UNL-2024-25', 'UNL-2026-27']</td></tr>
+<tr class='legitimate_missing'><td>14</td><td>missing historical records</td><td>events</td><td>legitimate_missing</td><td>2</td><td>played matches with no event data in any permitted source</td><td></td></tr>
+<tr class='legitimate_missing'><td>14</td><td>missing historical records</td><td>matches</td><td>legitimate_missing</td><td>8</td><td>played matches with no attendance in either Wikipedia</td><td></td></tr>
+<tr class='legitimate_missing'><td>14</td><td>missing historical records</td><td>matches</td><td>legitimate_missing</td><td>830</td><td>played matches without a Man of the Match (not recorded for Copa 2001/04/07 or Nations League group matches)</td><td></td></tr>
+<tr class='legitimate_missing'><td>14</td><td>missing historical records</td><td>events</td><td>legitimate_missing</td><td>1466</td><td>played matches without pass/shot coordinates (only StatsBomb and Wyscout publish them)</td><td></td></tr>
+<tr class='info'><td>15</td><td>conflicting records between files</td><td>fjelstul_vs_matches_conflicts.csv</td><td>info</td><td>0</td><td>Fjelstul vs matches: rows in the conflict report (resolved or annotated individually)</td><td>[]</td></tr>
+<tr class='possible_error'><td>15</td><td>conflicting records between files</td><td>wikipedia_vs_matches_conflicts.csv</td><td>possible_error</td><td>1</td><td>Wikipedia vs matches: rows in the conflict report (resolved or annotated individually)</td><td>[{'season_id': 'UNL-2024-25', 'kind': 'score_or_date', 'date': '2024-11-15', 'match': 'ROU v KOS', 'ours': '2024-11-15 0-0 [martj42]', 'wikipedia': '2024-11-15 3-0'}]</td></tr>
+<tr class='possible_error'><td>15</td><td>conflicting records between files</td><td>martj42_vs_matches_conflicts.csv</td><td>possible_error</td><td>2</td><td>martj42 vs matches: rows in the conflict report (resolved or annotated individually)</td><td>[{'season_id': 'EURO-2016', 'our_date': '2016-06-21', 'martj42_date': '2016-06-22', 'match': 'Italy v Ireland', 'ours': '0-1', 'martj42': 'Italy 0-1 Republic of Ireland'}]</td></tr>
+<tr class='possible_error'><td>15</td><td>conflicting records between files</td><td>wikipedia_details_validation.csv</td><td>possible_error</td><td>53</td><td>matches where Wikipedia and Fjelstul/StatsBomb disagree on the NUMBER of cards (517 compared)</td><td></td></tr>
+<tr class='possible_error'><td>15</td><td>conflicting records between files</td><td>fjelstul_vs_statsbomb.csv</td><td>possible_error</td><td>18</td><td>matches where Fjelstul and StatsBomb disagree on card counts (128 compared)</td><td></td></tr>
+</table><h2>Cached source files and staging (summarised)</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>files</th>
+      <th>bytes</th>
+      <th>ucl_files</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>openfootball</th>
+      <td>47</td>
+      <td>574322</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>statsbomb</th>
+      <td>315</td>
+      <td>66769053</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>wikipedia</th>
+      <td>563</td>
+      <td>57231069</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>wikipedia_es</th>
+      <td>14</td>
+      <td>586543</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>staging(statsbomb)</th>
+      <td>1104</td>
+      <td>106186390</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>

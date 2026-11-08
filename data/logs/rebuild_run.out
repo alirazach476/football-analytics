@@ -1,0 +1,48 @@
+2026-11-06 01:48:47,259 INFO stage 'registry' done in 0.0s
+2026-11-06 01:48:47,333 INFO WC-2002: 64 matches from 2002/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,342 INFO WC-2006: 64 matches from 2006/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,342 INFO WC-2010: 64 matches from 2010/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,354 INFO WC-2014: 64 matches from 2014/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,358 INFO WC-2018: 64 matches from 2018/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,367 INFO WC-2022: 64 matches from 2022/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,375 INFO WC-2026: 104 matches from 2026/worldcup.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,375 INFO EURO-2000: 31 matches from 2000--belgium-netherlands/euro.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,375 INFO EURO-2004: 31 matches from 2004--portugal/euro.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,386 INFO EURO-2008: 31 matches from 2008--austria-switzerland/euro.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,387 INFO EURO-2012: 31 matches from 2012--poland-ukraine/euro.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,387 INFO EURO-2016: 51 matches from 2016--france/euro.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,393 INFO EURO-2020: 51 matches from 2020/euro.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,393 INFO EURO-2024: 51 matches from 2024/euro.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,393 INFO EURO-2028: 51 matches from 2028/euro.json (0 unparsed candidate lines)
+2026-11-06 01:48:47,400 INFO COPA-2011: 26 matches from 2011--argentina/copa.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,400 INFO COPA-2021: 28 matches from 2021--brazil/copa.txt (0 unparsed candidate lines)
+2026-11-06 01:48:47,400 INFO COPA-2024: 32 matches from 2024--usa/copa.txt (0 unparsed candidate lines)
+2026-11-06 01:48:48,723 INFO stage 'matches' done in 1.5s
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\martj42.py:147: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  out = pd.concat([m, new], ignore_index=True)
+2026-11-06 01:48:49,567 INFO stage 'martj42' done in 0.8s
+2026-11-06 01:48:50,962 INFO stage 'teams' done in 1.4s
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\wikipedia_matches.py:430: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  m = pd.concat([m, new], ignore_index=True).sort_values(["competition_id", "season_id", "match_date", "kickoff_time_local", "match_id"]).reset_index(drop=True)
+2026-11-06 01:50:08,974 INFO stage 'wikipedia enrich + goals + details' done in 78.0s
+2026-11-06 01:50:28,121 INFO stage 'statsbomb combine' done in 19.1s
+2026-11-06 01:50:39,196 INFO stage 'stats' done in 11.1s
+2026-11-06 01:50:40,313 INFO stage 'openfootball goals' done in 1.1s
+2026-11-06 01:50:46,445 INFO stage 'wyscout' done in 6.1s
+2026-11-06 01:52:07,508 INFO stage 'fjelstul' done in 81.1s
+2026-11-06 01:52:09,313 INFO stage 'attendance from es.wikipedia (fill-null)' done in 1.8s
+2026-11-06 01:52:12,245 INFO stage 'venues' done in 2.9s
+2026-11-06 01:54:50,478 INFO stage 'wikipedia validation' done in 158.2s
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\unify.py:201: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  events = pd.concat([sbe, wye, fje, gl, mj, wp, wpd], ignore_index=True)
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\unify.py:204: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  lineups = pd.concat([sbl, wyl, fjl, wpl], ignore_index=True)
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\unify.py:240: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  ps = pd.concat([sb_ps, wy_ps], ignore_index=True)
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\unify.py:130: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  return pd.concat([out, pd.DataFrame(extra)], ignore_index=True)
+2026-11-06 01:59:59,641 INFO stage 'unify' done in 309.2s
+C:\Users\DELL\Downloads\Fifa Football Anaylsis\src\fbplatform\ingest\squads.py:251: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  allp = pd.concat([pl, pd.DataFrame(reg)], ignore_index=True)
+2026-11-06 02:00:21,638 INFO stage 'squads' done in 22.0s
+2026-11-06 02:00:22,217 INFO stage 'quality' done in 0.6s

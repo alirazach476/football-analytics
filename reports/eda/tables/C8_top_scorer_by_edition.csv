@@ -1,0 +1,24 @@
+season_id,full_name,team_name,goals,appearances
+COPA-2001,Víctor Aristizábal,Colombia,6,6
+COPA-2004,Javier Saviola,Argentina,3,3
+COPA-2007,Robinho,Brazil,6,6
+COPA-2011,José Paolo Guerrero González,Peru,5,5
+COPA-2015,José Paolo Guerrero González,Peru,4,6
+COPA-2016,Eduardo Jesús Vargas Rojas,Chile,6,6
+COPA-2019,José Paolo Guerrero González,Peru,3,6
+COPA-2021,Lionel Andrés Messi Cuccittini,Argentina,4,7
+COPA-2024,Lautaro Javier Martínez,Argentina,5,6
+EURO-2000,Patrick Kluivert,Netherlands,5,5
+EURO-2004,Milan Baroš,Czech Republic,5,5
+EURO-2008,David Villa,Spain,4,4
+EURO-2012,Cristiano Ronaldo dos Santos Aveiro,Portugal,3,5
+EURO-2016,Antoine Griezmann,France,6,7
+EURO-2020,Patrik Schick,Czech Republic,5,5
+EURO-2024,Harry Kane,England,3,7
+WC-2002,Ronaldo,Brazil,8,7
+WC-2006,Miroslav Klose,Germany,5,7
+WC-2010,David Villa,Spain,5,7
+WC-2014,James David Rodríguez Rubio,Colombia,6,5
+WC-2018,Harry Kane,England,6,6
+WC-2022,Kylian Mbappé Lottin,France,8,7
+WC-2026,Kylian Mbappé Lottin,France,10,8

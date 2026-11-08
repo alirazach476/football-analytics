@@ -1,0 +1,19 @@
+{
+ "task": "association (not predictive)",
+ "features": [
+  "age",
+  "minutes_played",
+  "appearances",
+  "start_share",
+  "team_ppm",
+  "team_gf_pm",
+  "assists_p90",
+  "pos_Goalkeeper",
+  "pos_Defender",
+  "pos_Midfielder",
+  "pos_Forward"
+ ],
+ "n": 4010,
+ "saved_at": "2026-11-06T08:01:38+00:00",
+ "python": "3.12.10"
+}

@@ -1,0 +1,2 @@
+brier,brier_base_rate,log_loss,log_loss_base_rate,accuracy,accuracy_base_rate,observed_over_share,n,model,note
+0.24632532364324208,0.25508488585724165,0.6857016475513475,0.7033652346810415,0.5255474452554745,0.5218978102189781,0.5218978102189781,274,poisson_regression,analytical experiment: independent-Poisson P(total>2.5)

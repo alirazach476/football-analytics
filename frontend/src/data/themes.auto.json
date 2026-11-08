@@ -1,0 +1,542 @@
+{
+ "wc-2002": {
+  "logo": "/logos/wc-2002.png",
+  "banner": "/logos/wc-2002-banner.webp",
+  "palette": [
+   "#ccaa33",
+   "#dd1d25",
+   "#0a5399",
+   "#63a99f",
+   "#198048",
+   "#ef8b7d"
+  ],
+  "primary": "#ccaa33",
+  "secondary": "#dd1d25",
+  "accent": "#0a5399",
+  "bannerLuminance": 0.136,
+  "logoSize": [
+   960,
+   1449
+  ]
+ },
+ "wc-2006": {
+  "logo": "/logos/wc-2006.png",
+  "banner": "/logos/wc-2006-banner.webp",
+  "palette": [
+   "#20964d",
+   "#68a851",
+   "#0862a1",
+   "#eb8539",
+   "#be3137",
+   "#81b1b3"
+  ],
+  "primary": "#20964d",
+  "secondary": "#0862a1",
+  "accent": "#eb8539",
+  "bannerLuminance": 0.063,
+  "logoSize": [
+   450,
+   561
+  ]
+ },
+ "wc-2010": {
+  "logo": "/logos/wc-2010.png",
+  "banner": "/logos/wc-2010-banner.webp",
+  "palette": [
+   "#074a96",
+   "#4d97cc",
+   "#d02929",
+   "#e59c3c",
+   "#2c7935",
+   "#84b442"
+  ],
+  "primary": "#074a96",
+  "secondary": "#4d97cc",
+  "accent": "#d02929",
+  "bannerLuminance": 0.327,
+  "logoSize": [
+   449,
+   515
+  ]
+ },
+ "wc-2014": {
+  "logo": "/logos/wc-2014.png",
+  "banner": "/logos/wc-2014-banner.webp",
+  "palette": [
+   "#367021",
+   "#518d2b",
+   "#74ab33",
+   "#00386a",
+   "#d0161d",
+   "#f7941c"
+  ],
+  "primary": "#367021",
+  "secondary": "#74ab33",
+  "accent": "#00386a",
+  "bannerLuminance": 0.435,
+  "logoSize": [
+   267,
+   362
+  ]
+ },
+ "wc-2018": {
+  "logo": "/logos/wc-2018.png",
+  "banner": "/logos/wc-2018-banner.webp",
+  "palette": [
+   "#d30b13",
+   "#e5c48b",
+   "#aa1916",
+   "#087cb7",
+   "#c36852",
+   "#164966"
+  ],
+  "primary": "#d30b13",
+  "secondary": "#e5c48b",
+  "accent": "#087cb7",
+  "bannerLuminance": 0.091,
+  "logoSize": [
+   330,
+   364
+  ]
+ },
+ "wc-2022": {
+  "logo": "/logos/wc-2022.png",
+  "banner": "/logos/wc-2022-banner.webp",
+  "palette": [
+   "#9a1032",
+   "#a01134",
+   "#c57381",
+   "#cf8e98",
+   "#ac324a",
+   "#b85568"
+  ],
+  "primary": "#9a1032",
+  "secondary": "#c57381",
+  "accent": "#c57381",
+  "bannerLuminance": 0.193,
+  "logoSize": [
+   250,
+   311
+  ]
+ },
+ "wc-2026": {
+  "logo": "/logos/wc-2026.png",
+  "banner": "/logos/wc-2026-banner.webp",
+  "palette": [
+   "#bf9951",
+   "#a17a3b",
+   "#7f5a28",
+   "#553919",
+   "#d9be7d",
+   "#1a543b"
+  ],
+  "primary": "#bf9951",
+  "secondary": "#7f5a28",
+  "accent": "#7f5a28",
+  "bannerLuminance": 0.242,
+  "logoSize": [
+   330,
+   510
+  ]
+ },
+ "euro-2000": {
+  "logo": "/logos/euro-2000.png",
+  "banner": "/logos/euro-2000-banner.webp",
+  "palette": [
+   "#047dc4",
+   "#80a2c9",
+   "#ee3430",
+   "#e98982",
+   "#e5c028",
+   "#756c15"
+  ],
+  "primary": "#047dc4",
+  "secondary": "#80a2c9",
+  "accent": "#ee3430",
+  "bannerLuminance": 0.133,
+  "logoSize": [
+   224,
+   447
+  ]
+ },
+ "euro-2004": {
+  "logo": "/logos/euro-2004.png",
+  "banner": "/logos/euro-2004-banner.webp",
+  "palette": [
+   "#f37121",
+   "#f36c19",
+   "#f68424",
+   "#00ae68",
+   "#f58844",
+   "#f69b63"
+  ],
+  "primary": "#f37121",
+  "secondary": "#00ae68",
+  "accent": "#00ae68",
+  "bannerLuminance": 0.084,
+  "logoSize": [
+   1280,
+   1588
+  ]
+ },
+ "euro-2008": {
+  "logo": "/logos/euro-2008.png",
+  "banner": "/logos/euro-2008-banner.webp",
+  "palette": [
+   "#ee0c0d",
+   "#e06869",
+   "#ab0c0f",
+   "#287a2e",
+   "#d4de88",
+   "#8abe35"
+  ],
+  "primary": "#ee0c0d",
+  "secondary": "#e06869",
+  "accent": "#287a2e",
+  "bannerLuminance": 0.087,
+  "logoSize": [
+   194,
+   246
+  ]
+ },
+ "euro-2012": {
+  "logo": "/logos/euro-2012.png",
+  "banner": "/logos/euro-2012-banner.webp",
+  "palette": [
+   "#de9d20",
+   "#bd2e25",
+   "#1590c6",
+   "#51592a",
+   "#b5c149",
+   "#6dc3d8"
+  ],
+  "primary": "#de9d20",
+  "secondary": "#bd2e25",
+  "accent": "#1590c6",
+  "bannerLuminance": 0.056,
+  "logoSize": [
+   287,
+   348
+  ]
+ },
+ "euro-2016": {
+  "logo": "/logos/euro-2016.png",
+  "banner": "/logos/euro-2016-banner.webp",
+  "palette": [
+   "#042d60",
+   "#d72026",
+   "#116396",
+   "#8f2224",
+   "#32a6d5",
+   "#c16763"
+  ],
+  "primary": "#042d60",
+  "secondary": "#d72026",
+  "accent": "#116396",
+  "bannerLuminance": 0.106,
+  "logoSize": [
+   267,
+   375
+  ]
+ },
+ "euro-2020": {
+  "logo": "/logos/euro-2020.png",
+  "banner": "/logos/euro-2020-banner.webp",
+  "palette": [
+   "#088198",
+   "#24b1ce",
+   "#aec848",
+   "#ec7813",
+   "#b62b2f",
+   "#8ba3c2"
+  ],
+  "primary": "#088198",
+  "secondary": "#24b1ce",
+  "accent": "#aec848",
+  "bannerLuminance": 0.359,
+  "logoSize": [
+   1280,
+   1458
+  ]
+ },
+ "euro-2024": {
+  "logo": "/logos/euro-2024.png",
+  "banner": "/logos/euro-2024-banner.webp",
+  "palette": [
+   "#08519e",
+   "#db191b",
+   "#5288b7",
+   "#8ab5ce",
+   "#2ba261",
+   "#d9a446"
+  ],
+  "primary": "#08519e",
+  "secondary": "#db191b",
+  "accent": "#5288b7",
+  "bannerLuminance": 0.17,
+  "logoSize": [
+   700,
+   700
+  ]
+ },
+ "euro-2028": {
+  "logo": "/logos/euro-2028.png",
+  "banner": "/logos/euro-2028-banner.webp",
+  "palette": [
+   "#2201a0",
+   "#01c879",
+   "#94aad2",
+   "#6572ad",
+   "#c71558",
+   "#b0598d"
+  ],
+  "primary": "#2201a0",
+  "secondary": "#01c879",
+  "accent": "#6572ad",
+  "bannerLuminance": 0.049,
+  "logoSize": [
+   243,
+   411
+  ]
+ },
+ "copa-2001": {
+  "logo": "/logos/copa-2001.png",
+  "banner": "/logos/copa-2001-banner.webp",
+  "palette": [
+   "#433c80",
+   "#e32219",
+   "#453e85",
+   "#ea231a",
+   "#d9ae19",
+   "#977c46"
+  ],
+  "primary": "#433c80",
+  "secondary": "#e32219",
+  "accent": "#e32219",
+  "bannerLuminance": 0.598,
+  "logoSize": [
+   500,
+   385
+  ]
+ },
+ "copa-2004": {
+  "logo": "/logos/copa-2004.png",
+  "banner": "/logos/copa-2004-banner.webp",
+  "palette": [
+   "#e2001a",
+   "#0074b6",
+   "#df2338",
+   "#d25463",
+   "#eb8d98",
+   "#77b5d8"
+  ],
+  "primary": "#e2001a",
+  "secondary": "#0074b6",
+  "accent": "#d25463",
+  "bannerLuminance": 0.768,
+  "logoSize": [
+   480,
+   208
+  ]
+ },
+ "copa-2007": {
+  "logo": "/logos/copa-2007.png",
+  "banner": "/logos/copa-2007-banner.webp",
+  "palette": [
+   "#d11f26",
+   "#035299",
+   "#800f12",
+   "#ddb50b",
+   "#042b62",
+   "#867b75"
+  ],
+  "primary": "#d11f26",
+  "secondary": "#035299",
+  "accent": "#800f12",
+  "bannerLuminance": 0.078,
+  "logoSize": [
+   1280,
+   728
+  ]
+ },
+ "copa-2011": {
+  "logo": "/logos/copa-2011.png",
+  "banner": "/logos/copa-2011-banner.webp",
+  "palette": [
+   "#049bcd",
+   "#0673a9",
+   "#e5b41b",
+   "#8dc5e8",
+   "#44a5d0",
+   "#dbc66c"
+  ],
+  "primary": "#049bcd",
+  "secondary": "#e5b41b",
+  "accent": "#8dc5e8",
+  "bannerLuminance": 0.181,
+  "logoSize": [
+   1280,
+   803
+  ]
+ },
+ "copa-2015": {
+  "logo": "/logos/copa-2015.png",
+  "banner": "/logos/copa-2015-banner.webp",
+  "palette": [
+   "#043675",
+   "#ba1d22",
+   "#196aae",
+   "#24abe3",
+   "#e98753",
+   "#82ba51"
+  ],
+  "primary": "#043675",
+  "secondary": "#ba1d22",
+  "accent": "#196aae",
+  "bannerLuminance": 0.72,
+  "logoSize": [
+   1280,
+   1244
+  ]
+ },
+ "copa-2016": {
+  "logo": "/logos/copa-2016.png",
+  "banner": "/logos/copa-2016-banner.webp",
+  "palette": [
+   "#d2a532",
+   "#aa7f2e",
+   "#eac35d",
+   "#c02025",
+   "#1d608a",
+   "#2497ce"
+  ],
+  "primary": "#d2a532",
+  "secondary": "#c02025",
+  "accent": "#c02025",
+  "bannerLuminance": 0.038,
+  "logoSize": [
+   290,
+   290
+  ]
+ },
+ "copa-2019": {
+  "logo": "/logos/copa-2019.png",
+  "banner": "/logos/copa-2019-banner.webp",
+  "palette": [
+   "#022a7b",
+   "#699508",
+   "#1c5906",
+   "#0accd8",
+   "#dac032",
+   "#56815b"
+  ],
+  "primary": "#022a7b",
+  "secondary": "#699508",
+  "accent": "#1c5906",
+  "bannerLuminance": 0.036,
+  "logoSize": [
+   180,
+   182
+  ]
+ },
+ "copa-2021": {
+  "logo": "/logos/copa-2021.png",
+  "banner": "/logos/copa-2021-banner.webp",
+  "palette": [
+   "#003384",
+   "#95c6e6",
+   "#dd3135",
+   "#5bab44",
+   "#e4b667",
+   "#426194"
+  ],
+  "primary": "#003384",
+  "secondary": "#95c6e6",
+  "accent": "#dd3135",
+  "bannerLuminance": 0.15,
+  "logoSize": [
+   500,
+   546
+  ]
+ },
+ "copa-2024": {
+  "logo": "/logos/copa-2024.png",
+  "banner": "/logos/copa-2024-banner.webp",
+  "palette": [
+   "#0163e2",
+   "#002d82",
+   "#2779e0",
+   "#5696e6",
+   "#8db8ed",
+   "#da5a5c"
+  ],
+  "primary": "#0163e2",
+  "secondary": "#002d82",
+  "accent": "#5696e6",
+  "bannerLuminance": 0.141,
+  "logoSize": [
+   1280,
+   1397
+  ]
+ },
+ "copa-2028": {
+  "logo": "/logos/copa-2028.png",
+  "banner": null,
+  "palette": [
+   "#092e85",
+   "#d62c20",
+   "#4a7ab4",
+   "#7ec2e5",
+   "#2c5299",
+   "#713456"
+  ],
+  "primary": "#092e85",
+  "secondary": "#d62c20",
+  "accent": "#4a7ab4",
+  "bannerLuminance": 0.8,
+  "logoSize": [
+   394,
+   418
+  ]
+ },
+ "unl": {
+  "logo": "/logos/unl.png",
+  "banner": "/logos/unl-banner.webp",
+  "palette": [
+   "#384f67",
+   "#ce3327",
+   "#edbe26",
+   "#299149",
+   "#4f96b2",
+   "#d08b73"
+  ],
+  "primary": "#384f67",
+  "secondary": "#ce3327",
+  "accent": "#edbe26",
+  "bannerLuminance": 0.086,
+  "logoSize": [
+   600,
+   600
+  ]
+ },
+ "wc-2030": {
+  "logo": "/logos/wc-2030.png",
+  "banner": null,
+  "palette": [
+   "#e20814",
+   "#08a74d",
+   "#dd6465",
+   "#3eb9e6",
+   "#5dae6c",
+   "#d6d22e"
+  ],
+  "primary": "#e20814",
+  "secondary": "#08a74d",
+  "accent": "#dd6465",
+  "bannerLuminance": 0.8,
+  "logoSize": [
+   304,
+   316
+  ]
+ }
+}

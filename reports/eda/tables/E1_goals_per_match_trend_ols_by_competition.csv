@@ -1,0 +1,5 @@
+competition_id,slope_per_year,ci_low,ci_high,p_value,r2,n,note
+COPA,-0.0234,-0.0668,0.02,0.2426,0.1888,9,OLS on edition means (small n); the formal per-match test with overdispersion check is in the statistics report (Q1)
+EURO,-0.0099,-0.0387,0.0188,0.4161,0.1358,7,OLS on edition means (small n); the formal per-match test with overdispersion check is in the statistics report (Q1)
+UNL,0.0255,-0.0578,0.1088,0.4019,0.2402,5,OLS on edition means (small n); the formal per-match test with overdispersion check is in the statistics report (Q1)
+WC,0.0221,0.0026,0.0415,0.0333,0.6292,7,OLS on edition means (small n); the formal per-match test with overdispersion check is in the statistics report (Q1)

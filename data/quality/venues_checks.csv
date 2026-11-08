@@ -1,0 +1,7 @@
+check,failing,detail
+matches_without_venue_id,4,
+venues_with_more_than_one_country,1,Baku Olympic Stadium
+attendance_over_120pct_of_capacity,37,Estadio Centenario:29000>23500;Estadio Centenario:30000>23500;Estadio Palogrande:40000>31611;Estadio Brigadier General Estanislao López:47000>30835;Stade du Pays de Charleroi:18500>15000;GelreDome:28400>21248
+venues_without_coordinates,5,
+venues_without_capacity,5,
+venues_without_country,5,

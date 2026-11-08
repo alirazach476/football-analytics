@@ -1,0 +1,4 @@
+position,n_players,k,silhouette,silhouette_by_k,bootstrap_stability_mean_ari,note
+Defender,338,2,0.234768743372407,"{2: 0.235, 3: 0.121, 4: 0.118, 5: 0.105}",0.7445515349475866,"clustered WITHIN position; features per 90 from StatsBomb-covered matches only; goalkeepers not clustered (too few, different role) - see goalkeeper table"
+Midfielder,225,2,0.22747901627193218,"{2: 0.227, 3: 0.12, 4: 0.131, 5: 0.107}",0.9013525141905727,"clustered WITHIN position; features per 90 from StatsBomb-covered matches only; goalkeepers not clustered (too few, different role) - see goalkeeper table"
+Forward,178,3,0.13711434609446688,"{2: 0.133, 3: 0.137, 4: 0.117, 5: 0.118}",0.573938857304712,"clustered WITHIN position; features per 90 from StatsBomb-covered matches only; goalkeepers not clustered (too few, different role) - see goalkeeper table"

@@ -1,0 +1,21 @@
+competition_id,stage_name,matches,beyond_90,shootouts,beyond_90_pct
+COPA,Final,9,4,3,44.4
+COPA,Quarter-finals,36,14,13,38.9
+COPA,Semi-finals,18,4,4,22.2
+COPA,Third place,9,2,2,22.2
+EURO,Final,7,3,1,42.9
+EURO,Quarter-finals,28,11,10,39.3
+EURO,Round of 16,24,7,3,29.2
+EURO,Semi-finals,14,6,3,42.9
+UNL,Final,4,2,2,50.0
+UNL,Play-off,6,1,1,16.7
+UNL,Promotion/relegation play-off,20,0,0,0.0
+UNL,Quarter-finals,8,0,0,0.0
+UNL,Semi-finals,8,0,0,0.0
+UNL,Third place,4,1,1,25.0
+WC,Final,7,5,2,71.4
+WC,Quarter-finals,28,11,8,39.3
+WC,Round of 16,56,18,11,32.1
+WC,Round of 32,16,5,3,31.2
+WC,Semi-finals,14,3,1,21.4
+WC,Third place,7,0,0,0.0

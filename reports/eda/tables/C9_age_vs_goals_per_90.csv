@@ -1,0 +1,7 @@
+age_band,player_seasons,minutes,goals,goals_per_90,note
+<=21,142,32868.2,41,0.112,age known for 4502 player-seasons with minutes; association only
+22-24,648,164169.4,236,0.129,age known for 4502 player-seasons with minutes; association only
+25-27,1115,304566.3,404,0.119,age known for 4502 player-seasons with minutes; association only
+28-30,1229,345368.4,437,0.114,age known for 4502 player-seasons with minutes; association only
+31-33,890,257874.2,241,0.084,age known for 4502 player-seasons with minutes; association only
+34+,478,137554.1,138,0.09,age known for 4502 player-seasons with minutes; association only

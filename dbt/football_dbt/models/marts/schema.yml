@@ -1,0 +1,49 @@
+version: 2
+models:
+  - name: mart_match_performance
+    description: "One row per match (played and scheduled). Scheduled fixtures are labelled 'Coming soon' with fixture_detail."
+    columns:
+      - {name: match_key, tests: [unique, not_null]}
+      - {name: status_label, tests: [not_null, accepted_values: {values: ['Full time', 'Coming soon']}]}
+      - {name: total_goals, tests: [non_negative]}
+    tests:
+      - expression_is_true: {expression: "match_status = 'completed' or total_goals is null"}
+  - name: mart_team_performance
+    columns:
+      - {name: played, tests: [non_negative]}
+    tests:
+      - unique: {column_name: "team_key || '-' || season_id"}
+      - expression_is_true: {expression: "played = wins + draws + losses and points = 3 * wins + draws and goal_diff = goals_for - goals_against"}
+  - name: mart_player_performance
+    tests:
+      - unique: {column_name: "player_key || '-' || team_name || '-' || season_id"}
+  - name: mart_tournament_summary
+    columns:
+      - {name: season_id, tests: [unique, not_null]}
+      - {name: tournament_status, tests: [accepted_values: {values: ['completed', 'in progress / upcoming']}]}
+    tests:
+      - expression_is_true: {expression: "matches_in_dataset = matches_played + matches_coming_soon"}
+  - name: mart_goal_analysis
+    columns:
+      - {name: event_key, tests: [unique, not_null]}
+      - {name: minute_band, tests: [accepted_values: {values: ['unknown', '00-15', '16-30', '31-45', '46-60', '61-75', '76-90', '90+ (extra time)']}]}
+  - name: mart_competition_comparison
+    columns:
+      - {name: competition_id, tests: [unique, not_null, accepted_values: {values: ['WC', 'EURO', 'COPA', 'UNL']}]}
+  - name: mart_head_to_head
+    tests:
+      - unique: {column_name: "team_a_key || '-' || team_b_key"}
+      - expression_is_true: {expression: "matches = team_a_wins + draws + team_b_wins and team_a_key < team_b_key"}
+  - name: mart_player_career
+    columns:
+      - {name: player_key, tests: [unique, not_null]}
+  - name: mart_knockout_analysis
+    tests:
+      - unique: {column_name: "season_id || '-' || stage_name"}
+  - name: mart_group_stage_analysis
+    tests:
+      - unique: {column_name: "season_id || '-' || group_name"}
+  - name: mart_upcoming_fixtures
+    description: "Fixtures not yet played, kept visible as 'Coming soon'."
+    columns:
+      - {name: status_label, tests: [accepted_values: {values: ['Coming soon']}]}

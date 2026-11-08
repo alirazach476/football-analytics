@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: int_team_matches
+    description: "Two rows per played match with both team views."
+    columns:
+      - {name: result, tests: [accepted_values: {values: ['W', 'D', 'L']}]}
+    tests:
+      - unique:
+          column_name: "match_key || '-' || team_key"
+  - name: int_player_seasons
+    tests:
+      - unique:
+          column_name: "player_key || '-' || team_key || '-' || season_id"

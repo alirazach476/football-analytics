@@ -1,0 +1,3 @@
+model,n,cv_r2_grouped_by_player,cv_mae,baseline_mae_mean,note
+ridge,4010,0.26169914255591065,0.11895520893944667,0.15154041280837807,association models; grouped CV by player; goals/90 capped at the 99th percentile
+gradient_boosting,4010,0.27838922814113476,0.11374577029329432,0.15154041280837807,association models; grouped CV by player; goals/90 capped at the 99th percentile

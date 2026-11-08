@@ -1,0 +1,18 @@
+services:
+  warehouse:
+    image: postgres:16
+    container_name: football_warehouse
+    environment:
+      POSTGRES_USER: ${WH_USER:-football}
+      POSTGRES_PASSWORD: ${WH_PASSWORD:-football_local_dev}
+      POSTGRES_DB: ${WH_DB:-football_dw}
+    ports:
+      - "${WH_PORT:-5433}:5432"
+    volumes:
+      - football_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${WH_USER:-football} -d ${WH_DB:-football_dw}"]
+      interval: 5s
+      retries: 20
+volumes:
+  football_pgdata:

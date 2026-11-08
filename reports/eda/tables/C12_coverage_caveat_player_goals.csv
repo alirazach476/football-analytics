@@ -1,0 +1,5 @@
+competition_id,goals,with_player,pct_goals_attributed_to_a_player,note
+UNL,1910,0,0.0,player tables count only goals linked to a player id; the Nations League has no squad data to link names
+EURO,682,641,94.0,player tables count only goals linked to a player id; the Nations League has no squad data to link names
+COPA,623,577,92.6,player tables count only goals linked to a player id; the Nations League has no squad data to link names
+WC,1273,1221,95.9,player tables count only goals linked to a player id; the Nations League has no squad data to link names
