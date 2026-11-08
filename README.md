@@ -20,7 +20,7 @@
 
 [**Live demo**](https://football-analytics-xi.vercel.app) · [**Project guide (PDF)**](docs/Football_Analytics_Project_Guide.pdf) · [Screenshots](#-screenshots) · [Architecture](#-architecture) · [Quick start](#-quick-start) · [Docs](#-documentation)
 
-<sub>The demo's API runs from the author's PC through a free tunnel, so it can be offline. See [Deployment](docs/DEPLOYMENT.md).</sub>
+<sub>Always on: the front end and the API both run on Vercel, reading a Neon Postgres database (all free tier). See [Deployment](docs/DEPLOYMENT.md).</sub>
 
 </div>
 
@@ -93,7 +93,7 @@ flowchart LR
 | Statistics & ML | scipy, statsmodels, scikit-learn, XGBoost, SHAP, MLflow |
 | API | FastAPI, Uvicorn, psycopg 3 |
 | Front end | React 18, TypeScript, Vite, Tailwind, TanStack Query, framer-motion, Plotly.js, flag-icons |
-| Deployment | Vercel (front end), Cloudflare tunnel (API), Neon (hosted Postgres), Docker |
+| Deployment | Vercel (front end + serverless Python API), Neon (hosted Postgres), Docker |
 | Quality | pytest (223), vitest (6), dbt tests, Pandera, PostgreSQL constraints |
 
 ## 🎨 Dashboard
@@ -145,7 +145,7 @@ Tests: `python -m pytest -q` (full suite takes ~20 min: statistics permutations,
 
 ## 🌐 Deployment
 
-Front end on **Vercel**, warehouse copy on **Neon**, API through a free Cloudflare tunnel (`python tools/serve_public.py`). Details and the always-on options (Docker image, `render.yaml`) are in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+Front end and API are two **Vercel** projects (the API is a slimmed FastAPI serverless function) and the warehouse is a copy on **Neon**; nothing depends on a personal machine. Update steps and the Docker/Render alternative are in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## 🗂 Project structure
 
@@ -168,7 +168,7 @@ tests/  notebooks/  docs/  reports/ tools/  deploy/
 
 ## ⚠️ Known limits
 
-Nations League has no manager or assist data and its scorers are not linked to player ids; assists exist only for some editions; 7 matches lack some scorers in every source; the live demo depends on the author's PC being on.
+Nations League has no manager or assist data and its scorers are not linked to player ids; assists exist only for some editions; 7 matches lack some scorers in every source; the free serverless API sleeps when idle, so the first request after a quiet period takes a few seconds.
 
 ---
 

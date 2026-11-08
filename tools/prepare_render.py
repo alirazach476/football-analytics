@@ -32,6 +32,11 @@ def main():
             rows.append(dict(layer="Bronze (frozen snapshot)", table=f.stem, rows=sum(1 for _ in open(f, encoding="utf-8", errors="ignore")) - 1))
     for f in sorted((ROOT / "data" / "silver").glob("*.parquet")):
         rows.append(dict(layer="Silver", table=f.stem, rows=pq.ParquetFile(f).metadata.num_rows))
+    import pandas as pd
+    out = ROOT / "data" / "silver_pkl"
+    out.mkdir(exist_ok=True)
+    for name in ("matches", "players", "lineups", "venues", "squads"):                      # silver tables the data-engineering charts read (slim hosts have no pyarrow)
+        pd.read_parquet(ROOT / "data" / "silver" / f"{name}.parquet").to_pickle(out / f"{name}.pkl.xz", compression="xz")
     (ROOT / "data" / "layer_counts_snapshot.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
     print(f"snapshot: {len(rows)} tables")
 

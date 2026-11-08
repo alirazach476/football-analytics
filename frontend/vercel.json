@@ -5,7 +5,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://loan-pledge-astronomy-regularly.trycloudflare.com/api/:path*" },
+    { "source": "/api/:path*", "destination": "https://football-analytics-api.vercel.app/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [

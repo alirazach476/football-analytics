@@ -71,7 +71,7 @@ img.shot { width: 100%; border: 1pt solid var(--line); border-radius: 6pt; margi
 <tr><td>API</td><td>FastAPI + psycopg 3</td><td>Typed, fast, automatic docs; reuses the existing Python chart code</td></tr>
 <tr><td>Charts</td><td>Plotly (server-side JSON) + Matplotlib/Seaborn twins</td><td>Interactive charts plus static exports without rewriting charts in JS</td></tr>
 <tr><td>Front end</td><td>React 18, Vite, Tailwind, TanStack Query, framer-motion, flag-icons</td><td>Fast builds, cached queries, themeable design tokens, animation</td></tr>
-<tr><td>Hosting</td><td>Vercel, Neon, Cloudflare tunnel, Docker</td><td>Free tier friendly; see section 6</td></tr></table>
+<tr><td>Hosting</td><td>Vercel (front end + serverless API), Neon, Docker</td><td>Free-tier friendly and always on; see section 6</td></tr></table>
 
 <h2>4. Dashboard tour</h2>
 <img class="shot" src="../../docs/img/match-center.jpg"><div class="cap">Match Center: broadcast scoreboard in each nation's colours, scorers with assists, managers, comparison statistics.</div>
@@ -93,12 +93,15 @@ img.shot { width: 100%; border: 1pt solid var(--line); border-radius: 6pt; margi
 <tr><td>Tabs / charts hidden when data is absent</td><td>Commentary and shot data do not exist for most matches</td><td>The UI shows only sections the data supports and says what is not recorded</td></tr></table>
 
 <h2>6. Deployment and trade-offs</h2>
-<div class="flow"><span>Browser</span><i>→</i><span>Vercel (React, /api proxy)</span><i>→</i><span>Cloudflare tunnel</span><i>→</i><span>FastAPI on my PC</span><i>→</i><span>Postgres (local Docker or Neon)</span></div>
-<ul><li>Hugging Face Docker Spaces need a paid plan and Render needs a card on file, so the card-free choice was a <b>tunnel</b>. The cost is availability: the site is up only while <code>python tools/serve_public.py</code> runs, and each tunnel run gets a new address (the script redeploys Vercel automatically).</li><li>A copy of the warehouse (298 MB) is loaded into <b>Neon</b>, and a Docker image + <code>render.yaml</code> are ready for an always-on host with a one-line change.</li><li>Secrets are never committed; the repository holds code, docs, tests, models, reports and small runtime data only.</li></ul>
+<div class="flow"><span>Browser</span><i>→</i><span>Vercel: React app (/api proxy)</span><i>→</i><span>Vercel: FastAPI serverless function</span><i>→</i><span>Neon Postgres</span></div>
+<ul><li>Everything runs on free tiers and nothing depends on a personal machine. The front end and the API are two Vercel projects; the warehouse (298 MB) is a copy on <b>Neon</b>.</li>
+<li><b>Making the API fit a serverless function.</b> Hugging Face Docker Spaces and Render both need payment details, so I slimmed the API instead: connection settings moved to a tiny module, scikit-learn, statsmodels and mlflow load lazily, <code>xgboost-cpu</code> replaces the CUDA build, pyarrow is dropped (silver tables ship as small pickles), and heavy ML objects (test-period scoring, SHAP, player stats) are pre-computed and shipped as pickles. Every chart, the predictor and the exports run on the free plan.</li>
+<li>Trade-off: the free function sleeps when idle, so the first request takes about 10 s; later ones take about a second. A Docker image and <code>render.yaml</code> exist for an always-warm container.</li>
+<li>I first exposed the API from my PC through a Cloudflare tunnel; it worked but only while the PC was on, so I replaced it. Secrets live only in Vercel environment variables and are never committed.</li></ul>
 
 <h2 class="pb">7. Interview preparation</h2>
 <h3>The 60-second pitch</h3>
-<div class="box ok">I built an end-to-end football analytics platform. It ingests six open data sources into an immutable Bronze layer, cleans and entity-resolves them in Silver (8,410 canonical players), loads a PostgreSQL star schema, and builds 11 dbt marts with 115 tests. A statistics and ML layer with leakage-free features and a chronological split shows honestly that complex models do not clearly beat an Elo baseline. A FastAPI service serves 85 interactive charts and a Match Center to a React dashboard, where every tournament has its own design built from its logo. It is deployed on Vercel with Neon and a tunnel, and I can explain every trade-off.</div>
+<div class="box ok">I built an end-to-end football analytics platform. It ingests six open data sources into an immutable Bronze layer, cleans and entity-resolves them in Silver (8,410 canonical players), loads a PostgreSQL star schema, and builds 11 dbt marts with 115 tests. A statistics and ML layer with leakage-free features and a chronological split shows honestly that complex models do not clearly beat an Elo baseline. A FastAPI service serves 85 interactive charts and a Match Center to a React dashboard, where every tournament has its own design built from its logo. It is deployed always-on on Vercel (front end and a serverless Python API) with a Neon database, and I can explain every trade-off.</div>
 
 <h3>Data engineering</h3>
 <div class="q"><p><b>Why Bronze / Silver / Gold?</b></p><p>Bronze is immutable and traceable (hash + version), Silver is the cleaned and unified model, Gold is business-ready marts. Each layer can be rebuilt from the one before, and a bug in cleaning never destroys raw data.</p></div>
@@ -125,12 +128,13 @@ img.shot { width: 100%; border: 1pt solid var(--line); border-radius: 6pt; margi
 <div class="q"><p><b>How did you cut API memory?</b></p><p>Lazy imports of scikit-learn, statsmodels and mlflow (290 → 190 MB at start-up), a per-thread reusable database connection, and pre-computed ML caches.</p></div>
 
 <h3>Deployment and operations</h3>
-<div class="q"><p><b>Why Vercel plus a tunnel?</b></p><p>Constraints: free only, no card. Vercel hosts the static React app and proxies <code>/api</code>; the API needs ~500 MB, Postgres and heavy Python libraries, which no free serverless tier fits. A tunnel keeps everything free but ties availability to my machine; the Docker image and <code>render.yaml</code> make an always-on move trivial.</p></div>
+<div class="q"><p><b>How did you deploy a pandas / scikit-learn / XGBoost API for free?</b></p><p>Constraint: free tiers only. Free container hosts needed a card or a paid plan, so I made the API fit a Vercel serverless function: a light connection module, lazy imports of the heavy libraries, <code>xgboost-cpu</code>, no pyarrow, and pre-computed ML objects shipped as pickles. The database is a Neon copy of the warehouse. I measured the install size, found and fixed an import chain that pulled the whole ingestion stack, and verified every endpoint on the live URL, including memory-heavy ML charts and exports.</p></div>
+<div class="q"><p><b>What did you try first and why did you change it?</b></p><p>A tunnel to my PC: free and quick, but the site died when the PC was off. A serverless API removed that single point of failure at the cost of a cold start of about 10 s on the first request.</p></div>
 <div class="q"><p><b>What would you do with more budget?</b></p><p>Run the API on a small always-on container with managed Postgres, add CI (tests + dbt on every push), alerting on freshness, and an autoscaled cache for the ML endpoints.</p></div>
 
 <h3>Behavioural / reflection</h3>
 <div class="q"><p><b>What would you improve next?</b></p><p>Event data for the Nations League, a per-match managers source for all editions, assist coverage, richer features (squad value, rest days), and CI/CD.</p></div>
-<div class="q"><p><b>What are the known limitations?</b></p><p>Assists and managers are missing for some editions, 7 matches lack scorers in every source, Nations League scorers are not linked to player ids, and the live demo depends on one machine.</p></div>
+<div class="q"><p><b>What are the known limitations?</b></p><p>Assists and managers are missing for some editions, 7 matches lack scorers in every source, Nations League scorers are not linked to player ids, and the free serverless API has a cold start of about 10 s after idle periods.</p></div>
 
 <h3>Numbers worth remembering</h3>
 <table><tr><td>1,830 matches · 1,779 played · 51 coming soon</td><td>103 teams · 8,410 players</td></tr><tr><td>4,494 goals · 1,033,220 events</td><td>30 editions · 4 competitions</td></tr><tr><td>11 Gold marts · 115 dbt models + tests · 13 Pandera checks</td><td>223 Python tests · 6 front-end tests</td></tr><tr><td>85 chart ids · 14 dashboard pages</td><td>Test period 275 matches · 55–57 % accuracy</td></tr></table>

@@ -7,11 +7,21 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 
 import joblib
-import mlflow
 import numpy as np
 import pandas as pd
 
 from ..config import ROOT
+
+
+class _LazyMlflow:
+    """mlflow is only needed while TRAINING; the hosted API never imports it (keeps the serverless bundle small and start-up fast)."""
+
+    def __getattr__(self, name):
+        import mlflow as _m
+        return getattr(_m, name)
+
+
+mlflow = _LazyMlflow()
 
 MODELS = ROOT / "models"
 REPORTS = ROOT / "reports" / "ml"
