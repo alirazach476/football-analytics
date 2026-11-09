@@ -6,7 +6,7 @@ import { Skeleton } from "../components/ui";
 import { BODY_OF } from "../components/Brand";
 import CountryFlag from "../components/CountryFlag";
 
-const NAMES: Record<string, string> = { WC: "FIFA World Cup", EURO: "UEFA European Championship", COPA: "Copa América", UNL: "UEFA Nations League" };
+const NAMES: Record<string, string> = { WC: "FIFA World Cup", EURO: "UEFA European Championship", COPA: "Copa América", UNL: "UEFA Nations League", FIN: "CONMEBOL–UEFA Cup of Champions (Finalissima)" };
 
 export default function CompetitionHub() {
   const { comp = "" } = useParams(); const id = comp.toUpperCase(); const { data } = useTournaments();
@@ -58,7 +58,7 @@ export default function CompetitionHub() {
                   <div className="font-display text-2xl font-bold uppercase leading-tight">{e.edition}</div>
                   <div className="mt-0.5 truncate text-xs font-semibold uppercase tracking-wider opacity-85">{e.host ?? "host to be confirmed"}</div>
                   <div className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px] font-bold uppercase">
-                    {soon ? <span className="chip chip-soon">{e.status === "upcoming" ? "Coming soon" : "Announced"}{e.matchesComingSoon ? ` · ${e.matchesComingSoon} fixtures` : ""}</span>
+                    {soon ? <span className="chip chip-soon">{e.status === "upcoming" ? "Coming soon" : e.status === "cancelled" ? "Cancelled" : "Announced"}{e.matchesComingSoon ? ` · ${e.matchesComingSoon} fixtures` : ""}</span>
                       : <><span className="bc-slant px-3 py-1" style={{ background: t.primary, color: "var(--c-on-primary)" }}>{e.matchesPlayed} matches</span>{e.champion && <span className="bc-slant flex items-center gap-1.5 bg-white/20 px-3 py-1 backdrop-blur"><CountryFlag country={e.champion} size={16} />{e.champion}</span>}</>}
                   </div>
                 </div>

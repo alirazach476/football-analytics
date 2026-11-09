@@ -22,6 +22,6 @@ export function statusOf(m: Pick<MatchRow, "is_played" | "status_label" | "went_
 }
 export const fmtMinute = (minute?: number | null, added?: number | null) => (minute == null ? "" : `${Math.round(minute)}${added ? `+${Math.round(added)}` : ""}'`);
 export const dateLabel = (d?: string | null, opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" }) => (d ? new Date(d).toLocaleDateString("en-GB", opts) : "date to be confirmed");
-export const compLabel = (m: Pick<MatchRow, "competition_id">) => ({ WC: "FIFA World Cup", EURO: "UEFA Euro", COPA: "Copa América", UNL: "UEFA Nations League" } as Record<string, string>)[m.competition_id] ?? m.competition_id;
+export const compLabel = (m: Pick<MatchRow, "competition_id">) => ({ WC: "FIFA World Cup", EURO: "UEFA Euro", COPA: "Copa América", UNL: "UEFA Nations League", FIN: "Finalissima" } as Record<string, string>)[m.competition_id] ?? m.competition_id;
 export const editionLabel = (season: string) => season.replace(/^[A-Z]+-/, "");
 export const stageLine = (m: Pick<MatchRow, "stage_name" | "group_name" | "matchday">) => [m.stage_name, m.group_name ? `Group ${m.group_name}` : null, m.matchday ? `Matchday ${m.matchday}` : null].filter(Boolean).join(" · ");

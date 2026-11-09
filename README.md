@@ -32,6 +32,7 @@ A medallion pipeline (**Bronze → Silver → PostgreSQL star schema → dbt Gol
 
 - **1,830 matches** (1,779 played + 51 *Coming soon*), **103 national teams**, **8,410 canonical players**, **4,494 goals**, **1,033,220 event rows**
 - **30 editions**: World Cup 2002–2026 (+ **2030 coming soon**), Euro 2000–2028, Copa América 2001–2028, Nations League 2018–2027
+- **Finalissima (CONMEBOL–UEFA Cup of Champions)** as a separate, sourced section: **2022** (Italy 0–3 Argentina, Wembley: scorers, line-ups, statistics, officials) and **2026** (Spain v Argentina, shown as *cancelled* by UEFA on 15 March 2026, with no invented result). It sits outside the four-competition warehouse, so no statistic or model changes
 - **85 interactive charts** (Plotly) with a table view and CSV / HTML / PNG export for each
 - **Broadcast-style Match Center**: scoreboard, scorers and assists, managers, statistics, line-ups on a pitch, event timeline, head-to-head
 - **Honest by design**: nothing is invented, missing data stays empty, upcoming fixtures say **Coming soon**, model output is always labelled as a prediction

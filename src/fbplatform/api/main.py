@@ -20,7 +20,7 @@ from ..dashboard import queries as Q
 from ..viz import common as C
 from ..viz import export as X
 from ..viz.filters import Filters
-from . import charts, store, tournaments, wc2030
+from . import charts, finalissima, store, tournaments, wc2030
 from .serialize import chart_payload, records, scalar, table
 
 app = FastAPI(title="Football analytics API", version="1.0")
@@ -113,12 +113,23 @@ def export(body: dict = Body(...)):
 
 @app.get("/api/tournaments")
 def tournament_list():
-    return {"editions": tournaments.catalogue(), "wc2030": {"seasonId": "WC-2030", "slug": "wc-2030", "themeKey": "wc-2030", "status": "coming_soon", "edition": "2030 FIFA World Cup"}}
+    return {"editions": tournaments.catalogue() + finalissima.catalogue_entries(), "wc2030": {"seasonId": "WC-2030", "slug": "wc-2030", "themeKey": "wc-2030", "status": "coming_soon", "edition": "2030 FIFA World Cup"}}
 
 
 @app.get("/api/tournament/{season_id}")
 def tournament_page(season_id: str):
+    if season_id.upper().startswith("FIN-"):
+        e = finalissima.edition(season_id)
+        if e is None:
+            raise KeyError(season_id)
+        return {"meta": {k: v for k, v in e.items() if k in finalissima.catalogue_entries()[0]}, "finalissima": True}
     return tournaments.edition(season_id.upper())
+
+
+@app.get("/api/finalissima")
+def finalissima_editions():
+    """CONMEBOL-UEFA Cup of Champions (2022 played, 2026 cancelled): curated, sourced, separate from the four-competition warehouse."""
+    return {"editions": list(finalissima.EDITIONS.values())}
 
 
 @app.get("/api/wc2030")
