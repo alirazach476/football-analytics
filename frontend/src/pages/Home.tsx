@@ -11,6 +11,7 @@ const COMPS = [
   ["EURO", "UEFA European Championship", "euro-2024", "Euro 2000 – 2024, plus Euro 2028 coming soon"],
   ["COPA", "Copa América", "copa-2024", "Copa 2001 – 2024, plus Copa 2028 announced"],
   ["UNL", "UEFA Nations League", "unl", "One identity, every edition"],
+  ["FIN", "Finalissima", "fin-2022", "2022 Italy v Argentina · 2026 cancelled"],
 ] as const;
 
 export default function Home() {

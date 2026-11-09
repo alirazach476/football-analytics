@@ -35,8 +35,8 @@ export const useApiQuery = <T = any>(name: string, args: Record<string, any> = {
   useQuery({ queryKey: ["q", name, args], queryFn: () => queryRequest<T>(name, args), enabled, staleTime: STALE });
 
 export interface Edition {
-  seasonId: string; slug: string; themeKey: string; competition: "WC" | "EURO" | "COPA" | "UNL"; competitionName: string; edition: string; year: number; host: string | null; start: string | null; end: string | null;
-  teams: number | null; format: string | null; verification: string | null; status: "in_data" | "upcoming" | "announced"; matchesPlayed: number; matchesComingSoon: number; champion: string | null; runnerUp: string | null;
+  seasonId: string; slug: string; themeKey: string; competition: "WC" | "EURO" | "COPA" | "UNL" | "FIN"; competitionName: string; edition: string; year: number; host: string | null; start: string | null; end: string | null;
+  teams: number | null; format: string | null; verification: string | null; status: "in_data" | "upcoming" | "announced" | "cancelled"; matchesPlayed: number; matchesComingSoon: number; champion: string | null; runnerUp: string | null;
 }
 export interface Lookups {
   competitions: { id: string; label: string; color: string }[]; seasons: { seasonId: string; competition: string; year: number; status: string }[]; teams: string[]; stages: string[];

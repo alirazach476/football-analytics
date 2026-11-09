@@ -113,3 +113,19 @@ def test_goals_from_openfootball_are_shown_as_goals():
     r = c.get("/api/match-center/1041").json()                        # Euro 2004 final, Greece 1-0
     goals = [e for e in r["timeline"]["rows"] if e["kind"] == "Goal"]
     assert [(g["player"], g["scoring_side"]) for g in goals] == [("Angelos Charisteas", "away")] and r["goalsComplete"]
+
+
+def test_finalissima_section_is_sourced_and_separate():
+    eds = {e["seasonId"]: e for e in c.get("/api/finalissima").json()["editions"]}
+    f22, f26 = eds["FIN-2022"], eds["FIN-2026"]
+    m = f22["match"]
+    assert (m["home_team_name"], m["away_team_name"], m["home_score"], m["away_score"]) == ("Italy", "Argentina", 0, 3) and m["venue_name"] == "Wembley Stadium"
+    goals = [(e["player"], e["minute"], e["minute_added"]) for e in f22["timeline"] if e["kind"] == "Goal"]
+    assert goals == [("Lautaro Martínez", 28, None), ("Ángel Di María", 45, 1), ("Paulo Dybala", 90, 4)]
+    assert all(e["assist"] is None for e in f22["timeline"]) and f22["sources"]
+    assert sum(p["is_starter"] for p in f22["lineups"]) == 22
+    assert f26["status"] == "cancelled" and f26["match"]["home_score"] is None and not f26["timeline"] and not f26["lineups"] and "cancel" in f26["match"]["fixture_detail"].lower()
+    cat = c.get("/api/tournaments").json()["editions"]
+    assert {e["seasonId"] for e in cat if e["competition"] == "FIN"} == {"FIN-2022", "FIN-2026"}
+    assert c.get("/api/tournament/FIN-2026").status_code == 200 and c.get("/api/tournament/FIN-1999").status_code == 404
+    assert "FIN" not in {e["competition_id"] for e in c.post("/api/fixtures", json={"filters": {}, "limit": 400}).json()["rows"]}      # not part of the four-competition warehouse

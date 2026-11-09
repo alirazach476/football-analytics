@@ -15,7 +15,7 @@ const LAB = [
   ["/lab/competitions", "Competitions", BarChart3], ["/lab/teams", "Teams", LineChart], ["/lab/players", "Players", Target], ["/lab/matches", "Matches", Crosshair],
   ["/lab/statistics", "Statistics", Ruler], ["/lab/ml", "Machine learning", Brain], ["/lab/engineering", "Data engineering", Cog],
 ] as const;
-const COMPS = [["WC", "FIFA World Cup", "wc-2026"], ["EURO", "UEFA Euro", "euro-2024"], ["COPA", "Copa América", "copa-2024"], ["UNL", "UEFA Nations League", "unl"]] as const;
+const COMPS = [["WC", "FIFA World Cup", "wc-2026"], ["EURO", "UEFA Euro", "euro-2024"], ["COPA", "Copa América", "copa-2024"], ["UNL", "UEFA Nations League", "unl"], ["FIN", "Finalissima", "fin-2022"]] as const;
 
 const link = ({ isActive }: { isActive: boolean }) => cx("flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition", isActive ? "font-semibold" : "hover:bg-white/5");
 const linkStyle = (active: boolean) => ({ background: active ? "color-mix(in srgb, var(--c-primary) 16%, transparent)" : undefined, color: active ? "var(--c-primary)" : "var(--c-ink)" });
@@ -55,7 +55,7 @@ function Sidebar({ onNavigate }: { onNavigate: () => void }) {
                 <NavLink key={e.seasonId} to={`/tournament/${e.slug}`} className={link} style={({ isActive }) => ({ ...linkStyle(isActive), paddingTop: 5, paddingBottom: 5 })}>
                   <img src={THEMES[e.themeKey]?.logo} alt="" className="h-5 w-5 rounded object-contain" loading="lazy" />
                   <span className="truncate text-[13px]">{e.competition === "UNL" ? e.seasonId.replace("UNL-", "") : e.year}</span>
-                  {e.status !== "in_data" && <span className="chip chip-soon ml-auto !py-0 !text-[10px]">Soon</span>}
+                  {e.status !== "in_data" && <span className="chip chip-soon ml-auto !py-0 !text-[10px]">{e.status === "cancelled" ? "Cancelled" : "Soon"}</span>}
                 </NavLink>))}
             </div>}
           </div>

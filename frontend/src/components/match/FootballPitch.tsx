@@ -3,7 +3,7 @@ import { Table } from "../../api";
 import CountryFlag from "../CountryFlag";
 import { teamPalette } from "../../data/teamColors";
 
-export interface Player { team_name: string; player: string; jersey_number?: number | null; is_starter?: boolean | null; minutes_played?: number | null; primary_position?: string | null; line?: string | null }
+export interface Player { team_name: string; player: string; jersey_number?: number | null; is_starter?: boolean | null; minutes_played?: number | null; note?: string | null; primary_position?: string | null; line?: string | null }
 
 // recorded position -> short code, formation line and lateral weight (left 0 .. right 1). Unknown positions are never guessed.
 const POS: Record<string, [string, "GK" | "DF" | "DM" | "MF" | "AM" | "FW", number]> = {
@@ -101,7 +101,7 @@ export default function TeamLineup({ team, players, color, manager }: { team: st
       <TeamBanner team={team} c1={c1} c2={c2} shape={usePitch ? shape : undefined} manager={manager} />
       {bench.length > 0 && <div className="card mt-4 p-4"><h4 className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--c-muted)" }}>Substitutes</h4>
         <ul className="grid gap-1.5 sm:grid-cols-2">{bench.map((p) => <li key={p.player} className="flex items-center justify-between gap-2 text-sm"><span className="flex min-w-0 items-center gap-2"><span className="grid h-6 w-7 shrink-0 place-items-center rounded-sm text-[11px] font-bold" style={{ background: "#e8ff2e", color: "#000" }}>{p.jersey_number ?? "–"}</span><span className="truncate">{p.player}</span></span>
-          {p.minutes_played ? <span className="chip whitespace-nowrap !py-0 !text-[10px]" style={{ color: "var(--c-ink)" }} title="minutes played">{Math.round(p.minutes_played)}′</span> : <span className="text-[10px]" style={{ color: "var(--c-muted)" }}>unused</span>}</li>)}</ul></div>}
+          {p.note ? <span className="chip whitespace-nowrap !py-0 !text-[10px]" style={{ color: "var(--c-ink)" }}>{p.note}</span> : p.minutes_played ? <span className="chip whitespace-nowrap !py-0 !text-[10px]" style={{ color: "var(--c-ink)" }} title="minutes played">{Math.round(p.minutes_played)}′</span> : <span className="text-[10px]" style={{ color: "var(--c-muted)" }}>unused</span>}</li>)}</ul></div>}
     </div>
   );
 }

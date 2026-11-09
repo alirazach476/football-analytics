@@ -2,10 +2,10 @@ import { Table } from "../../api";
 import TeamIdentity from "./TeamIdentity";
 
 interface Metric { key: string; label: string; pct?: boolean; dec?: number }
-// Only fields that exist in wh.fact_team_match_stats. Possession, offsides, off-target shots are NOT recorded, so they are never shown.
+// Only metrics a source records are drawn (warehouse StatsBomb stats have no possession/offsides/saves; the Finalissima match report does). A missing metric is skipped, never zero.
 export const METRICS: Metric[] = [
-  { key: "xg", label: "Expected goals (xG)", dec: 2 }, { key: "shots", label: "Total shots" }, { key: "shots_on_target", label: "Shots on target" }, { key: "passes", label: "Passes" },
-  { key: "pass_accuracy", label: "Pass accuracy", pct: true }, { key: "corners_taken", label: "Corners" }, { key: "fouls_committed", label: "Fouls committed" }, { key: "yellow_cards", label: "Yellow cards" }, { key: "red_cards", label: "Red cards" },
+  { key: "possession", label: "Possession", pct: true }, { key: "xg", label: "Expected goals (xG)", dec: 2 }, { key: "shots", label: "Total shots" }, { key: "shots_on_target", label: "Shots on target" }, { key: "passes", label: "Passes" },
+  { key: "pass_accuracy", label: "Pass accuracy", pct: true }, { key: "corners_taken", label: "Corners" }, { key: "fouls_committed", label: "Fouls committed" }, { key: "yellow_cards", label: "Yellow cards" }, { key: "red_cards", label: "Red cards" }, { key: "offsides", label: "Offsides" }, { key: "saves", label: "Saves" },
 ];
 const fmt = (v: number, m: Metric) => (m.pct ? `${Math.round(v * 100)}%` : m.dec ? v.toFixed(m.dec) : Math.round(v).toLocaleString("en-US"));
 
