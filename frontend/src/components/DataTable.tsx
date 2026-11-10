@@ -1,10 +1,14 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowDown, ArrowUp, Download, Search } from "lucide-react";
 import { Table, saveBlob } from "../api";
 import { StatusBadge, cx } from "./ui";
 import CountryFlag from "./CountryFlag";
+import PlayerLink from "./PlayerLink";
 import { flagCode } from "../data/countries";
 
+const PLAYER_COL = /^(full_name|player|player_name|scorer|entity_name_raw)$/i;
+const AUTO_HIDE = ["match_key", "player_key"];            // ids used for the links, not shown
 const TEAM_COL = /^(team|team_name|home_team_name|away_team_name|team_a|team_b|champion|runner_up|runnerup|opponent|nationality|a|b)$/i;
 
 const fmt = (v: any, col: string): string => {
@@ -24,8 +28,9 @@ export const toCsv = (t: Table) => {
 
 export default function DataTable({ table, pageSize = 15, searchable = true, filename = "table", hide = [], dense = false, onRowClick, empty = "No rows." }:
   { table?: Table; pageSize?: number; searchable?: boolean; filename?: string; hide?: string[]; dense?: boolean; onRowClick?: (row: Record<string, any>) => void; empty?: string }) {
-  const [q, setQ] = useState(""); const [sort, setSort] = useState<{ col: string; dir: 1 | -1 } | null>(null); const [page, setPage] = useState(0);
-  const cols = useMemo(() => (table?.columns ?? []).filter((c) => !hide.includes(c)), [table, hide]);
+  const nav = useNavigate(); const [q, setQ] = useState(""); const [sort, setSort] = useState<{ col: string; dir: 1 | -1 } | null>(null); const [page, setPage] = useState(0);
+  const cols = useMemo(() => (table?.columns ?? []).filter((c) => !hide.includes(c) && !AUTO_HIDE.includes(c)), [table, hide]);
+  const rowAction = (r: Record<string, any>) => (onRowClick ? () => onRowClick(r) : r.match_key != null ? () => nav(`/match/${r.match_key}`) : undefined);
   const rows = useMemo(() => {
     let r = table?.rows ?? [];
     if (q) { const s = q.toLowerCase(); r = r.filter((x) => cols.some((c) => String(x[c] ?? "").toLowerCase().includes(s))); }
@@ -53,9 +58,9 @@ export default function DataTable({ table, pageSize = 15, searchable = true, fil
           </thead>
           <tbody>
             {rows.slice(cur * pageSize, cur * pageSize + pageSize).map((r, i) => (
-              <tr key={i} onClick={onRowClick ? () => onRowClick(r) : undefined} className={cx("border-t transition hover:bg-white/5", onRowClick && "cursor-pointer")} style={{ borderColor: "var(--c-border)" }}>
+              <tr key={i} onClick={rowAction(r)} title={!onRowClick && r.match_key != null ? "Open match" : undefined} className={cx("border-t transition hover:bg-white/5", (onRowClick || r.match_key != null) && "cursor-pointer")} style={{ borderColor: "var(--c-border)" }}>
                 {cols.map((c) => { const v = r[c]; const num = typeof v === "number";
-                  return <td key={c} className={cx("td", dense && "!py-1", num && "text-right tabular-nums")}>{c === "status_label" && typeof v === "string" ? <StatusBadge text={v} /> : TEAM_COL.test(c) && typeof v === "string" && flagCode(v) ? <span className="inline-flex items-center gap-2"><CountryFlag country={v} size={20} />{v}</span> : fmt(v, c)}</td>; })}
+                  return <td key={c} className={cx("td", dense && "!py-1", num && "text-right tabular-nums")}>{c === "status_label" && typeof v === "string" ? <StatusBadge text={v} /> : PLAYER_COL.test(c) && r.player_key != null && typeof v === "string" ? <PlayerLink id={r.player_key} name={v} country={r.nationality ?? r.plays_for ?? r.team_name} size={20} /> : TEAM_COL.test(c) && typeof v === "string" && flagCode(v) ? <span className="inline-flex items-center gap-2"><CountryFlag country={v} size={20} />{v}</span> : fmt(v, c)}</td>; })}
               </tr>))}
           </tbody>
         </table>

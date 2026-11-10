@@ -6,8 +6,9 @@ import { abbr, isPlaceholder } from "../../data/countries";
 import CountryFlag from "../CountryFlag";
 import { MatchRow, compLabel, dateLabel, editionLabel, fmtMinute, stageLine, statusOf } from "./matchUtils";
 import MatchStatusBadge from "./MatchStatusBadge";
+import PlayerLink from "../PlayerLink";
 
-export interface TimelineEvt { minute?: number | null; minute_added?: number | null; kind: string; detail_type?: string | null; card?: string | null; team_name: string; player?: string | null; other_player?: string | null; assist?: string | null; side: "home" | "away"; scoring_side: "home" | "away" }
+export interface TimelineEvt { minute?: number | null; minute_added?: number | null; kind: string; detail_type?: string | null; card?: string | null; team_name: string; player?: string | null; other_player?: string | null; assist?: string | null; player_key?: number | null; assist_key?: number | null; side: "home" | "away"; scoring_side: "home" | "away" }
 
 /** Lower-third scorer tags: angled team-colour tags with a white minute box, sliding in one after the other. */
 export function GoalScorers({ events, side, color }: { events: TimelineEvt[]; side: "home" | "away"; color: string }) {
@@ -18,7 +19,7 @@ export function GoalScorers({ events, side, color }: { events: TimelineEvt[]; si
         <motion.li key={i} initial={{ opacity: 0, x: side === "home" ? -30 : 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.12 }}
           className={`flex max-w-full items-stretch overflow-hidden text-sm shadow-lg ${side === "home" ? "flex-row-reverse bc-slant-l" : "bc-slant-r"}`} style={{ background: `linear-gradient(${side === "home" ? 270 : 90}deg, ${color}, color-mix(in srgb, ${color} 55%, #000))` }}>
           <span className="grid min-w-[3.3rem] place-items-center bg-white px-2 font-display text-base font-bold tabular-nums text-slate-900">{fmtMinute(g.minute, g.minute_added)}</span>
-          <span className="truncate px-3 py-1 font-semibold text-white">{g.player ?? "Goal"}{g.kind === "Own goal" && <b className="ml-1.5 text-[10px] uppercase text-red-200">own goal</b>}{g.detail_type === "Penalty" && g.kind === "Goal" && <b className="ml-1.5 text-[10px] uppercase text-white/80">pen</b>}{g.assist && <span className="ml-2 text-[11px] font-medium text-white/80">assist {g.assist}</span>}</span>
+          <span className="truncate px-3 py-1 font-semibold text-white"><PlayerLink id={g.player_key} name={g.player ?? "Goal"} />{g.kind === "Own goal" && <b className="ml-1.5 text-[10px] uppercase text-red-200">own goal</b>}{g.detail_type === "Penalty" && g.kind === "Goal" && <b className="ml-1.5 text-[10px] uppercase text-white/80">pen</b>}{g.assist && <span className="ml-2 text-[11px] font-medium text-white/80">assist <PlayerLink id={g.assist_key} name={g.assist} /></span>}</span>
         </motion.li>))}
     </ul>
   );

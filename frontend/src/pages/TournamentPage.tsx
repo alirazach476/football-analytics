@@ -95,7 +95,7 @@ export default function TournamentPage() {
           <div className="mb-3 flex flex-wrap items-center gap-1.5">{stages.map((x) => <button key={x} onClick={() => setStage(x)} className={x === stage ? "chip" : "btn !rounded-full !py-0.5 !text-xs"}>{x}</button>)}
             <span className="ml-auto flex gap-1.5"><button className={view === "cards" ? "chip" : "btn !py-0.5 !text-xs"} onClick={() => setView("cards")}>Scoreboards</button><button className={view === "table" ? "chip" : "btn !py-0.5 !text-xs"} onClick={() => setView("table")}>Table</button></span></div>
           {view === "cards" ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{(d.matches?.rows ?? []).filter((r: any) => stage === "All" || r.stage_name === stage).map((r: any) => <FixtureCard key={r.match_key} m={{ ...r, had_shootout: r.home_pen != null, competition_id: m.competition, season_id: seasonId }} showComp={false} />)}</div>
-            : <DataTable table={matchTable} pageSize={20} filename={`${seasonId}_matches`} hide={MATCH_HIDE} onRowClick={(r) => r.is_played && nav(`/match/${r.match_key}`)} empty="No matches in the data yet." />}
+            : <DataTable table={matchTable} pageSize={20} filename={`${seasonId}_matches`} hide={MATCH_HIDE} onRowClick={(r) => nav(`/match/${r.match_key}`)} empty="No matches in the data yet." />}
           {d.coverage && <p className="mt-3 text-xs" style={{ color: "var(--c-muted)" }}>Player of the match recorded for {d.coverage.withPlayerOfTheMatch} of {d.coverage.matchesPlayed} played matches. {d.coverage.playerOfTheMatchNote}</p>}
         </Section>}
 
