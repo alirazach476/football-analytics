@@ -129,3 +129,18 @@ def test_finalissima_section_is_sourced_and_separate():
     assert {e["seasonId"] for e in cat if e["competition"] == "FIN"} == {"FIN-2022", "FIN-2026"}
     assert c.get("/api/tournament/FIN-2026").status_code == 200 and c.get("/api/tournament/FIN-1999").status_code == 404
     assert "FIN" not in {e["competition_id"] for e in c.post("/api/fixtures", json={"filters": {}, "limit": 400}).json()["rows"]}      # not part of the four-competition warehouse
+
+
+def test_click_through_ids_for_matches_and_players():
+    """Tables and match pages carry the ids that make rows open a match and names open a player page."""
+    r = c.get("/api/players/4303").json()                               # Lionel Messi
+    assert r["profile"]["nationality"] == "Argentina" and r["totals"]["goals"] > 20 and r["totals"]["tournaments"] >= 10
+    assert "match_key" in r["appearances"]["columns"] and r["appearances"]["rows"][0]["match_key"] is not None
+    assert c.get("/api/players/999999999").status_code == 404
+    m = c.get("/api/match-center/439").json()
+    goals = [e for e in m["timeline"]["rows"] if e["kind"] == "Goal"]
+    assert all(e["player_key"] for e in goals) and any(e["assist_key"] for e in goals) and all(p["player_key"] for p in m["lineups"]["rows"][:11])
+    q = lambda name, **a: c.post("/api/query", json={"name": name, "args": a}).json()
+    assert "match_key" in q("records", comp="WC")["highest_scoring"]["columns"] and "player_key" in q("records", comp="WC")["top_scorers"]["columns"]
+    assert "match_key" in q("head_to_head_table", a="Argentina", b="France")["columns"] and "match_key" in q("team_results", team="Argentina")["columns"]
+    assert "match_key" in q("upcoming_fixtures")["columns"] and "match_key" in q("team_upcoming", team="Spain")["columns"]

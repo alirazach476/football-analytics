@@ -2,6 +2,7 @@ import { ArrowLeftRight, Goal, Square } from "lucide-react";
 import CountryFlag from "../CountryFlag";
 import { MatchRow, fmtMinute } from "./matchUtils";
 import { TimelineEvt } from "./MatchScoreboard";
+import PlayerLink from "../PlayerLink";
 
 const icon = (e: TimelineEvt) => {
   if (e.kind === "Goal") return { el: <Goal size={16} />, label: e.detail_type === "Penalty" ? "Penalty goal" : "Goal", color: "#22c55e" };
@@ -30,13 +31,13 @@ export default function MatchTimeline({ events, match: m }: { events: TimelineEv
     items.push(
       <li key={i} className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 py-1.5">
         <div className={`flex items-center justify-end gap-2 text-right ${home ? "" : "invisible"}`}>
-          <div className="min-w-0"><div className="break-words font-semibold leading-tight">{e.player ?? ic.label}</div>{sub(e) && <div className="text-xs" style={{ color: "var(--c-muted)" }}>{sub(e)}</div>}</div>
+          <div className="min-w-0"><div className="break-words font-semibold leading-tight"><PlayerLink id={e.player_key} name={e.player ?? ic.label} /></div>{sub(e) && <div className="text-xs" style={{ color: "var(--c-muted)" }}>{sub(e)}</div>}</div>
           <span aria-label={ic.label} title={ic.label} style={{ color: ic.color }}>{ic.el}</span>
         </div>
         <div className="flex w-20 flex-col items-center"><span className="rounded-md px-2 py-0.5 text-sm font-black tabular-nums" style={{ background: "color-mix(in srgb, var(--c-primary) 18%, transparent)", color: "var(--c-primary)" }}>{fmtMinute(e.minute, e.minute_added)}</span></div>
         <div className={`flex items-center gap-2 ${home ? "invisible" : ""}`}>
           <span aria-label={ic.label} title={ic.label} style={{ color: ic.color }}>{ic.el}</span>
-          <div className="min-w-0"><div className="break-words font-semibold leading-tight">{e.player ?? ic.label}</div>{sub(e) && <div className="text-xs" style={{ color: "var(--c-muted)" }}>{sub(e)}</div>}</div>
+          <div className="min-w-0"><div className="break-words font-semibold leading-tight"><PlayerLink id={e.player_key} name={e.player ?? ic.label} /></div>{sub(e) && <div className="text-xs" style={{ color: "var(--c-muted)" }}>{sub(e)}</div>}</div>
         </div>
       </li>);
   });

@@ -57,7 +57,7 @@ def coverage_report() -> pd.DataFrame:
 
 
 def upcoming_fixtures() -> pd.DataFrame:
-    return q("select * from gold.mart_upcoming_fixtures order by match_date, match_id")
+    return q("select u.*, m.match_key from gold.mart_upcoming_fixtures u join staging.stg_matches m using (match_id) order by u.match_date, u.match_id")
 
 
 # ------------------------------------------------------------------ competitions
@@ -76,11 +76,11 @@ def outcome_table(comp: str) -> pd.DataFrame:
 
 
 def records(comp: str) -> dict:
-    cols = "season_id, match_date, stage_name, home_team_name, away_team_name, home_score, away_score, total_goals, goal_margin"
+    cols = "match_key, season_id, match_date, stage_name, home_team_name, away_team_name, home_score, away_score, total_goals, goal_margin"
     base = f"from gold.mart_match_performance where competition_id = %s and match_status='completed'"
     return dict(highest_scoring=q(f"select {cols} {base} order by total_goals desc, match_date limit 5", (comp,)),
                 biggest_margin=q(f"select {cols} {base} order by goal_margin desc, total_goals desc limit 5", (comp,)),
-                top_scorers=q("""select full_name, max(team_name) as team_name, sum(goals) as goals from gold.mart_player_performance
+                top_scorers=q("""select player_key, full_name, max(team_name) as team_name, sum(goals) as goals from gold.mart_player_performance
                                  where season_id like %s group by player_key, full_name order by 3 desc limit 10""", (comp + "-%",)))
 
 
@@ -108,28 +108,28 @@ def team_by_edition(team: str) -> pd.DataFrame:
 
 
 def team_results(team: str, limit: int = 300) -> pd.DataFrame:
-    return q("""select m.match_date, m.season_id, m.stage_name, m.home_team_name, m.home_score, m.away_score, m.away_team_name, m.venue_name
+    return q("""select m.match_key, m.match_date, m.season_id, m.stage_name, m.home_team_name, m.home_score, m.away_score, m.away_team_name, m.venue_name
                 from staging.stg_matches m where m.is_played and (m.home_team_name = %s or m.away_team_name = %s) order by m.match_date desc limit %s""", (team, team, limit))
 
 
 def team_upcoming(team: str) -> pd.DataFrame:
-    return q("select match_date, season_id, stage_name, home_team_name, away_team_name, venue_name, status_label, fixture_detail from gold.mart_upcoming_fixtures where home_team_name = %s or away_team_name = %s order by match_date", (team, team))
+    return q("select m.match_key, u.match_date, u.season_id, u.stage_name, u.home_team_name, u.away_team_name, u.venue_name, u.status_label, u.fixture_detail from gold.mart_upcoming_fixtures u join staging.stg_matches m using (match_id) where u.home_team_name = %s or u.away_team_name = %s order by u.match_date", (team, team))
 
 
 def head_to_head_table(a: str, b: str) -> pd.DataFrame:
-    return q("""select match_date, season_id, stage_name, home_team_name, home_score, away_score, away_team_name from staging.stg_matches
+    return q("""select match_key, match_date, season_id, stage_name, home_team_name, home_score, away_score, away_team_name from staging.stg_matches
                 where is_played and ((home_team_name = %s and away_team_name = %s) or (home_team_name = %s and away_team_name = %s)) order by match_date desc""", (a, b, b, a))
 
 
 # ------------------------------------------------------------------ players
 def player_search(term: str, limit: int = 50) -> pd.DataFrame:
-    return q("""select player_key, full_name, nationality, appearances, goals, assists, minutes_played, tournaments, first_season_year, last_season_year
-                from gold.mart_player_career where full_name ilike %s order by goals desc, appearances desc limit %s""", (f"%{term}%", limit))
+    return q("""select c.player_key, c.full_name, c.nationality, c.appearances, c.goals, c.assists, c.minutes_played, c.tournaments, c.first_season_year, c.last_season_year, (select mode() within group (order by pp.team_name) from gold.mart_player_performance pp where pp.player_key = c.player_key) as plays_for
+                from gold.mart_player_career c where c.full_name ilike %s order by c.goals desc, c.appearances desc limit %s""", (f"%{term}%", limit))
 
 
 def top_players(metric: str = "goals", limit: int = 20) -> pd.DataFrame:
     assert metric in {"goals", "assists", "appearances", "minutes_played"}
-    return q(f"select player_key, full_name, nationality, goals, assists, appearances, minutes_played, tournaments from gold.mart_player_career order by {metric} desc nulls last limit %s", (limit,))
+    return q(f"select c.player_key, c.full_name, c.nationality, c.goals, c.assists, c.appearances, c.minutes_played, c.tournaments, (select mode() within group (order by pp.team_name) from gold.mart_player_performance pp where pp.player_key = c.player_key) as plays_for from gold.mart_player_career c order by c.{metric} desc nulls last limit %s", (limit,))
 
 
 def player_by_edition(player_key: int) -> pd.DataFrame:

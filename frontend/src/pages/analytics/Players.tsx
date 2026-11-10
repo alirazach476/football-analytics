@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Callout, KpiCard, PageHeader, Tabs } from "../../components/ui";
 import { SearchBox, Segmented, SelectField } from "../../components/controls";
 import ChartSection from "../../components/ChartSection";
+import { Link } from "react-router-dom";
+import CountryFlag from "../../components/CountryFlag";
 import { Block, Loading, T, n0, useTable } from "./kit";
 
 const sum = (rows: any[], k: string) => rows.reduce((a, r) => a + (Number(r[k]) || 0), 0);
@@ -39,6 +41,7 @@ export default function Players() {
           <div className="mb-5 max-w-xl"><SearchBox label="Search a player (name contains)" value={term} onChange={setTerm} />
             {res.rows.length > 0 && <div className="mt-3"><SelectField label="Player" value={key} onChange={setPk} options={res.rows.map((r) => [String(r.player_key), `${r.full_name} (${r.nationality || "nationality n/a"})`] as [string, string])} /></div>}</div>
           {!res.rows.length ? <Callout tone="info">No player found. Try another spelling.</Callout> : !prof ? <Loading /> : <>
+            <div className="mb-4 flex flex-wrap items-center gap-3">{(prof.nationality ?? res.rows.find((r) => String(r.player_key) === key)?.plays_for) && <CountryFlag country={prof.nationality ?? res.rows.find((r) => String(r.player_key) === key)?.plays_for} size={40} />}<h2 className="font-display text-2xl font-bold">{prof.full_name}</h2><Link to={`/player/${key}`} className="btn btn-primary">Open full player page</Link></div>
             <div className="mb-3 grid grid-cols-2 gap-4 md:grid-cols-5">
               <KpiCard label="Appearances" value={sum(by.rows, "appearances")} /><KpiCard label="Goals" value={sum(by.rows, "goals")} /><KpiCard label="Assists (where recorded)" value={sum(by.rows, "assists")} />
               <KpiCard label="Minutes (known)" value={n0(Math.round(sum(by.rows, "minutes_played")))} /><KpiCard label="Tournaments" value={new Set(by.rows.map((r) => r.season_id)).size} /></div>

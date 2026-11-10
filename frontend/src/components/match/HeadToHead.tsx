@@ -1,5 +1,6 @@
 import { Table } from "../../api";
 import CountryFlag from "../CountryFlag";
+import { Link } from "react-router-dom";
 import { dateLabel } from "./matchUtils";
 
 /** Historical meetings between two teams in the four competitions (recorded score, extra time included, shoot-outs excluded). */
@@ -25,7 +26,7 @@ export default function HeadToHead({ table, a, b, currentDate }: { table?: Table
           return <li key={i} className="grid grid-cols-[5.5rem_1fr_auto_1fr] items-center gap-2 border-t px-4 py-2 text-sm" style={{ borderColor: "var(--c-border)", background: cur ? "color-mix(in srgb, var(--c-primary) 12%, transparent)" : undefined }}>
             <span className="text-xs tabular-nums" style={{ color: "var(--c-muted)" }}>{dateLabel(r.match_date)}</span>
             <span className="flex items-center justify-end gap-2 text-right font-semibold"><span className="truncate">{r.home_team_name}</span><CountryFlag country={r.home_team_name} size={20} /></span>
-            <span className="rounded-md px-2 font-display font-black tabular-nums" style={{ background: "color-mix(in srgb, var(--c-muted) 20%, transparent)" }}>{r.home_score}–{r.away_score}</span>
+            {r.match_key != null ? <Link to={`/match/${r.match_key}`} title="Open match" className="rounded-md px-2 font-display font-black tabular-nums hover:underline" style={{ background: "color-mix(in srgb, var(--c-muted) 20%, transparent)" }}>{r.home_score}–{r.away_score}</Link> : <span className="rounded-md px-2 font-display font-black tabular-nums" style={{ background: "color-mix(in srgb, var(--c-muted) 20%, transparent)" }}>{r.home_score}–{r.away_score}</span>}
             <span className="flex items-center gap-2 font-semibold"><CountryFlag country={r.away_team_name} size={20} /><span className="truncate">{r.away_team_name}</span><span className="ml-auto hidden text-xs font-normal sm:inline" style={{ color: "var(--c-muted)" }}>{r.season_id} · {r.stage_name}</span></span></li>; })}</ul></div>
     </div>
   );

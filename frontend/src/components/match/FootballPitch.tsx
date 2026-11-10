@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import PlayerLink from "../PlayerLink";
 import { Table } from "../../api";
 import CountryFlag from "../CountryFlag";
 import { teamPalette } from "../../data/teamColors";
 
-export interface Player { team_name: string; player: string; jersey_number?: number | null; is_starter?: boolean | null; minutes_played?: number | null; note?: string | null; primary_position?: string | null; line?: string | null }
+export interface Player { team_name: string; player_key?: number | null; player: string; jersey_number?: number | null; is_starter?: boolean | null; minutes_played?: number | null; note?: string | null; primary_position?: string | null; line?: string | null }
 
 // recorded position -> short code, formation line and lateral weight (left 0 .. right 1). Unknown positions are never guessed.
 const POS: Record<string, [string, "GK" | "DF" | "DM" | "MF" | "AM" | "FW", number]> = {
@@ -49,7 +51,7 @@ function Avatar({ kit, gk }: { kit: string; gk: boolean }) {
 
 function PlayerCard({ p, kit }: { p: Player; kit: string }) {
   const code = info(p)?.[0] ?? p.primary_position?.slice(0, 2).toUpperCase() ?? "";
-  return (
+  const body = (
     <div className="group flex w-[19%] min-w-[58px] max-w-[96px] flex-col items-stretch drop-shadow-xl transition hover:-translate-y-1" title={`${p.player}${p.primary_position ? ` · ${p.primary_position}` : ""}`}>
       <div className="overflow-hidden rounded-[4px] border-2 border-white bg-white">
         <div className="flex items-center justify-between bg-black px-1 py-px leading-none"><span className="text-[9px] font-bold text-white sm:text-[10px]">{code}</span><span className="font-display text-xs font-bold sm:text-sm" style={{ color: "#22e07a" }}>{p.jersey_number ?? "–"}</span></div>
@@ -58,6 +60,7 @@ function PlayerCard({ p, kit }: { p: Player; kit: string }) {
       <div className="-mt-px line-clamp-3 min-h-[2.7em] rounded-b-[4px] px-0.5 py-0.5 text-center text-[8px] font-extrabold leading-tight tracking-wide text-black sm:text-[10px]" style={{ background: "#e8ff2e" }}>{tagName(p.player)}</div>
     </div>
   );
+  return p.player_key ? <Link to={`/player/${p.player_key}`} className="contents" aria-label={`Open ${p.player}`}>{body}</Link> : body;
 }
 
 /** Team banner under the pitch: flag + name on black with curved bands in the national colours. */
@@ -100,7 +103,7 @@ export default function TeamLineup({ team, players, color, manager }: { team: st
       {usePitch && generic && <p className="mt-2 text-center text-[11px]" style={{ color: "var(--c-muted)" }}>Some players only have a general position (defender, midfielder or forward), so their left-to-right order within a line is not known.</p>}
       <TeamBanner team={team} c1={c1} c2={c2} shape={usePitch ? shape : undefined} manager={manager} />
       {bench.length > 0 && <div className="card mt-4 p-4"><h4 className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--c-muted)" }}>Substitutes</h4>
-        <ul className="grid gap-1.5 sm:grid-cols-2">{bench.map((p) => <li key={p.player} className="flex items-center justify-between gap-2 text-sm"><span className="flex min-w-0 items-center gap-2"><span className="grid h-6 w-7 shrink-0 place-items-center rounded-sm text-[11px] font-bold" style={{ background: "#e8ff2e", color: "#000" }}>{p.jersey_number ?? "–"}</span><span className="truncate">{p.player}</span></span>
+        <ul className="grid gap-1.5 sm:grid-cols-2">{bench.map((p) => <li key={p.player} className="flex items-center justify-between gap-2 text-sm"><span className="flex min-w-0 items-center gap-2"><span className="grid h-6 w-7 shrink-0 place-items-center rounded-sm text-[11px] font-bold" style={{ background: "#e8ff2e", color: "#000" }}>{p.jersey_number ?? "–"}</span><span className="truncate"><PlayerLink id={p.player_key} name={p.player} /></span></span>
           {p.note ? <span className="chip whitespace-nowrap !py-0 !text-[10px]" style={{ color: "var(--c-ink)" }}>{p.note}</span> : p.minutes_played ? <span className="chip whitespace-nowrap !py-0 !text-[10px]" style={{ color: "var(--c-ink)" }} title="minutes played">{Math.round(p.minutes_played)}′</span> : <span className="text-[10px]" style={{ color: "var(--c-muted)" }}>unused</span>}</li>)}</ul></div>}
     </div>
   );

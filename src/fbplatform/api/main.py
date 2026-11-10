@@ -142,6 +142,30 @@ def player_search(q: str = Query(..., min_length=2), limit: int = 40):
     return table(Q.player_search(q, limit))
 
 
+@app.get("/api/players/{player_key}")
+def player_detail(player_key: int):
+    """Everything on a player page: profile, career totals, per-edition rows, awards and every recorded appearance (each one links to its match)."""
+    prof = Q.player_profile(player_key)
+    if prof.empty:
+        raise KeyError(player_key)
+    p = records(prof)[0]
+    if p.get("date_of_birth"):
+        p["age"] = int((pd.Timestamp("today") - pd.Timestamp(p["date_of_birth"])).days // 365.25)
+    by = Q.player_by_edition(player_key)
+    apps = Q.q("""select m.match_key, m.match_date, m.season_id, m.stage_name, m.home_team_name, m.away_team_name, m.home_score, m.away_score, t.team_name, a.jersey_number, a.is_starter, a.minutes_played,
+                         a.yellow_cards, a.red_cards,
+                         (select count(distinct (e.minute, coalesce(e.minute_added, 0))) from wh.fact_match_events e where e.match_key = a.match_key and e.player_key = a.player_key
+                            and (e.is_goal or e.event_type = 'goal') and not coalesce(e.is_own_goal, false) and e.event_type <> 'own_goal_for' and e.minute is not null and coalesce(e.period, 0) <> 5) as goals,
+                         (select count(distinct (e.minute, coalesce(e.minute_added, 0))) from wh.fact_match_events e where e.match_key = a.match_key and e.related_player_key = a.player_key
+                            and e.is_goal and not coalesce(e.is_own_goal, false)) as assists
+                  from wh.fact_player_appearances a join staging.stg_matches m using (match_key) join wh.dim_team t using (team_key)
+                  where a.player_key = %s and m.is_played order by m.match_date desc""", (int(player_key),))
+    num = lambda col: float(by[col].fillna(0).sum()) if col in by else 0
+    totals = {"appearances": int(num("appearances")), "goals": int(num("goals")), "assists": int(num("assists")), "minutes": int(num("minutes_played")), "yellow_cards": int(num("yellow_cards")),
+              "red_cards": int(num("red_cards")), "tournaments": int(by.season_id.nunique()) if len(by) else 0, "teams": sorted(by.team_name.dropna().unique().tolist()) if len(by) else []}
+    return {"profile": p, "totals": totals, "byEdition": table(by), "awards": table(Q.player_awards(player_key)), "appearances": table(apps)}
+
+
 @app.get("/api/matches/{match_key}")
 def match_detail(match_key: int):
     row = Q.match_row(match_key)
@@ -230,7 +254,7 @@ _POS = {"Goalkeeper": "GK", "Defender": "DF", "Center Back": "DF", "Left Center 
 
 
 def _lineups(match_key: int) -> pd.DataFrame:
-    df = Q.q("""select t.team_name, coalesce(p.full_name, a.player_name_raw) player, a.jersey_number, a.is_starter, a.minutes_played, p.primary_position
+    df = Q.q("""select t.team_name, a.player_key, coalesce(p.full_name, a.player_name_raw) player, a.jersey_number, a.is_starter, a.minutes_played, p.primary_position
                 from wh.fact_player_appearances a join wh.dim_team t using (team_key) left join wh.dim_player p using (player_key)
                 where a.match_key = %s order by t.team_name, a.is_starter desc nulls last, a.jersey_number""", (int(match_key),))
     df["line"] = df.primary_position.map(_POS)               # unknown positions stay empty: never guessed
@@ -255,12 +279,19 @@ def match_center(match_key: int):
     # StatsBomb stores an own goal under the team of the player who scored it; martj42/fjelstul store it under the team that benefits (verified against every recorded score)
     flip = is_og & tl.provider.eq("statsbomb")
     tl["scoring_side"] = [("away" if sd == "home" else "home") if f else sd for sd, f in zip(tl.side, flip)]
+    # player ids so names can link to player pages (goal, card and substitution events keep their player's id; goals also keep the assist provider's id when known)
+    ids = Q.q("""select e.minute, e.minute_added, coalesce(p.full_name, e.player_name_raw) as player, e.player_key
+                 from wh.fact_match_events e left join wh.dim_player p on p.player_key = e.player_key where e.match_key = %s and e.minute is not null""", (int(match_key),))
+    kid = {(float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player): int(r.player_key) for r in ids.itertuples() if r.player_key is not None and not pd.isna(r.player_key)}
+    tl["player_key"] = [kid.get((float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player)) for r in tl.itertuples()]
     # assists from every source that records them: StatsBomb pass-to-goal link (related player) or the martj42 assist column
-    ass = Q.q("""select e.minute, e.minute_added, coalesce(p.full_name, e.player_name_raw) as player, coalesce(rp.full_name, e.related_player_name_raw, e.assist_name_raw) as assist
+    ass = Q.q("""select e.minute, e.minute_added, coalesce(p.full_name, e.player_name_raw) as player, coalesce(rp.full_name, e.related_player_name_raw, e.assist_name_raw) as assist, e.related_player_key as assist_key
                  from wh.fact_match_events e left join wh.dim_player p on p.player_key = e.player_key left join wh.dim_player rp on rp.player_key = e.related_player_key
                  where e.match_key = %s and e.is_goal and not coalesce(e.is_own_goal, false)""", (int(match_key),))
     amap = {(float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player): r.assist for r in ass.itertuples() if isinstance(r.assist, str)}
     tl["assist"] = [amap.get((float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player)) if r.kind == "Goal" else None for r in tl.itertuples()]
+    akey = {(float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player): int(r.assist_key) for r in ass.itertuples() if r.assist_key is not None and not pd.isna(r.assist_key)}
+    tl["assist_key"] = [akey.get((float(r.minute), 0 if pd.isna(r.minute_added) else float(r.minute_added), r.player)) if r.kind == "Goal" else None for r in tl.itertuples()]
     goals = tl[tl.kind.isin(["Goal", "Own goal"])]
     mg = Q.q("""select mm.side, mm.manager_name, mm.source, mm.level from wh.fact_match_managers mm where mm.match_key = %s""", (int(match_key),))
     managers = {r.side: dict(name=r.manager_name, source=r.source, level=r.level) for r in mg.itertuples()}
