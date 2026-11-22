@@ -198,6 +198,9 @@ def run() -> pd.DataFrame:
     rows += parse_unl(c, now)
     df = pd.DataFrame(rows, columns=COLS).drop_duplicates(["season_id", "award_name", "entity_name_raw", "entity_link_title", "position_label", "rank"])
     df = df[df.season_id.isin(set(pd.read_parquet(DATA / "silver" / "matches.parquet").season_id))].reset_index(drop=True)
+    # 1998: the source's "Top goalscorer | Runners-up" cell is the Silver Shoe (Batistuta and Vieri, 5 goals each)
+    m98 = (df.season_id == "WC-1998") & (df.award_name == "Golden Boot") & (df['rank'] == 2)
+    df.loc[m98, "position_label"] = "Silver Shoe (shared, 5 goals each)"
     df = link(df)
     out = PROC / "awards"
     out.mkdir(exist_ok=True)
