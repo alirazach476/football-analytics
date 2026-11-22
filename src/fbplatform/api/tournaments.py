@@ -56,7 +56,9 @@ def edition(season_id: str) -> dict:
     played = matches[matches.is_played == True] if len(matches) else matches
     n_played, motm_n = int(len(played)), int(played.motm.notna().sum()) if len(played) else 0
     note = None
-    if n_played and motm_n == 0:
+    if season_id == "WC-1998":
+        note = "No player-of-the-match award exists for the 1998 World Cup: FIFA introduced it at the 2002 World Cup (it was the Man of the Match, later sponsored as the Budweiser award)."
+    elif n_played and motm_n == 0:
         note = "Player of the match is not published for this edition's matches (verified absent from the sources we may use)."
     elif n_played and motm_n < n_played:
         note = "Player of the match exists only for some matches of this edition (for the Nations League, the Finals matches)."

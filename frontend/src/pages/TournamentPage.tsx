@@ -96,7 +96,7 @@ export default function TournamentPage() {
             <span className="ml-auto flex gap-1.5"><button className={view === "cards" ? "chip" : "btn !py-0.5 !text-xs"} onClick={() => setView("cards")}>Scoreboards</button><button className={view === "table" ? "chip" : "btn !py-0.5 !text-xs"} onClick={() => setView("table")}>Table</button></span></div>
           {view === "cards" ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{(d.matches?.rows ?? []).filter((r: any) => stage === "All" || r.stage_name === stage).map((r: any) => <FixtureCard key={r.match_key} m={{ ...r, had_shootout: r.home_pen != null, competition_id: m.competition, season_id: seasonId }} showComp={false} />)}</div>
             : <DataTable table={matchTable} pageSize={20} filename={`${seasonId}_matches`} hide={MATCH_HIDE} onRowClick={(r) => nav(`/match/${r.match_key}`)} empty="No matches in the data yet." />}
-          {d.coverage && <p className="mt-3 text-xs" style={{ color: "var(--c-muted)" }}>Player of the match recorded for {d.coverage.withPlayerOfTheMatch} of {d.coverage.matchesPlayed} played matches. {d.coverage.playerOfTheMatchNote}</p>}
+          {d.coverage && <p className="mt-3 text-xs" style={{ color: "var(--c-muted)" }}>{seasonId === "WC-1998" ? "" : `Player of the match recorded for ${d.coverage.withPlayerOfTheMatch} of ${d.coverage.matchesPlayed} played matches. `}{d.coverage.playerOfTheMatchNote}</p>}
         </Section>}
 
         {tab === "Standings" && <Section title="Group standings" hint="Derived from the recorded 90-minute scores (3 points for a win).">{st.isLoading ? <Skeleton h={240} /> : <StandingsTable table={st.data?.table} />}</Section>}
@@ -110,7 +110,7 @@ export default function TournamentPage() {
           <Section title="Individual awards" hint="Source: Wikipedia award pages."><DataTable table={d.awards} filename={`${seasonId}_awards`} empty={soon ? "No awards yet: this edition has not been played." : "No award rows were collected for this edition."} /></Section>
           <Section title="Team awards"><DataTable table={d.teamAwards} searchable={false} filename={`${seasonId}_team_awards`} empty="No team awards recorded." /></Section>
           <Section title="Top scorers (from goal events)" hint="Goals linked to a player; computed from recorded goal events, not an official table."><DataTable table={d.topScorers} filename={`${seasonId}_scorers`} empty="No linked scorers for this edition." /></Section>
-          <Section title="Player-of-the-match leaders"><DataTable table={d.motmLeaders} searchable={false} filename={`${seasonId}_motm`} empty="Player of the match is not recorded for this edition." /></Section>
+          <Section title="Player-of-the-match leaders"><DataTable table={d.motmLeaders} searchable={false} filename={`${seasonId}_motm`} empty={seasonId === "WC-1998" ? "Not awarded in 1998: FIFA introduced the player-of-the-match award at the 2002 World Cup." : "Player of the match is not recorded for this edition."} /></Section>
         </>}
 
         {tab === "Records" && <div className="grid gap-6 lg:grid-cols-2">

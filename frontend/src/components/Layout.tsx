@@ -17,6 +17,7 @@ const LAB = [
 ] as const;
 const COMPS = [["WC", "FIFA World Cup", "wc-2026"], ["EURO", "UEFA Euro", "euro-2024"], ["COPA", "Copa América", "copa-2024"], ["UNL", "UEFA Nations League", "unl"], ["FIN", "Finalissima", "fin-2022"]] as const;
 
+const MENU_BG = "url(/bg-we-are-26.jpg) center top / cover no-repeat";
 const link = ({ isActive }: { isActive: boolean }) => cx("flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition", isActive ? "font-semibold" : "hover:bg-white/5");
 const linkStyle = (active: boolean) => ({ background: active ? "color-mix(in srgb, var(--c-primary) 16%, transparent)" : undefined, color: active ? "var(--c-primary)" : "var(--c-ink)" });
 
@@ -78,14 +79,14 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* site-wide background artwork (FIFA World Cup 26 pattern), softened so text stays readable in every theme */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0" style={{ backgroundImage: "url(/bg-we-are-26.jpg)", backgroundSize: "cover", backgroundPosition: "center top", opacity: theme.mode === "dark" ? 0.55 : 0.34, filter: "saturate(1.2)" }} />
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0" style={{ background: "linear-gradient(180deg, color-mix(in srgb, var(--c-bg) 30%, transparent) 0%, color-mix(in srgb, var(--c-bg) 62%, transparent) 60%, color-mix(in srgb, var(--c-bg) 90%, transparent) 100%)" }} />
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r lg:block" style={{ background: "linear-gradient(180deg, var(--sidebar-bg), color-mix(in srgb, var(--sidebar-bg) 70%, #000))", borderColor: "color-mix(in srgb, var(--c-primary) 35%, transparent)" }}><Sidebar onNavigate={() => {}} /></aside>
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r lg:block" style={{ background: `linear-gradient(180deg, color-mix(in srgb, var(--sidebar-bg) 78%, transparent), color-mix(in srgb, var(--sidebar-bg) 60%, #000 25%)), ${MENU_BG}`, borderColor: "color-mix(in srgb, var(--c-primary) 35%, transparent)" }}><Sidebar onNavigate={() => {}} /></aside>
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b px-4 py-3 backdrop-blur lg:hidden" style={{ background: "color-mix(in srgb, var(--c-bg) 88%, transparent)", borderColor: "var(--c-border)" }}>
         <button onClick={() => setMenu(true)} aria-label="Open menu" className="btn !px-2"><Menu size={18} /></button>
         <BrandLogos size={30} /><span className="font-display font-bold">Football Analytics</span>
         <Activity size={16} className="ml-auto" style={{ color: health.data?.ok ? "#22c55e" : "#ef4444" }} aria-label={health.data?.ok ? "warehouse online" : "warehouse offline"} />
       </header>
       {menu && <div className="fixed inset-0 z-40 lg:hidden"><div className="absolute inset-0 bg-black/60" onClick={() => setMenu(false)} />
-        <div className="absolute inset-y-0 left-0 w-72" style={{ background: "var(--sidebar-bg)" }}>
+        <div className="absolute inset-y-0 left-0 w-72" style={{ background: `linear-gradient(180deg, color-mix(in srgb, var(--sidebar-bg) 78%, transparent), color-mix(in srgb, var(--sidebar-bg) 60%, #000 25%)), ${MENU_BG}` }}>
           <button className="absolute right-2 top-2 btn !px-2" onClick={() => setMenu(false)} aria-label="Close menu"><X size={16} /></button><Sidebar onNavigate={() => setMenu(false)} /></div></div>}
       <main className="relative overflow-x-clip lg:pl-72">
         {theme.key !== "app" && <div className="pointer-events-none absolute inset-x-0 top-0 h-[900px] overflow-hidden lg:left-72" aria-hidden>
