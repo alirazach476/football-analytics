@@ -1,6 +1,6 @@
 # Model documentation
 
-_Generated 2026-11-06. Models are saved in `models/` (joblib + JSON metadata); runs are tracked in MLflow (`mlflow ui --backend-store-uri sqlite:///mlflow.db`)._
+_Generated 2026-11-22. Models are saved in `models/` (joblib + JSON metadata); runs are tracked in MLflow (`mlflow ui --backend-store-uri sqlite:///mlflow.db`)._
 
 ## Rules applied to every model
 
@@ -13,40 +13,40 @@ _Generated 2026-11-06. Models are saved in `models/` (joblib + JSON metadata); r
 ## 1. Match outcome (A win / draw / B win)
 
 * **Target:** result of the team listed first on the recorded score (extra time included, shoot-out excluded). **Rows:** played matches with both teams known.
-* **Split:** train 2000-06-10 → 2022-11-23 (1242), validation → 2024-11-15 (262), test 2024-11-16 → 2026-10-06 (275).
+* **Split:** train 1998-06-10 → 2022-11-28 (1326), validation → 2024-11-19 (277), test 2025-03-20 → 2026-11-17 (292).
 * **Features (52):** per-team past win %, points/match, goals for/against, goal difference, clean sheets, last-5 form, tournament experience (earlier editions), knockout record, attack/defence strength (relative to the league average so far), rest days, Elo; pairwise differences; head-to-head record; stage, knockout flag, host flags, competition.
 * **Elo:** computed only from earlier matches in these four competitions (start 1500, K by competition, goal-difference multiplier, +100 for the host). Partial strength measure, not the official World Football Elo.
 * **Selection:** lowest validation log loss → **xgboost**, refit on train+validation.
 
 | model | accuracy [95% CI] | macro-F1 | log loss [95% CI] | ROC-AUC (OvR) |
 |---|---|---|---|---|
-| baseline_prior | 0.433 [0.375, 0.491] | 0.201 | 1.075 [1.051, 1.101] | 0.500 |
-| baseline_elo_logreg | 0.567 [0.509, 0.622] | 0.430 | 0.942 [0.897, 0.988] | 0.711 |
-| logreg | 0.542 [0.484, 0.600] | 0.442 | 0.951 [0.893, 1.013] | 0.675 |
-| random_forest | 0.556 [0.498, 0.611] | 0.421 | 0.972 [0.931, 1.016] | 0.685 |
-| xgboost | 0.575 [0.520, 0.629] | 0.443 | 0.956 [0.910, 1.002] | 0.695 |
+| baseline_prior | 0.449 [0.390, 0.507] | 0.206 | 1.065 [1.040, 1.089] | 0.500 |
+| baseline_elo_logreg | 0.596 [0.541, 0.654] | 0.445 | 0.930 [0.888, 0.973] | 0.707 |
+| logreg | 0.558 [0.503, 0.617] | 0.452 | 0.948 [0.891, 1.003] | 0.665 |
+| random_forest | 0.575 [0.521, 0.634] | 0.439 | 0.957 [0.914, 1.002] | 0.682 |
+| xgboost | 0.568 [0.514, 0.623] | 0.441 | 0.956 [0.911, 1.000] | 0.691 |
 
-Final selected model on the test period (refit on train+validation): accuracy 0.564, log loss 0.946, ROC-AUC 0.702.
+Final selected model on the test period (refit on train+validation): accuracy 0.579, log loss 0.950, ROC-AUC 0.686.
 
 **Interpretation:** the features carry real signal (every model beats the class prior), but none is clearly better than the one-feature Elo baseline — the intervals overlap. Draws are almost never predicted (draw recall on the test period is 0-4% for every model; see `confusion_matrices_test.csv`). Do not read these as betting-grade probabilities.
 
 ## 2. Goal prediction (expected goals per team, regulation time)
 
-* **Selected:** poisson_regression (lowest validation Poisson deviance). Diagnostics: {'pearson_dispersion': 1.1436750955548032, 'zero_share_observed': 0.3010948905109489, 'zero_share_poisson_expected': 0.293175588591258}.
+* **Selected:** poisson_regression (lowest validation Poisson deviance). Diagnostics: {'pearson_dispersion': 1.2113941952090395, 'zero_share_observed': 0.29037800687285226, 'zero_share_poisson_expected': 0.29678690583885486}.
 * Baseline = training mean. Metrics: MAE, RMSE (team and total goals), Poisson deviance, dispersion, zero share, calibration by decile.
 
 | model | MAE team goals | RMSE team goals | Poisson deviance | MAE total goals |
 |---|---|---|---|---|
-| baseline_train_mean | 1.034 | 1.371 | 1.451 | 1.416 |
-| poisson_regression | 0.935 | 1.255 | 1.230 | 1.388 |
-| random_forest | 0.957 | 1.272 | 1.261 | 1.402 |
-| xgboost | 0.955 | 1.268 | 1.257 | 1.405 |
+| baseline_train_mean | 1.031 | 1.364 | 1.424 | 1.397 |
+| poisson_regression | 0.932 | 1.267 | 1.238 | 1.373 |
+| random_forest | 0.957 | 1.273 | 1.257 | 1.391 |
+| xgboost | 0.943 | 1.270 | 1.251 | 1.378 |
 
-**Over/under 2.5 (analytical experiment, independent-Poisson assumption):** accuracy 0.526 vs base rate 0.522; Brier 0.246 vs 0.255. Goal totals are barely predictable beyond the base rate.
+**Over/under 2.5 (analytical experiment, independent-Poisson assumption):** accuracy 0.512 vs base rate 0.540; Brier 0.249 vs 0.256. Goal totals are barely predictable beyond the base rate.
 
 ## 3. Team clustering
 
-K-Means / Ward / DBSCAN on standardised team features (goals for/against, win %, points, goal difference, clean sheets, goal-difference SD, edition-to-edition SD). k = 2 by silhouette (0.29); cophenetic correlation 0.47; DBSCAN found 2 clusters and 17 noise teams; bootstrap stability ARI 0.68. The structure is weak: teams form a continuum. Cluster names come from explicit rules over the standardised centroids and the profile tables are saved beside them. Possession is not available.
+K-Means / Ward / DBSCAN on standardised team features (goals for/against, win %, points, goal difference, clean sheets, goal-difference SD, edition-to-edition SD). k = 2 by silhouette (0.30); cophenetic correlation 0.50; DBSCAN found 2 clusters and 23 noise teams; bootstrap stability ARI 0.83. The structure is weak: teams form a continuum. Cluster names come from explicit rules over the standardised centroids and the profile tables are saved beside them. Possession is not available.
 
 ## 4. Player clustering
 

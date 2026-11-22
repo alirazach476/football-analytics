@@ -30,8 +30,8 @@
 
 A medallion pipeline (**Bronze → Silver → PostgreSQL star schema → dbt Gold**) that unifies six open data sources, a statistics and machine-learning layer, and a **React + FastAPI** dashboard with a visual identity per tournament: every edition page is built from that edition's own logo, colours and artwork.
 
-- **1,830 matches** (1,779 played + 51 *Coming soon*), **103 national teams**, **8,410 canonical players**, **4,494 goals**, **1,033,220 event rows**
-- **30 editions**: World Cup 2002–2026 (+ **2030 coming soon**), Euro 2000–2028, Copa América 2001–2028, Nations League 2018–2027
+- **1,946 matches** (1,895 played + 51 *Coming soon*), **103 national teams**, **8,818 canonical players**, **4,821 goals**, **1,034,175 event rows**
+- **31 editions** in the warehouse: World Cup 1998–2026 (+ **2030 coming soon**), Euro 2000–2028, Copa América 2001–2028, Nations League 2018–2027
 - **Finalissima (CONMEBOL–UEFA Cup of Champions)** as a separate, sourced section: **2022** (Italy 0–3 Argentina, Wembley: scorers, line-ups, statistics, officials) and **2026** (Spain v Argentina, shown as *cancelled* by UEFA on 15 March 2026, with no invented result). It sits outside the four-competition warehouse, so no statistic or model changes
 - **85 interactive charts** (Plotly) with a table view and CSV / HTML / PNG export for each
 - **Broadcast-style Match Center**: scoreboard, scorers and assists, managers, statistics, line-ups on a pitch, event timeline, head-to-head
@@ -119,7 +119,7 @@ FIFA, UEFA and CONMEBOL websites are **not** scraped (their terms prohibit it). 
 
 ## 📊 Honest results
 
-On a chronological test period (275 matches), the match-outcome models land around **55–57 % accuracy**; XGBoost does **not** clearly beat a one-feature Elo baseline (log loss 0.956 vs 0.942, intervals overlap). Goal totals barely beat the base rate, and team clusters are weak. The project reports this plainly rather than overselling the models.
+On a chronological test period (292 matches, March 2025 – November 2026), the match-outcome models land around **56–60 % accuracy**; XGBoost (56.8 %, log loss 0.956) does **not** beat a one-feature Elo baseline (59.6 %, log loss 0.930); the intervals overlap, so no complex model is clearly better. Goal totals barely beat the base rate, and team clusters are weak. The project reports this plainly rather than overselling the models.
 
 ## 🚀 Quick start
 

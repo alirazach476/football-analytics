@@ -132,7 +132,7 @@ def validate(df: pd.DataFrame) -> pd.DataFrame:
     fj["team_id_ours"] = fj.team_name.map(lambda n: idx.get(cn_strict(n)))
     for (sid, tid), g in df.groupby(["season_id", "team_id"]):
         row = dict(season_id=sid, team_id=tid, squad_size_wikipedia=len(g))
-        if sid.startswith("WC") and 2002 <= int(sid.split("-")[1]) <= 2022:
+        if sid.startswith("WC") and 1998 <= int(sid.split("-")[1]) <= 2022:
             f = fj[(fj.tournament_id == sid) & (fj.team_id_ours == tid)]
             row.update(squad_size_fjelstul=len(f), numbers_equal=set(g.shirt_number.dropna().astype(int)) == set(f.shirt_number.dropna().astype(int)))
         rows.append(row)

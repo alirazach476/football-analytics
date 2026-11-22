@@ -1,6 +1,6 @@
 # Data dictionary
 
-_Generated 2026-11-06 from the live PostgreSQL warehouse (`python -m fbplatform.docs_gen`). Schema `wh` = star schema; `gold` = dbt marts; `monitoring` = pipeline/quality tables._
+_Generated 2026-11-22 from the live PostgreSQL warehouse (`python -m fbplatform.docs_gen`). Schema `wh` = star schema; `gold` = dbt marts; `monitoring` = pipeline/quality tables._
 
 Conventions: surrogate keys end in `_key`; natural keys are `*_id`. NULL means *unknown or not applicable* and is never filled with an estimate. Scheduled fixtures keep NULL scores.
 
@@ -367,7 +367,7 @@ The four competitions in scope (WC, EURO, COPA, UNL).
 | `competition_id` | text | no |  |  |
 | `competition_name` | text | no |  |  |
 
-## wh.dim_date (10,257 rows)
+## wh.dim_date (10,988 rows)
 
 Calendar dimension covering all match dates.
 
@@ -384,7 +384,7 @@ Calendar dimension covering all match dates.
 | `day_name` | text | yes |  |  |
 | `is_weekend` | boolean | yes |  |  |
 
-## wh.dim_player (8,410 rows)
+## wh.dim_player (8,818 rows)
 
 Canonical players after entity resolution (merged ids listed in `merged_player_ids`).
 
@@ -402,7 +402,7 @@ Canonical players after entity resolution (merged ids listed in `merged_player_i
 | `merged_player_ids` | text | yes |  | JSON list of all source ids merged into this player. |
 | `n_source_ids` | integer | yes |  |  |
 
-## wh.dim_player_xref (9,978 rows)
+## wh.dim_player_xref (10,399 rows)
 
 Every original source player id -> canonical player and the rule that merged it.
 
@@ -412,7 +412,7 @@ Every original source player id -> canonical player and the rule that merged it.
 | `player_key` | integer | no |  | Surrogate key of the canonical player. |
 | `resolution_rule` | text | no |  | Entity-resolution rule: D1 same name+DOB; D2 name containment + shared national team + never in one line-up. |
 
-## wh.dim_referee (516 rows)
+## wh.dim_referee (545 rows)
 
 Referees parsed from 'Name (Country)'.
 
@@ -422,7 +422,7 @@ Referees parsed from 'Name (Country)'.
 | `referee_name` | text | no |  |  |
 | `referee_country` | text | no |  |  |
 
-## wh.dim_season (29 rows)
+## wh.dim_season (30 rows)
 
 One row per edition with expected/actual/played/scheduled match counts.
 
@@ -475,7 +475,7 @@ Stages with order and knockout flag.
 | `stage_order` | integer | yes |  |  |
 | `is_knockout` | boolean | no |  |  |
 
-## wh.dim_venue (338 rows)
+## wh.dim_venue (346 rows)
 
 Stadiums (identity = Wikipedia article) with coordinates and capacity where known.
 
@@ -503,7 +503,7 @@ Row counts of the last warehouse load.
 | `rows_loaded` | bigint | yes |  |  |
 | `source_rows` | bigint | yes |  |  |
 
-## wh.fact_match_events (1,033,220 rows)
+## wh.fact_match_events (1,034,175 rows)
 
 All event rows (goals, cards, substitutions, and for StatsBomb/Wyscout every on-ball event with coordinates).
 
@@ -540,7 +540,20 @@ All event rows (goals, cards, substitutions, and for StatsBomb/Wyscout every on-
 | `is_assist` | boolean | yes |  |  |
 | `is_key_pass` | boolean | yes |  |  |
 
-## wh.fact_matches (1,830 rows)
+## wh.fact_match_managers
+
+
+
+| column | type | null | key | description |
+|---|---|---|---|---|
+| `match_key` | integer | no | PK | Surrogate key of the match. |
+| `team_key` | integer | no | PK | Surrogate key of the team. |
+| `side` | text | yes |  |  |
+| `manager_name` | text | no |  |  |
+| `source` | text | no |  |  |
+| `level` | text | no |  |  |
+
+## wh.fact_matches (1,946 rows)
 
 One row per match, played or scheduled. Scheduled fixtures have status 'scheduled', label 'Coming soon' and NULL scores.
 
@@ -587,7 +600,7 @@ One row per match, played or scheduled. Scheduled fixtures have status 'schedule
 | `source_url` | text | yes |  | Where the row came from (line number for text sources). |
 | `retrieval_timestamp` | text | yes |  |  |
 
-## wh.fact_player_appearances (35,351 rows)
+## wh.fact_player_appearances (37,096 rows)
 
 Line-up rows: who played, starter flag, minutes (provider-derived or Wikipedia-derived, see `fact_player_appearances` notes).
 
@@ -682,7 +695,7 @@ Team awards (fair play, most entertaining team).
 | `source_page` | text | yes |  |  |
 | `source_revid` | bigint | yes |  |  |
 
-## wh.fact_team_match_stats (3,406 rows)
+## wh.fact_team_match_stats (3,628 rows)
 
 Team statistics per match (StatsBomb-covered matches only).
 
@@ -717,7 +730,7 @@ Team statistics per match (StatsBomb-covered matches only).
 | `possession_pct` | numeric | yes |  |  |
 | `substitutions` | integer | yes |  |  |
 
-## wh.fact_tournament_standings (762 rows)
+## wh.fact_tournament_standings (794 rows)
 
 Group tables DERIVED from played group-stage matches (basis column states the rules).
 

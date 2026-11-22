@@ -39,10 +39,30 @@ def _name_key(s) -> str:
     return " ".join(sorted(_tok(s)))
 
 
+def fill_unl_group_stage(m: pd.DataFrame) -> pd.DataFrame:
+    """A Nations League league-phase match that no stage source lists yet (it is newer than the Wikipedia tables) gets stage 'Group stage' and its group ONLY when
+    both teams are already placed in the same group of that season by the source tables. The rule is recorded in `stage_basis`; nothing else is inferred."""
+    m = m.copy()
+    m["stage_basis"] = None
+    m.loc[m.stage.notna(), "stage_basis"] = "source"
+    todo = m[(m.competition_id == "UNL") & m.stage.isna() & m.home_team_id.notna() & m.away_team_id.notna()]
+    placed = m[(m.competition_id == "UNL") & m.stage.eq("Group stage") & m.group.notna()]
+    for i, r in todo.iterrows():
+        g = placed[placed.season_id == r.season_id]
+        gh = set(g[(g.home_team_id == r.home_team_id) | (g.away_team_id == r.home_team_id)].group)
+        ga = set(g[(g.home_team_id == r.away_team_id) | (g.away_team_id == r.away_team_id)].group)
+        both = gh & ga
+        if len(both) == 1:
+            m.at[i, "stage"], m.at[i, "group"] = "Group stage", next(iter(both))
+            m.at[i, "stage_basis"] = f"derived: both teams are in group {next(iter(both))} of this league phase (not yet listed by the stage source)"
+    return m
+
+
 def silver_matches(m: pd.DataFrame, venues: pd.DataFrame) -> pd.DataFrame:
     m = m.copy()
     m["match_date"] = pd.to_datetime(m.match_date)
     m["competition_name"] = m.competition_id.map(COMP_NAMES)
+    m = fill_unl_group_stage(m)
     m["season_year"] = m.season_id.str.extract(r"-(\d{4})")[0].astype(int)
     m["is_played"] = m.match_status.eq("completed")
     m["status_label"] = m.match_status.map({"completed": "Full time", "scheduled": "Coming soon"}).fillna("Unknown")

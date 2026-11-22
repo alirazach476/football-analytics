@@ -1,6 +1,6 @@
 # Database schema
 
-_Generated 2026-11-06. Engine: PostgreSQL 16 (Docker, host port 5442). DDL: `sql/warehouse_schema.sql`; loader: `src/fbplatform/warehouse/load.py`._
+_Generated 2026-11-22. Engine: PostgreSQL 16 (Docker, host port 5442). DDL: `sql/warehouse_schema.sql`; loader: `src/fbplatform/warehouse/load.py`._
 
 ```text
                       dim_competition ─┐
@@ -25,21 +25,21 @@ _Generated 2026-11-06. Engine: PostgreSQL 16 (Docker, host port 5442). DDL: `sql
 | table | rows |
 |---|---|
 | dim_competition | 4 |
-| dim_season | 29 |
+| dim_season | 30 |
 | dim_team | 103 |
 | dim_team_name_history | 108 |
-| dim_player | 8,410 |
-| dim_player_xref | 9,978 |
-| dim_venue | 338 |
-| dim_referee | 516 |
-| dim_date | 10,257 |
+| dim_player | 8,818 |
+| dim_player_xref | 10,399 |
+| dim_venue | 346 |
+| dim_referee | 545 |
+| dim_date | 10,988 |
 | dim_tournament_stage | 9 |
-| fact_matches | 1,830 |
-| fact_team_match_stats | 3,406 |
+| fact_matches | 1,946 |
+| fact_team_match_stats | 3,628 |
 | fact_player_match_stats | 15,006 |
-| fact_player_appearances | 35,351 |
-| fact_match_events | 1,033,220 |
-| fact_tournament_standings | 762 |
+| fact_player_appearances | 37,096 |
+| fact_match_events | 1,034,175 |
+| fact_tournament_standings | 794 |
 | fact_player_awards | 391 |
 | fact_team_awards | 16 |
 
@@ -47,19 +47,6 @@ _Generated 2026-11-06. Engine: PostgreSQL 16 (Docker, host port 5442). DDL: `sql
 
 | table | column | → table | column |
 |---|---|---|---|
-| fact_player_appearances | team_key | dim_team | team_key |
-| fact_player_appearances | player_key | dim_player | player_key |
-| fact_match_events | match_key | fact_matches | match_key |
-| fact_match_events | team_key | dim_team | team_key |
-| fact_match_events | player_key | dim_player | player_key |
-| fact_match_events | related_player_key | dim_player | player_key |
-| fact_tournament_standings | season_key | dim_season | season_key |
-| fact_tournament_standings | team_key | dim_team | team_key |
-| fact_player_awards | season_key | dim_season | season_key |
-| fact_player_awards | player_key | dim_player | player_key |
-| fact_player_awards | team_key | dim_team | team_key |
-| fact_team_awards | season_key | dim_season | season_key |
-| fact_team_awards | team_key | dim_team | team_key |
 | dim_season | competition_key | dim_competition | competition_key |
 | dim_team_name_history | team_key | dim_team | team_key |
 | dim_player_xref | player_key | dim_player | player_key |
@@ -77,3 +64,18 @@ _Generated 2026-11-06. Engine: PostgreSQL 16 (Docker, host port 5442). DDL: `sql
 | fact_player_match_stats | team_key | dim_team | team_key |
 | fact_player_match_stats | player_key | dim_player | player_key |
 | fact_player_appearances | match_key | fact_matches | match_key |
+| fact_player_appearances | team_key | dim_team | team_key |
+| fact_player_appearances | player_key | dim_player | player_key |
+| fact_match_events | match_key | fact_matches | match_key |
+| fact_match_events | team_key | dim_team | team_key |
+| fact_match_events | player_key | dim_player | player_key |
+| fact_match_events | related_player_key | dim_player | player_key |
+| fact_match_managers | match_key | fact_matches | match_key |
+| fact_match_managers | team_key | dim_team | team_key |
+| fact_tournament_standings | season_key | dim_season | season_key |
+| fact_tournament_standings | team_key | dim_team | team_key |
+| fact_player_awards | season_key | dim_season | season_key |
+| fact_player_awards | player_key | dim_player | player_key |
+| fact_player_awards | team_key | dim_team | team_key |
+| fact_team_awards | season_key | dim_season | season_key |
+| fact_team_awards | team_key | dim_team | team_key |

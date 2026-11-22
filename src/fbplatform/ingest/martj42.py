@@ -44,7 +44,7 @@ def cn(name: str) -> str:
 def season_for(cid: str, d: date) -> str | None:
     y = d.year
     if cid == "WC":
-        return f"WC-{y}" if y >= 2002 and y % 4 == 2 else None
+        return f"WC-{y}" if y >= 1998 and y % 4 == 2 else None
     if cid == "EURO":
         if y == 2021:
             return "EURO-2020"

@@ -7,7 +7,7 @@ import { Callout, KpiCard, Section, Skeleton } from "../components/ui";
 import { BrandLogos } from "../components/Brand";
 
 const COMPS = [
-  ["WC", "FIFA World Cup", "wc-2026", "2002 – 2026, plus World Cup 2030 coming soon"],
+  ["WC", "FIFA World Cup", "wc-2026", "1998 – 2026, plus World Cup 2030 coming soon"],
   ["EURO", "UEFA European Championship", "euro-2024", "Euro 2000 – 2024, plus Euro 2028 coming soon"],
   ["COPA", "Copa América", "copa-2024", "Copa 2001 – 2024, plus Copa 2028 announced"],
   ["UNL", "UEFA Nations League", "unl", "One identity, every edition"],

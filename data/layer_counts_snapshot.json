@@ -7,37 +7,37 @@
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "competition_seasons",
-  "rows": 30
+  "rows": 31
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "events_all",
-  "rows": 1033220
+  "rows": 1034175
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "head_coaches",
-  "rows": 491
+  "rows": 523
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "lineups_all",
-  "rows": 35351
+  "rows": 37096
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "match_event_coverage",
-  "rows": 1779
+  "rows": 1895
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "matches",
-  "rows": 1830
+  "rows": 1946
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "player_links",
-  "rows": 616
+  "rows": 617
  },
  {
   "layer": "Bronze (frozen snapshot)",
@@ -47,12 +47,12 @@
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "players_all",
-  "rows": 9978
+  "rows": 10399
  },
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "squads",
-  "rows": 11728
+  "rows": 12433
  },
  {
   "layer": "Bronze (frozen snapshot)",
@@ -62,7 +62,7 @@
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "team_match_stats_all",
-  "rows": 3406
+  "rows": 3628
  },
  {
   "layer": "Bronze (frozen snapshot)",
@@ -72,7 +72,7 @@
  {
   "layer": "Bronze (frozen snapshot)",
   "table": "venues",
-  "rows": 338
+  "rows": 346
  },
  {
   "layer": "Silver",
@@ -82,17 +82,17 @@
  {
   "layer": "Silver",
   "table": "events",
-  "rows": 1033220
+  "rows": 1034175
  },
  {
   "layer": "Silver",
   "table": "lineups",
-  "rows": 35351
+  "rows": 37096
  },
  {
   "layer": "Silver",
   "table": "matches",
-  "rows": 1830
+  "rows": 1946
  },
  {
   "layer": "Silver",
@@ -102,22 +102,22 @@
  {
   "layer": "Silver",
   "table": "player_xref",
-  "rows": 9978
+  "rows": 10399
  },
  {
   "layer": "Silver",
   "table": "players",
-  "rows": 8410
+  "rows": 8818
  },
  {
   "layer": "Silver",
   "table": "squads",
-  "rows": 11728
+  "rows": 12433
  },
  {
   "layer": "Silver",
   "table": "team_match_stats",
-  "rows": 3406
+  "rows": 3628
  },
  {
   "layer": "Silver",
@@ -127,6 +127,6 @@
  {
   "layer": "Silver",
   "table": "venues",
-  "rows": 338
+  "rows": 346
  }
 ]

@@ -54,7 +54,7 @@ def warning_schemas() -> dict[str, pa.DataFrameSchema]:
     return {
         "matches": pa.DataFrameSchema({
             "attendance": _col(nullable=True, checks=pa.Check.in_range(0, 150000)),
-        }, checks=[pa.Check(lambda d: pd.to_datetime(d.match_date).between("2000-01-01", "2028-12-31"), error="match_date outside 2000-2028")]),
+        }, checks=[pa.Check(lambda d: pd.to_datetime(d.match_date).between("1998-01-01", "2028-12-31"), error="match_date outside 1998-2028")]),
         "players": pa.DataFrameSchema({"date_of_birth": _col(nullable=True, checks=pa.Check(
             lambda s: pd.to_datetime(s.dropna(), errors="coerce").between("1940-01-01", "2012-12-31"), error="implausible date of birth"))}),
         "events": pa.DataFrameSchema({

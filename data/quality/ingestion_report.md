@@ -1,6 +1,6 @@
-# Ingestion data-quality report (20261105T210022Z)
+# Ingestion data-quality report (20261122T131844Z)
 
-Matches: 1830  | source records: 1164
+Matches: 1946  | source records: 1228
 
 ## Checks
 
@@ -16,7 +16,7 @@ Matches: 1830  | source records: 1164
 | et_score_below_90min_score         | error      | ALL         |              0 |                                                                      |
 | ht_score_above_90min_score         | error      | ALL         |              0 |                                                                      |
 | completed_without_score            | error      | ALL         |              0 |                                                                      |
-| missing_stage                      | warning    | ALL         |              0 |                                                                      |
+| missing_stage                      | warning    | ALL         |              2 |                                                                      |
 | date_outside_registry_window       | warning    | COPA-2001   |              0 |                                                                      |
 | stage_chronology                   | error      | COPA-2001   |              0 |                                                                      |
 | date_outside_registry_window       | warning    | COPA-2004   |              0 |                                                                      |
@@ -55,6 +55,8 @@ Matches: 1830  | source records: 1164
 | stage_chronology                   | error      | UNL-2022-23 |              0 |                                                                      |
 | stage_chronology                   | error      | UNL-2024-25 |              0 |                                                                      |
 | stage_chronology                   | error      | UNL-2026-27 |              0 |                                                                      |
+| date_outside_registry_window       | warning    | WC-1998     |              0 |                                                                      |
+| stage_chronology                   | error      | WC-1998     |              0 |                                                                      |
 | date_outside_registry_window       | warning    | WC-2002     |              0 |                                                                      |
 | stage_chronology                   | error      | WC-2002     |              0 |                                                                      |
 | date_outside_registry_window       | warning    | WC-2006     |              0 |                                                                      |
@@ -101,7 +103,8 @@ Matches: 1830  | source records: 1164
 | UNL              | UNL-2022-23 | martj42            |       162 |         162 |         0 |          162 |                  0 |            162 |
 | UNL              | UNL-2024-25 | martj42            |       184 |         184 |         0 |          184 |                  0 |            184 |
 | UNL              | UNL-2024-25 | wikipedia          |         4 |           4 |         0 |            4 |                  0 |              4 |
-| UNL              | UNL-2026-27 | martj42            |       104 |         104 |         0 |          104 |                  0 |            104 |
+| UNL              | UNL-2026-27 | martj42            |       156 |         156 |         0 |          156 |                  0 |            154 |
+| WC               | WC-1998     | openfootball       |        64 |          64 |         0 |           64 |                  0 |             64 |
 | WC               | WC-2002     | openfootball       |        64 |          64 |         0 |           64 |                  0 |             64 |
 | WC               | WC-2006     | openfootball       |        64 |          64 |        56 |           64 |                  0 |             64 |
 | WC               | WC-2010     | openfootball       |        64 |          64 |         0 |           64 |                  0 |             64 |

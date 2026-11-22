@@ -25,24 +25,24 @@
  "selection_rule": "lowest validation Poisson deviance",
  "best_params": {
   "poisson_regression": "{'m__alpha': 1.0}",
-  "random_forest": "{'m__max_depth': 3, 'm__min_samples_leaf': 15}",
+  "random_forest": "{'m__max_depth': 5, 'm__min_samples_leaf': 15}",
   "xgboost": "{'learning_rate': 0.03, 'max_depth': 2, 'min_child_weight': 30, 'n_estimators': 250}"
  },
  "diagnostics": {
-  "pearson_dispersion": 1.1436750955548032,
-  "zero_share_observed": 0.3010948905109489,
-  "zero_share_poisson_expected": 0.293175588591258
+  "pearson_dispersion": 1.2113941952090395,
+  "zero_share_observed": 0.29037800687285226,
+  "zero_share_poisson_expected": 0.29678690583885486
  },
  "over_under": {
-  "brier": 0.24632532364324208,
-  "brier_base_rate": 0.25508488585724165,
-  "log_loss": 0.6857016475513475,
-  "log_loss_base_rate": 0.7033652346810415,
-  "accuracy": 0.5255474452554745,
-  "accuracy_base_rate": 0.5218978102189781,
-  "observed_over_share": 0.5218978102189781,
-  "n": 274
+  "brier": 0.2488166900347299,
+  "brier_base_rate": 0.2563204813799857,
+  "log_loss": 0.6907905618563854,
+  "log_loss_base_rate": 0.7058372009436255,
+  "accuracy": 0.5120274914089347,
+  "accuracy_base_rate": 0.5395189003436426,
+  "observed_over_share": 0.5395189003436426,
+  "n": 291
  },
- "saved_at": "2026-11-06T07:58:59+00:00",
+ "saved_at": "2026-11-22T13:26:29+00:00",
  "python": "3.12.10"
 }

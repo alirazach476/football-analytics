@@ -83,7 +83,7 @@ def test_eda_tables_are_consistent_with_the_warehouse():
     T = res["tables"]
     assert len(T) >= 40 and len(res["figures"]) >= 9
     a1 = T["A1_competition_summary"].set_index("competition_id")
-    assert set(a1.index) == {"WC", "EURO", "COPA", "UNL"} and a1.matches_played.sum() == 1779
+    assert set(a1.index) == {"WC", "EURO", "COPA", "UNL"} and a1.matches_played.sum() == 1895
     assert len(T["E5_upcoming_fixtures_coming_soon"]) == 51 and (T["E5_upcoming_fixtures_coming_soon"].status_label == "Coming soon").all()
     c1 = T["C1_top_scorers"]
     assert c1.full_name.is_unique and c1.goals.is_monotonic_decreasing

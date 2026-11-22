@@ -363,9 +363,9 @@ def test_visualisation_pages_render_without_errors(page):
 def test_competition_filter_changes_the_sample_and_cross_filter_sets_the_edition():
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file(str(VIEWS / "viz_competition.py"), default_timeout=300).run()
-    assert any("**1,779** of 1,779" in c.value for c in at.caption)
+    assert any("**1,895** of 1,895" in c.value for c in at.caption)
     at.sidebar.multiselect(key="f_comps").select("WC").run()
-    assert not at.exception and any("**488** of 1,779" in c.value for c in at.caption)
+    assert not at.exception and any("**552** of 1,895" in c.value for c in at.caption)
     # cross-filtering: a selected edition (set by clicking a chart) becomes the default of the detail tabs
     at2 = AppTest.from_file(str(VIEWS / "viz_competition.py"), default_timeout=300)
     at2.session_state["xf_season"] = "WC-2018"

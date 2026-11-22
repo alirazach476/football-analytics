@@ -1,4 +1,4 @@
-"""Fjelstul World Cup Database (CC BY-SA 4.0) - men's World Cups 2002-2022.
+"""Fjelstul World Cup Database (CC BY-SA 4.0) - men's World Cups 1998-2022.
 
 Attribution (required): Fjelstul, Joshua C. "The Fjelstul World Cup Database v.1.2.0." July 19, 2023.
 https://www.github.com/jfjelstul/worldcup  - licence CC BY-SA 4.0: derived data carries the same licence.
@@ -63,7 +63,7 @@ def run():
     tid = team_index()
     m = pd.read_parquet(PROC / "matches.parquet")
     fm = _csv("matches")
-    fm = fm[fm.tournament_id.isin([f"WC-{y}" for y in (2002, 2006, 2010, 2014, 2018, 2022)])]
+    fm = fm[fm.tournament_id.isin([f"WC-{y}" for y in (1998, 2002, 2006, 2010, 2014, 2018, 2022)])]
     link, unlinked = link_matches(fm, m, tid)
     prov_full = set(pd.read_parquet(PROC / "events.parquet", columns=["match_id"]).match_id) | \
         set(pd.read_parquet(PROC / "wyscout" / "events_wyscout.parquet", columns=["match_id"]).match_id)

@@ -1,6 +1,6 @@
 # Data quality
 
-_Generated 2026-11-06._
+_Generated 2026-11-22._
 
 **Automated checks:** 14 of 14 passed in the latest run (Pandera on Silver, dbt on Gold) = 100%. This is rule compliance, **not** completeness: see coverage below.
 
@@ -32,6 +32,32 @@ _Generated 2026-11-06._
 | silver | player_xref | pandera_critical_schema | critical | pass | 0 |
 | silver | players | pandera_critical_schema | critical | pass | 0 |
 | silver | matches | pandera_critical_schema | critical | pass | 0 |
+| silver | matches | winner: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | went_extra_time: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_wikipedia_title: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_raw: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_name: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_link_rule: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_id: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_country: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | venue_city_raw: match_date outside 2000-2028 | warning | fail | 62 |
+| silver | matches | venue_city: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | teams_known: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | status_label: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | stage_standard: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | stage_raw: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | stage_basis: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | stage: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | source_url: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | silver_built_from: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | shootout_winner_source: match_date outside 2000-2028 | warning | fail | 3 |
+| silver | matches | shootout_winner_side: match_date outside 2000-2028 | warning | fail | 3 |
+| silver | matches | season_year: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | season_id: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | score_raw: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | score_basis: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | retrieval_timestamp: match_date outside 2000-2028 | warning | fail | 64 |
+| silver | matches | referee_raw: match_date outside 2000-2028 | warning | fail | 64 |
 
 ## Duplicates and entity resolution
 
@@ -39,7 +65,7 @@ _Generated 2026-11-06._
 |---|---|
 | duplicate match ids | 0 |
 | players with the same name and date of birth still separate | 39 |
-| player ids merged into another canonical id (entity resolution) | 1568 |
+| player ids merged into another canonical id (entity resolution) | 1581 |
 | duplicate (match, team, player) line-up rows | 0 |
 | duplicate event ids | 0 |
 
@@ -70,7 +96,8 @@ Expected matches are format arithmetic, not official records. Percentages are of
 | UNL-2020-21 |  | 170 | 170 | 0 | 2 | 86 | 98 | 2 | 99 | goal events cover 98.5% of recorded goals |
 | UNL-2022-23 |  | 162 | 162 | 0 | 2 | 96 | 100 | 2 | 100 | no expectation defined |
 | UNL-2024-25 |  | 188 | 188 | 0 | 2 | 91 | 100 | 2 | 100 | no expectation defined |
-| UNL-2026-27 |  | 104 | 104 | 0 | 0 | 86 | 100 | 0 | 100 | no expectation defined |
+| UNL-2026-27 |  | 156 | 156 | 0 | 0 | 88 | 98 | 0 | 99 | goal events cover 98.5% of recorded goals |
+| WC-1998 | 64 | 64 | 64 | 0 | 100 | 100 | 100 | 0 | 100 | complete vs expectation |
 | WC-2002 | 64 | 64 | 64 | 0 | 100 | 100 | 100 | 100 | 100 | complete vs expectation |
 | WC-2006 | 64 | 64 | 64 | 0 | 100 | 100 | 100 | 100 | 100 | complete vs expectation |
 | WC-2010 | 64 | 64 | 64 | 0 | 100 | 100 | 100 | 100 | 100 | complete vs expectation |

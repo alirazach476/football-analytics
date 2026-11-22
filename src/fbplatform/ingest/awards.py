@@ -49,7 +49,7 @@ RULES = [
     ("copa", r"best young player", None, "Best Young Player", "Best young player", "player"),
 ]
 ROLL = {"wc": ("FIFA World Cup awards", "WC"), "euro": ("UEFA European Championship awards", "EURO"), "copa": ("Copa América awards", "COPA")}
-MINYEAR = {"WC": 2002, "EURO": 2000, "COPA": 2001}
+MINYEAR = {"WC": 1998, "EURO": 2000, "COPA": 2001}
 
 
 def _rank(h: str):

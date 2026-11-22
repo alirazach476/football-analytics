@@ -22,6 +22,7 @@ export interface Theme {
 
 type Def = Omit<Theme, "key" | "logo" | "banner" | "name" | "comp"> & { name: string };
 const D: Record<string, Def> = {
+  "wc-1998": { name: "FIFA World Cup 1998", mode: "light", primary: "#1c3f99", secondary: "#e3202e", accent: "#f4c430", bg: "#f3f6ff", heroFrom: "#0c2a82", heroTo: "#c4122f", pattern: "rings", tagline: "France — the first 32-team World Cup" },
   "wc-2002": { name: "FIFA World Cup 2002", mode: "light", primary: "#c8102e", secondary: "#c9a227", accent: "#0a5399", bg: "#fff8ee", heroFrom: "#b3261e", heroTo: "#c9a227", pattern: "rings", tagline: "Korea · Japan — the first World Cup in Asia" },
   "wc-2006": { name: "FIFA World Cup 2006", mode: "dark", primary: "#2fb36a", secondary: "#2f86d6", accent: "#f08a3c", bg: "#0a0d10", heroFrom: "#0a2540", heroTo: "#14532d", pattern: "dots", tagline: "Germany — a time to make friends" },
   "wc-2010": { name: "FIFA World Cup 2010", mode: "light", primary: "#e8590c", secondary: "#074a96", accent: "#f5b700", bg: "#fff6ee", heroFrom: "#d9480f", heroTo: "#7a1d00", pattern: "stripes", tagline: "South Africa — Ke Nako, it is time" },

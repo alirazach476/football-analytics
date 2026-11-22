@@ -6,7 +6,7 @@ import { EMPTY_FILTERS } from "../api";
 
 describe("themes", () => {
   it("has a theme and logo for every edition, Nations League shares one, WC 2030 exists", () => {
-    ["wc-2002", "wc-2026", "euro-2028", "copa-2028", "unl", "wc-2030", "fin-2022", "fin-2026"].forEach((k) => expect(THEMES[k]?.logo).toBeTruthy());
+    ["wc-1998", "wc-2002", "wc-2026", "euro-2028", "copa-2028", "unl", "wc-2030", "fin-2022", "fin-2026"].forEach((k) => expect(THEMES[k]?.logo).toBeTruthy());
     expect(themeFor("unl-2022-23").key).toBe("unl");
     expect(themeFor("UNL-2018-19").key).toBe("unl"); expect(themeFor("fin-2026").comp).toBe("FIN");
     expect(Object.keys(THEMES).filter((k) => k.startsWith("copa")).length).toBe(10);

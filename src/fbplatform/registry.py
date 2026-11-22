@@ -28,6 +28,7 @@ COMPETITIONS = [
 
 # (year, host, start, end, teams, expected_matches, format)
 _WC = [
+    (1998, "France", "1998-06-10", "1998-07-12", 32, 64, "8 groups of 4, then knockout"),   # added 2026-11-22 at the project owner's request
     (2002, "South Korea; Japan", "2002-05-31", "2002-06-30", 32, 64, "8 groups of 4, then knockout"),
     (2006, "Germany", "2006-06-09", "2006-07-09", 32, 64, "8 groups of 4, then knockout"),
     (2010, "South Africa", "2010-06-11", "2010-07-11", 32, 64, "8 groups of 4, then knockout"),

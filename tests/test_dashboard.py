@@ -19,7 +19,7 @@ VIEWS = Path(__file__).resolve().parents[1] / "src" / "fbplatform" / "dashboard"
 def test_kpis_reconcile_with_the_warehouse_and_keep_upcoming_separate():
     from fbplatform.dashboard import queries as Q
     k = Q.kpis()
-    assert k["competitions"] == 4 and k["matches_played"] == 1779 and k["matches_coming_soon"] == 51 and k["editions_upcoming"] == 1
+    assert k["competitions"] == 4 and k["matches_played"] == 1895 and k["matches_coming_soon"] == 51 and k["editions_upcoming"] == 1
     assert k["matches_played"] + k["matches_coming_soon"] == Q.q("select count(*) c from wh.fact_matches").c.iloc[0]
     assert k["goals"] == int(Q.q("select sum(home_score + away_score) s from wh.fact_matches where match_status='completed'").s.iloc[0])
 

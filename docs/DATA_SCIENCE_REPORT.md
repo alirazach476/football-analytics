@@ -1,10 +1,10 @@
 # Data science report
 
-_Generated 2026-11-06. Every number below is read from `reports/` at generation time._
+_Generated 2026-11-22. Every number below is read from `reports/` at generation time._
 
 ## Scope and data
 
-1,779 played matches (51 more fixtures are 'Coming soon' and excluded from every statistic and model target), 103 teams, 8,410 canonical players, 4,494 goals, 1,033,220 event rows across the FIFA World Cup, UEFA Euro, Copa América and UEFA Nations League. UEFA Champions League is out of scope. Per-match rates are used throughout; raw totals are never compared across editions of different size.
+1,895 played matches (51 more fixtures are 'Coming soon' and excluded from every statistic and model target), 103 teams, 8,818 canonical players, 4,821 goals, 1,034,175 event rows across the FIFA World Cup, UEFA Euro, Copa América and UEFA Nations League. UEFA Champions League is out of scope. Per-match rates are used throughout; raw totals are never compared across editions of different size.
 
 ## Exploratory analysis: headline facts
 
@@ -27,34 +27,34 @@ Assumptions were checked before choosing tests (goal counts are non-normal and o
 
 | Q | analysis | n | estimate [95% CI] | adj. p | effect size |
 |---|---|---|---|---|---|
-| Q1 | WC: goals per match (regulation) vs edition year | 488 | 1.09 [1.02, 1.17] | 0.0367 | RR-1 (relative change per decade): 0.0932 |
-| Q1 | EURO: goals per match (regulation) vs edition year | 261 | 0.942 [0.856, 1.04] | 0.461 | RR-1 (relative change per decade): -0.0582 |
-| Q1 | COPA: goals per match (regulation) vs edition year | 224 | 0.942 [0.846, 1.05] | 0.461 | RR-1 (relative change per decade): -0.058 |
-| Q2 | WC: knockout vs group/league, goals in regulation | 488 | -0.262 [-0.611, 0.0854] | 0.274 | Cliff's delta (Cohen's d=-0.15): -0.0972 |
-| Q2 | EURO: knockout vs group/league, goals in regulation | 261 | 0.405 [-0.0488, 0.851] | 0.274 | Cliff's delta (Cohen's d=0.27): 0.143 |
-| Q2 | COPA: knockout vs group/league, goals in regulation | 224 | 0.648 [0.142, 1.18] | 0.0938 | Cliff's delta (Cohen's d=0.38): 0.218 |
-| Q3 | WC: result of the team that scored first (W 311 / D 71 / L 50) | 432 | 0.72 [0.675, 0.762] | 1.07e-46 | win/(win+loss) share (0.5 = no edge): 0.861 |
+| Q1 | WC: goals per match (regulation) vs edition year | 552 | 1.05 [0.997, 1.11] | 0.198 | RR-1 (relative change per decade): 0.0528 |
+| Q1 | EURO: goals per match (regulation) vs edition year | 261 | 0.942 [0.856, 1.04] | 0.44 | RR-1 (relative change per decade): -0.0582 |
+| Q1 | COPA: goals per match (regulation) vs edition year | 224 | 0.942 [0.846, 1.05] | 0.44 | RR-1 (relative change per decade): -0.058 |
+| Q2 | WC: knockout vs group/league, goals in regulation | 552 | -0.219 [-0.538, 0.114] | 0.274 | Cliff's delta (Cohen's d=-0.13): -0.0806 |
+| Q2 | EURO: knockout vs group/league, goals in regulation | 261 | 0.405 [-0.0712, 0.857] | 0.274 | Cliff's delta (Cohen's d=0.27): 0.143 |
+| Q2 | COPA: knockout vs group/league, goals in regulation | 224 | 0.648 [0.134, 1.15] | 0.0938 | Cliff's delta (Cohen's d=0.38): 0.218 |
+| Q3 | WC: result of the team that scored first (W 350 / D 86 / L 56) | 492 | 0.711 [0.669, 0.751] | 1.36e-52 | win/(win+loss) share (0.5 = no edge): 0.862 |
 | Q3 | EURO: result of the team that scored first (W 162 / D 46 / L 33) | 241 | 0.672 [0.609, 0.731] | 1.21e-21 | win/(win+loss) share (0.5 = no edge): 0.831 |
 | Q3 | COPA: result of the team that scored first (W 158 / D 40 / L 18) | 216 | 0.731 [0.667, 0.789] | 7.85e-29 | win/(win+loss) share (0.5 = no edge): 0.898 |
-| Q4 | Group-stage goals scored/match vs number of knockout matches played | 490 | 0.612 [0.548, 0.667] | 1.18e-51 | Spearman rho^2: 0.374 |
-| Q4 | Group-stage goals scored/match vs points per match in the group stage | 490 | 0.724 [0.677, 0.761] | 2.16e-80 | Spearman rho^2: 0.524 |
-| Q4 | Reaching the knockout stage ~ group-stage goals scored/match (+ competition) | 490 | 18.4 [10.8, 31.2] | 4.31e-27 | AUC (goals scored alone): 0.857 |
-| Q5 | Group-stage goals conceded/match: progressed vs eliminated | 490 | -0.872 [-0.997, -0.751] | 1.19e-34 | Cliff's delta: -0.642 |
-| Q5 | Joint logistic model: effect of goals conceded/match, adjusting for the other | 490 | 0.0378 [0.0183, 0.0782] | 9.33e-19 | standardised OR: 0.0753 |
-| Q5 | Joint logistic model: effect of goals scored/match, adjusting for the other | 490 | 59.6 [25.7, 139] | 3.88e-21 | standardised OR: 20.6 |
-| Q6 | Does the team listed first win more often? (68 shoot-outs) | 68 | 0.456 [0.335, 0.581] | 0.595 | deviation from 0.5: -0.0441 |
-| Q6 | Does the team with the better record so far in that tournament win the shoot-out? | 59 | 0.576 [0.441, 0.704] | 0.595 | deviation from 0.5: 0.0763 |
-| Q7 | WC: share of variance in edition performance explained by team identity (teams with >=3 ed | 194 | 0.334 [0.185, 0.452] | 0.00266 | ICC (0 = no consistency, 1 = fully consistent): 0.334 |
-| Q7 | EURO: share of variance in edition performance explained by team identity (teams with >=3  | 116 | 0.128 [-0.0204, 0.257] | 0.0999 | ICC (0 = no consistency, 1 = fully consistent): 0.128 |
+| Q4 | Group-stage goals scored/match vs number of knockout matches played | 522 | 0.618 [0.557, 0.674] | 2.24e-56 | Spearman rho^2: 0.382 |
+| Q4 | Group-stage goals scored/match vs points per match in the group stage | 522 | 0.731 [0.69, 0.766] | 3.44e-88 | Spearman rho^2: 0.535 |
+| Q4 | Reaching the knockout stage ~ group-stage goals scored/match (+ competition) | 522 | 18.1 [10.9, 30.1] | 6.95e-29 | AUC (goals scored alone): 0.859 |
+| Q5 | Group-stage goals conceded/match: progressed vs eliminated | 522 | -0.874 [-0.995, -0.755] | 8.29e-38 | Cliff's delta: -0.65 |
+| Q5 | Joint logistic model: effect of goals conceded/match, adjusting for the other | 522 | 0.0396 [0.0198, 0.0792] | 7.64e-20 | standardised OR: 0.0792 |
+| Q5 | Joint logistic model: effect of goals scored/match, adjusting for the other | 522 | 50.9 [23.2, 112] | 2.17e-22 | standardised OR: 18.3 |
+| Q6 | Does the team listed first win more often? (71 shoot-outs) | 71 | 0.465 [0.345, 0.587] | 0.635 | deviation from 0.5: -0.0352 |
+| Q6 | Does the team with the better record so far in that tournament win the shoot-out? | 62 | 0.597 [0.464, 0.719] | 0.324 | deviation from 0.5: 0.0968 |
+| Q7 | WC: share of variance in edition performance explained by team identity (teams with >=3 ed | 221 | 0.329 [0.197, 0.449] | 0.00266 | ICC (0 = no consistency, 1 = fully consistent): 0.329 |
+| Q7 | EURO: share of variance in edition performance explained by team identity (teams with >=3  | 116 | 0.128 [-0.0269, 0.242] | 0.0906 | ICC (0 = no consistency, 1 = fully consistent): 0.128 |
 | Q7 | COPA: share of variance in edition performance explained by team identity (teams with >=3  | 107 | 0.479 [0.189, 0.67] | 0.00266 | ICC (0 = no consistency, 1 = fully consistent): 0.479 |
-| Q8 | Of 97 knockout matches that went beyond 90 minutes, how many were still level after extra  | 97 | 0.701 [0.6, 0.79] |  | share: 0.701 |
-| Q8 | Goals per minute in extra time vs regulation, same 53 matches | 53 | 1.42 [0.942, 2.12] | 0.0881 | rate ratio: 1.42 |
-| Q8 | Is the team with the better record so far less likely to win when the match goes beyond 90 | 276 | 0.605 [0.358, 1.02] | 0.0777 | phi coefficient: 0.113 |
-| Q9 | Absolute goal margin (regulation) differs between competitions (all matches) | 1735 | 0.00121 | 0.164 | epsilon-squared (0.01 small, 0.06 medium, 0.14 large): 0.00121 |
-| Q9 | Pairwise (all matches): WC vs EURO mean margin | 749 | 0.0804 [-0.0971, 0.249] | 1 | Cliff's delta: 0.0121 |
-| Q10 | WC: goals per match by format (WC-32: 384 matches, mean 2.45, WC-48: 104 matches, mean 2.8 | 488 | -0.431 [-0.812, -0.0393] | 0.0881 | Cliff's delta: -0.137 |
-| Q10 | WC: distribution of goals per match (0,1,2,3,4+) differs between formats | 488 | 5.9 | 0.62 | Cramer's V: 0.11 |
-| Q10 | EURO: goals per match by format (EURO-16: 113 matches, mean 2.64, EURO-24: 148 matches, me | 261 | 0.259 [-0.0997, 0.633] | 0.485 | Cliff's delta: 0.0825 |
+| Q8 | Of 101 knockout matches that went beyond 90 minutes, how many were still level after extra | 101 | 0.703 [0.604, 0.79] |  | share: 0.703 |
+| Q8 | Goals per minute in extra time vs regulation, same 57 matches | 57 | 1.36 [0.907, 2.01] | 0.121 | rate ratio: 1.36 |
+| Q8 | Is the team with the better record so far less likely to win when the match goes beyond 90 | 291 | 0.678 [0.406, 1.13] | 0.147 | phi coefficient: 0.0876 |
+| Q9 | Absolute goal margin (regulation) differs between competitions (all matches) | 1851 | 0.00144 | 0.13 | epsilon-squared (0.01 small, 0.06 medium, 0.14 large): 0.00144 |
+| Q9 | Pairwise (all matches): WC vs EURO mean margin | 813 | 0.0722 [-0.0949, 0.239] | 1 | Cliff's delta: 0.00512 |
+| Q10 | WC: goals per match by format (WC-32: 448 matches, mean 2.48, WC-48: 104 matches, mean 2.8 | 552 | -0.402 [-0.796, -0.0299] | 0.138 | Cliff's delta: -0.123 |
+| Q10 | WC: distribution of goals per match (0,1,2,3,4+) differs between formats | 552 | 5.28 | 0.779 | Cramer's V: 0.0978 |
+| Q10 | EURO: goals per match by format (EURO-16: 113 matches, mean 2.64, EURO-24: 148 matches, me | 261 | 0.259 [-0.107, 0.639] | 0.485 | Cliff's delta: 0.0825 |
 
 **Reading the results:** association is never causation; with n of 7–9 editions per competition, trend questions have low power; a non-significant result does not prove equality.
 
@@ -62,11 +62,11 @@ Assumptions were checked before choosing tests (goal counts are non-normal and o
 
 | model | accuracy | 95% CI | log loss | ROC-AUC |
 |---|---|---|---|---|
-| baseline_prior | 0.433 | [0.375, 0.491] | 1.075 | 0.500 |
-| baseline_elo_logreg | 0.567 | [0.509, 0.622] | 0.942 | 0.711 |
-| logreg | 0.542 | [0.484, 0.600] | 0.951 | 0.675 |
-| random_forest | 0.556 | [0.498, 0.611] | 0.972 | 0.685 |
-| xgboost | 0.575 | [0.520, 0.629] | 0.956 | 0.695 |
+| baseline_prior | 0.449 | [0.390, 0.507] | 1.065 | 0.500 |
+| baseline_elo_logreg | 0.596 | [0.541, 0.654] | 0.930 | 0.707 |
+| logreg | 0.558 | [0.503, 0.617] | 0.948 | 0.665 |
+| random_forest | 0.575 | [0.521, 0.634] | 0.957 | 0.682 |
+| xgboost | 0.568 | [0.514, 0.623] | 0.956 | 0.691 |
 
 No tuned model is clearly better than the single-feature Elo baseline (overlapping intervals). See `docs/MODEL_DOCUMENTATION.md`.
 

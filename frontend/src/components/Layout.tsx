@@ -75,6 +75,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   useEffect(() => { window.scrollTo({ top: 0 }); }, [pathname]);
   return (
     <ThemeOverrideCtx.Provider value={setOverride}><div className="min-h-full" style={{ background: "var(--c-bg)", color: "var(--c-ink)" }} data-theme={theme.key}>
+      {/* site-wide background artwork (FIFA World Cup 26 pattern), softened so text stays readable in every theme */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0" style={{ backgroundImage: "url(/bg-we-are-26.jpg)", backgroundSize: "cover", backgroundPosition: "center top", opacity: theme.mode === "dark" ? 0.55 : 0.34, filter: "saturate(1.2)" }} />
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0" style={{ background: "linear-gradient(180deg, color-mix(in srgb, var(--c-bg) 30%, transparent) 0%, color-mix(in srgb, var(--c-bg) 62%, transparent) 60%, color-mix(in srgb, var(--c-bg) 90%, transparent) 100%)" }} />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r lg:block" style={{ background: "linear-gradient(180deg, var(--sidebar-bg), color-mix(in srgb, var(--sidebar-bg) 70%, #000))", borderColor: "color-mix(in srgb, var(--c-primary) 35%, transparent)" }}><Sidebar onNavigate={() => {}} /></aside>
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b px-4 py-3 backdrop-blur lg:hidden" style={{ background: "color-mix(in srgb, var(--c-bg) 88%, transparent)", borderColor: "var(--c-border)" }}>
         <button onClick={() => setMenu(true)} aria-label="Open menu" className="btn !px-2"><Menu size={18} /></button>

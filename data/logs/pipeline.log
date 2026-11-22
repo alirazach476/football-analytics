@@ -141,3 +141,75 @@
 2026-11-06 01:59:59,641 INFO stage 'unify' done in 309.2s
 2026-11-06 02:00:21,638 INFO stage 'squads' done in 22.0s
 2026-11-06 02:00:22,217 INFO stage 'quality' done in 0.6s
+2026-11-22 17:53:34,512 INFO stage 'audit' done in 230.7s
+2026-11-22 17:53:34,610 INFO WC-1998: 64 matches from 1998/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,610 INFO WC-2002: 64 matches from 2002/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,618 INFO WC-2006: 64 matches from 2006/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,621 INFO WC-2010: 64 matches from 2010/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,626 INFO WC-2014: 64 matches from 2014/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,636 INFO WC-2018: 64 matches from 2018/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,642 INFO WC-2022: 64 matches from 2022/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,651 INFO WC-2026: 104 matches from 2026/worldcup.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,652 INFO EURO-2000: 31 matches from 2000--belgium-netherlands/euro.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,658 INFO EURO-2004: 31 matches from 2004--portugal/euro.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,658 INFO EURO-2008: 31 matches from 2008--austria-switzerland/euro.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,658 INFO EURO-2012: 31 matches from 2012--poland-ukraine/euro.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,667 INFO EURO-2016: 51 matches from 2016--france/euro.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,675 INFO EURO-2020: 51 matches from 2020/euro.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,683 INFO EURO-2024: 51 matches from 2024/euro.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,685 INFO EURO-2028: 51 matches from 2028/euro.json (0 unparsed candidate lines)
+2026-11-22 17:53:34,689 INFO COPA-2011: 26 matches from 2011--argentina/copa.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,693 INFO COPA-2021: 28 matches from 2021--brazil/copa.txt (0 unparsed candidate lines)
+2026-11-22 17:53:34,697 INFO COPA-2024: 32 matches from 2024--usa/copa.txt (0 unparsed candidate lines)
+2026-11-22 17:53:36,417 INFO stage 'matches' done in 1.9s
+2026-11-22 17:53:37,360 INFO stage 'martj42 matches + cross-check' done in 0.9s
+2026-11-22 17:56:25,437 WARNING skipping 2027 UEFA Nations League Final: missingtitle
+2026-11-22 17:56:25,507 INFO stage 'wikipedia pages (API, cached)' done in 168.1s
+2026-11-22 17:56:28,211 INFO stage 'teams' done in 2.7s
+2026-11-22 17:59:02,562 INFO stage 'wikipedia: enrich + goals' done in 154.4s
+2026-11-22 17:59:32,181 INFO stage 'statsbomb events/lineups/players' done in 29.6s
+2026-11-22 17:59:44,608 INFO stage 'stats' done in 12.4s
+2026-11-22 17:59:46,488 INFO stage 'openfootball goal events' done in 1.9s
+2026-11-22 17:59:54,682 INFO stage 'wyscout (Euro 2016 events)' done in 8.2s
+2026-11-22 18:02:11,138 INFO stage 'fjelstul (World Cup 2002-22)' done in 136.5s
+2026-11-22 18:02:13,864 INFO stage 'attendance from es.wikipedia (fill-null)' done in 2.7s
+2026-11-22 18:02:33,028 INFO stage 'venues' done in 19.2s
+2026-11-22 18:07:05,833 INFO stage 'unify providers' done in 272.8s
+2026-11-22 18:07:21,273 INFO stage 'squads (Wikipedia) + player linking' done in 15.4s
+2026-11-22 18:07:21,628 INFO stage 'quality' done in 0.4s
+2026-11-22 18:11:40,834 INFO stage 'audit' done in 172.6s
+2026-11-22 18:11:40,880 INFO WC-1998: 64 matches from 1998/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,882 INFO WC-2002: 64 matches from 2002/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,886 INFO WC-2006: 64 matches from 2006/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,889 INFO WC-2010: 64 matches from 2010/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,891 INFO WC-2014: 64 matches from 2014/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,895 INFO WC-2018: 64 matches from 2018/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,897 INFO WC-2022: 64 matches from 2022/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,903 INFO WC-2026: 104 matches from 2026/worldcup.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,905 INFO EURO-2000: 31 matches from 2000--belgium-netherlands/euro.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,907 INFO EURO-2004: 31 matches from 2004--portugal/euro.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,909 INFO EURO-2008: 31 matches from 2008--austria-switzerland/euro.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,910 INFO EURO-2012: 31 matches from 2012--poland-ukraine/euro.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,912 INFO EURO-2016: 51 matches from 2016--france/euro.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,915 INFO EURO-2020: 51 matches from 2020/euro.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,920 INFO EURO-2024: 51 matches from 2024/euro.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,923 INFO EURO-2028: 51 matches from 2028/euro.json (0 unparsed candidate lines)
+2026-11-22 18:11:40,925 INFO COPA-2011: 26 matches from 2011--argentina/copa.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,926 INFO COPA-2021: 28 matches from 2021--brazil/copa.txt (0 unparsed candidate lines)
+2026-11-22 18:11:40,929 INFO COPA-2024: 32 matches from 2024--usa/copa.txt (0 unparsed candidate lines)
+2026-11-22 18:11:41,624 INFO stage 'matches' done in 0.8s
+2026-11-22 18:11:41,970 INFO stage 'martj42 matches + cross-check' done in 0.3s
+2026-11-22 18:12:15,926 WARNING skipping 2027 UEFA Nations League Final: missingtitle
+2026-11-22 18:12:15,957 INFO stage 'wikipedia pages (API, cached)' done in 34.0s
+2026-11-22 18:12:16,805 INFO stage 'teams' done in 0.8s
+2026-11-22 18:13:13,039 INFO stage 'wikipedia: enrich + goals' done in 56.2s
+2026-11-22 18:13:22,629 INFO stage 'statsbomb events/lineups/players' done in 9.6s
+2026-11-22 18:13:27,487 INFO stage 'stats' done in 4.9s
+2026-11-22 18:13:27,976 INFO stage 'openfootball goal events' done in 0.5s
+2026-11-22 18:13:31,697 INFO stage 'wyscout (Euro 2016 events)' done in 3.7s
+2026-11-22 18:14:07,883 INFO stage 'fjelstul (World Cup 2002-22)' done in 36.2s
+2026-11-22 18:14:08,549 INFO stage 'attendance from es.wikipedia (fill-null)' done in 0.7s
+2026-11-22 18:15:16,765 INFO stage 'venues' done in 68.2s
+2026-11-22 18:18:27,883 INFO stage 'unify providers' done in 191.1s
+2026-11-22 18:18:44,195 INFO stage 'squads (Wikipedia) + player linking' done in 16.3s
+2026-11-22 18:18:44,722 INFO stage 'quality' done in 0.5s
