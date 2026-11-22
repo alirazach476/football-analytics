@@ -62,9 +62,8 @@ export default function TournamentPage() {
             <Trophy className="mx-auto mb-1" size={34} /><div className="text-[11px] font-extrabold uppercase tracking-[0.3em]">Champion</div>
             <div className="mt-1 flex items-center justify-center gap-2 font-display text-3xl font-extrabold uppercase"><CountryFlag country={m.champion} size={34} />{m.champion}</div>
             {m.runnerUp && <div className="mt-1 flex items-center justify-center gap-1.5 text-xs font-semibold opacity-80">runner-up <CountryFlag country={m.runnerUp} size={18} />{m.runnerUp}</div>}</motion.div>}
-          {mascot && <motion.figure initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6 }} className="relative m-0 flex h-56 w-40 flex-col items-center justify-between rounded-3xl bg-white/95 p-3 shadow-2xl sm:h-64 sm:w-48">
-            <img src={mascot} alt={`${m.edition} mascot`} className="min-h-0 flex-1 object-contain" loading="lazy" />
-            <figcaption className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.25em] text-slate-600">Official mascot</figcaption></motion.figure>}
+          {mascot && <motion.figure initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6 }} className="relative m-0 flex h-52 w-40 items-center justify-center rounded-3xl bg-white/95 p-3 shadow-2xl sm:h-60 sm:w-48">
+            <img src={mascot} alt={`${m.edition} mascot`} className="h-full w-full object-contain" loading="lazy" /></motion.figure>}
         </div>
         {!soon && played > 0 && <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-px sm:grid-cols-4" style={{ background: "rgba(255,255,255,.14)" }}>
           {[["Matches", played], ["Goals", s.total_goals], ["Goals / match", Number(s.goals_per_match).toFixed(2)], ["Draw share", `${Number(s.draw_pct).toFixed(0)}%`]].map(([k, v]) => <div key={String(k)} className="px-4 py-3 text-center backdrop-blur" style={{ background: "rgba(4,8,18,.72)" }}><div className="font-display text-3xl font-bold tabular-nums" style={{ color: theme.accent }}>{v}</div><div className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-75">{k}</div></div>)}</div>}
