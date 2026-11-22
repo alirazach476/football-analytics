@@ -17,6 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const MATCH_HIDE = ["match_key", "match_id", "is_played", "home_pen", "away_pen", "shootout_winner_side", "went_beyond_90"];
 
+const MASCOTS = new Set("wc-1998 wc-2002 wc-2006 wc-2010 wc-2014 wc-2018 wc-2022 wc-2026 euro-2000 euro-2004 euro-2008 euro-2012 euro-2016 euro-2020 euro-2024 copa-2001 copa-2004 copa-2007 copa-2011 copa-2015 copa-2016 copa-2019 copa-2021 copa-2024 copa-2028".split(" "));
 export default function TournamentPage() {
   const { slug = "" } = useParams(); const seasonId = slug.toUpperCase(); const nav = useNavigate();
   const q = useTournament(seasonId); const theme = themeFor(slug); const [tab, setTab] = useState("Overview"); const [stage, setStage] = useState("All");
@@ -34,6 +35,7 @@ export default function TournamentPage() {
   if (!d) return <Skeleton h={500} />;
   const m = d.meta, s = d.summary ?? {}; const soon = m.status !== "in_data"; const played = m.matchesPlayed;
   const fmtDate = (x: string | null) => (x ? new Date(x).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "to be confirmed");
+  const mascot = MASCOTS.has(theme.key) ? `/mascots/${theme.key}.${theme.key === "wc-2010" ? "svg" : "webp"}` : null; // UEFA Nations League and Finalissima have no mascots
   const tabs = ["Overview", "Matches", "Standings", "Bracket", "Teams", "Awards", "Records", "Charts", "Coverage"];
   return (
     <div>
@@ -60,6 +62,9 @@ export default function TournamentPage() {
             <Trophy className="mx-auto mb-1" size={34} /><div className="text-[11px] font-extrabold uppercase tracking-[0.3em]">Champion</div>
             <div className="mt-1 flex items-center justify-center gap-2 font-display text-3xl font-extrabold uppercase"><CountryFlag country={m.champion} size={34} />{m.champion}</div>
             {m.runnerUp && <div className="mt-1 flex items-center justify-center gap-1.5 text-xs font-semibold opacity-80">runner-up <CountryFlag country={m.runnerUp} size={18} />{m.runnerUp}</div>}</motion.div>}
+          {mascot && <motion.figure initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6 }} className="relative m-0 flex h-56 w-40 flex-col items-center justify-between rounded-3xl bg-white/95 p-3 shadow-2xl sm:h-64 sm:w-48">
+            <img src={mascot} alt={`${m.edition} mascot`} className="min-h-0 flex-1 object-contain" loading="lazy" />
+            <figcaption className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.25em] text-slate-600">Official mascot</figcaption></motion.figure>}
         </div>
         {!soon && played > 0 && <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-px sm:grid-cols-4" style={{ background: "rgba(255,255,255,.14)" }}>
           {[["Matches", played], ["Goals", s.total_goals], ["Goals / match", Number(s.goals_per_match).toFixed(2)], ["Draw share", `${Number(s.draw_pct).toFixed(0)}%`]].map(([k, v]) => <div key={String(k)} className="px-4 py-3 text-center backdrop-blur" style={{ background: "rgba(4,8,18,.72)" }}><div className="font-display text-3xl font-bold tabular-nums" style={{ color: theme.accent }}>{v}</div><div className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-75">{k}</div></div>)}</div>}
