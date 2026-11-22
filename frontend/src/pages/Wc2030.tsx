@@ -1,3 +1,4 @@
+import Mascot from "../components/Mascot";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Building2, CalendarClock, ExternalLink, Flag, Globe2, HelpCircle, ListChecks, MapPin, Sparkles, Trophy, Users } from "lucide-react";
@@ -31,6 +32,7 @@ export default function Wc2030() {
               <span className="rounded-full bg-white/70 px-3 py-1"><CalendarClock size={12} className="mr-1 inline" />{f.dates.value}</span>
             </div>
           </div>
+          <Mascot themeKey="wc-2030" name="FIFA World Cup 2030" />
         </div>
       </section>
 

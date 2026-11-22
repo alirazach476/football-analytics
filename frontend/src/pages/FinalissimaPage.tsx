@@ -1,3 +1,4 @@
+import Mascot from "../components/Mascot";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -56,6 +57,7 @@ export default function FinalissimaPage({ slug }: { slug: string }) {
             <Trophy className="mx-auto mb-1" size={34} /><div className="text-[11px] font-extrabold uppercase tracking-[0.3em]">Winner</div>
             <div className="mt-1 flex items-center justify-center gap-2 font-display text-3xl font-extrabold uppercase"><CountryFlag country={e.champion} size={34} />{e.champion}</div>
             {e.runnerUp && <div className="mt-1 flex items-center justify-center gap-1.5 text-xs font-semibold opacity-80">beat <CountryFlag country={e.runnerUp} size={18} />{e.runnerUp}</div>}</div>}
+          <Mascot themeKey={theme.key} name={e.edition} />
         </div>
       </section>
 

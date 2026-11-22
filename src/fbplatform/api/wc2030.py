@@ -32,7 +32,7 @@ FACTS = {
     "selection": {"decision": "Confirmed on 11 December 2024 at an extraordinary (virtual) FIFA Congress, alongside the award of 2034 to Saudi Arabia",
                   "bid": "Spain and Portugal announced a joint bid in October 2020; Morocco joined on 14 March 2023; the joint bid was the only candidate"},
     "identity": {"name": "Yalla Vamos 2030", "meaning": "'let's go' in Arabic and Spanish",
-                 "status": "bid identity/slogan unveiled in Lisbon on 19 March 2024; the final official FIFA tournament emblem is not confirmed in the sources used", "mascot": "not announced", "matchBall": "not announced"},
+                 "status": "bid identity/slogan unveiled in Lisbon on 19 March 2024; the final official FIFA tournament emblem is not confirmed in the sources used", "mascot": "artwork supplied by the project owner and shown on this page; its name and official status are not confirmed in the sources used", "matchBall": "not announced"},
     "qualification": {
         "hosts": "All six host countries (Morocco, Portugal, Spain, Uruguay, Argentina, Paraguay) qualify automatically",
         "concacaf": "Format announced 6 February 2026: multi-round, play-in to intercontinental play-offs; final-round matches 2028-2029, play-in matches November 2029",
@@ -66,6 +66,6 @@ FACTS = {
         "finalVenue": "not decided",
     },
     "undecided": ["Final team count (64 proposed by CONMEBOL, unconfirmed)", "Final venue list, and the venues of the opening match and the final", "Match schedule and exact opening/final dates",
-                  "Qualification slots per confederation", "Draw date", "Official tournament emblem, mascot and match ball"],
+                  "Qualification slots per confederation", "Draw date", "Official tournament emblem, mascot name and match ball"],
     "note": "This tournament has not been played: the dashboard shows no matches, results, standings or awards for it, and the machine-learning models make no predictions for it.",
 }
